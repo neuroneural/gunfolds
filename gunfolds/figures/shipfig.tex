@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{tikz,shippage}
+\usepackage{mdwlist}
+%%% LaTeX-command: "latex -shell-escape"
+%\immediate\write18{/usr/bin/python ../code/dbn2latex.py > test.tex}
+\usetikzlibrary{arrows,snakes,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,positioning,arrows}
+
+\pgfdeclarelayer{back}
+\pgfdeclarelayer{front}
+\pgfsetlayers{back,main,front}
+
+\definecolor{tableShade2}{HTML}{ECF3FE} %Finder
+\definecolor{patCol}{HTML}{96CA66} %Finder
+\definecolor{contCol}{HTML}{FF9600} %Finder
+
+% Define box and box title style
+\tikzstyle{mybox} = [draw=contCol!90, fill=patCol!50, very thick,
+    rectangle, inner sep=10pt, inner ysep=14pt]
+\tikzstyle{fancytitle} =[fill=contCol!70, text=black, draw=contCol!90, rectangle,
+sharp corners, font=\footnotesize\sf]
+\tikzset{
+          hid/.style={ % latent variable
+            circle,
+            draw=black, thin,
+            fill=gfCD,
+            minimum height=0.02em,
+            minimum width=0.02em,
+            text centered},
+          obs/.style={ % observed variable
+            rectangle,
+            draw=black, thin,
+            fill=gfSP,
+            minimum height=0.1em,
+            minimum width=0.1em,
+            text centered},
+          ahid/.style={ % a variable ready to go out
+            circle,
+            color=contCol!20,
+            draw=black, thin,
+            fill=gfFP,
+            minimum size=0.01cm
+           },
+          lahid/.style={ % a variable ready to go out with label
+            circle,
+            draw=black, thin,
+            fill=gfSP,
+            minimum size=0.01cm
+           },
+          % Define arrow style
+          pil/.style={
+            ->,
+            >=latex,
+            thin,
+            shorten <=1pt,
+            shorten >=1pt,},
+          pilip/.style={
+            <->,
+            >=latex,
+            thin,
+            opacity=10,
+            on background layer,
+            color=gfGG,
+            shorten <=3pt,
+            shorten >=3pt,
+          }
+        }
+% http://www.colourlovers.com/palette/92095/Giant_Goldfish
+\definecolor{gfCD}{HTML}{69D2E7} % Cloudless Day
+\definecolor{gfSP}{HTML}{A7DBD8} % Sunken Pool
+\definecolor{gfBS}{HTML}{E0E4CC} % Beach Storm
+\definecolor{gfGG}{HTML}{F38630} % Giant Goldfish
+\definecolor{gfFP}{HTML}{FA6900} % Food Pills
+
+\makeatletter
+\pgfkeys{%
+  /tikz/on layer/.code={
+    \pgfonlayer{#1}\begingroup
+    \aftergroup\endpgfonlayer
+    \aftergroup\endgroup
+  },
+  /tikz/node on layer/.code={
+    \gdef\node@@on@layer{%
+      \setbox\tikz@tempbox=\hbox\bgroup\pgfonlayer{#1}\unhbox\tikz@tempbox\endpgfonlayer\egroup}
+    \aftergroup\node@on@layer
+  },
+  /tikz/end node on layer/.code={
+    \endpgfonlayer\endgroup\endgroup
+  }
+}
+
+\begin{document}
+\begin{page}[20pt]%
+\hspace{-1cm}
+  \begin{tikzpicture}
+    \input{shipfig_figure.tex}
+    %\input{|'compile.sh'}
+  \end{tikzpicture}
+\end{page}
+\end{document}
+
+%%% Local Variables:
+%%% LaTeX-command: "pdflatex --shell-escape --enable-pipes"
+%%% End:

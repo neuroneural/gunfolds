@@ -1,0 +1,31 @@
+%% shippage -  N. Ollinger 2009
+%% a quick hack to shipout boxes 
+%% provide a page environment
+%% support pdflatex (PDF and dvips output) and xelatex (xdvipdfmx)
+%%
+%% Changes :
+%%   2009/02/01 add margin has an optional argument (default 0pt)
+%%   2009/01/22 add latex+dvips support (but -E is buggy with tikz)
+%%   2009/01/21 quick hack to shipout boxes
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{shippage}[2009/02/01 v0.3 quick hack to shipout boxes]
+\RequirePackage{ifxetex}
+\RequirePackage{ifpdf}
+\ProcessOptions
+\newbox\p@ge
+\newlength{\p@m@rgin}
+\newcommand\tobox{\setbox\p@ge\hbox{\hspace{\p@m@rgin}\vbox{\offinterlineskip\vspace{\p@m@rgin}\hbox{\raise\dp\p@ge\box\p@ge}\vspace{\p@m@rgin}}\hspace{\p@m@rgin}}}
+\ifxetex
+\newenvironment{page}[1][0pt]{\setlength{\p@m@rgin}{#1}\setbox\p@ge\hbox\bgroup}{\egroup\tobox\shipout\hbox{\special{papersize=\the\wd\p@ge,\the\ht\p@ge}\box\p@ge}}
+\AtBeginDocument{\hoffset -1in\voffset -1in}
+\else
+\ifpdf
+\newenvironment{page}[1][0pt]{\setlength{\p@m@rgin}{#1}\setbox\p@ge\hbox\bgroup}{\egroup\tobox\pdfpagewidth\wd\p@ge\pdfpageheight\ht\p@ge\shipout\box\p@ge}
+\AtBeginDocument{\pdfhorigin 0pt\pdfvorigin 0pt}
+\else
+\newenvironment{page}[1][0pt]{\setlength{\p@m@rgin}{#1}\setbox\p@ge\hbox\bgroup}{\egroup\tobox\shipout\vbox{\special{papersize=\the\wd\p@ge,\the\ht\p@ge}\unvbox\@begindvibox\box\p@ge}}
+\AtBeginDocument{\hoffset -1in\voffset -1in}
+\fi
+\fi
+\endinput
