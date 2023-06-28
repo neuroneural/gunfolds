@@ -8,9 +8,9 @@ Installation
 
 Install the gunfolds package
 
-.. code-block::
-
+```bash
    pip install gunfolds
+```
 
 Install these additional packages to use gunfolds
 
@@ -21,15 +21,15 @@ clingo installation
 
 To install ``clingo`` package with **conda install** run one of the following command
 
-.. code-block::
-
+```bash
    conda install -c conda-forge clingo
+```
    
 To install ``clingo`` package with **brew install** run the following command
 
-.. code-block::
-
+```bash
    brew install clingo
+```
    
 graph-tool installation
 -------------------------  
@@ -37,15 +37,15 @@ graph-tool installation
 
 To install ``graph-tool`` package with **conda install** run one of the following command
 
-.. code-block::
-
+```bash
    conda install -c conda-forge graph-tool
+```
    
 To install ``graph-tool`` package with **brew install** run the following command
 
-.. code-block::
-
+```bash
    brew install graph-tool
+```
 
 PyGObject installation
 -------------------------
@@ -55,9 +55,9 @@ PyGObject installation
 
 To install ``PyGObject`` package with **brew install** run the following command
 
-.. code-block::
-
+```bash
    brew install pygobject3 gtk+3
+```
 
 To install ``PyGObject`` package in Windows, Linux and any other platforms please refer to the link
 
