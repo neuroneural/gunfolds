@@ -815,6 +815,9 @@ def encode_list_sccs(glist, scc_members=None):
     :param glist: a list of graphs that are under sampled versions of
         the same system
     :type glist: list of dictionaries (``gunfolds`` graphs)
+
+    :param scc_members:
+    :type scc_members:
     
     :returns: ``clingo`` predicates 
     :rtype: string
