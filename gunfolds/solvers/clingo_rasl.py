@@ -251,8 +251,8 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
         efficient algorithm is employed.
     :type scc: (GUESS)boolean
 
-    :param scc_members:
-    :type scc_members:
+    :param scc_members: a list of dictionaries for nodes in each SCC
+    :type scc_members: list
 
     :param dm: a list of n-by-n 2-d square matrix of the weights for
         directed edges of each input n-node graph
@@ -324,8 +324,8 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_mem
         efficient algorithm is employed.
     :type scc: boolean
 
-    :param scc_members:
-    :type scc_members:
+    :param scc_members: a list of dictionaries for nodes in each SCC
+    :type scc_members: list
 
     :param dm: a list of n-by-n 2-d square matrix of the weights for
         directed edges of each input n-node graph
