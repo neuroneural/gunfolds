@@ -826,7 +826,7 @@ def encode_list_sccs(glist, scc_members=None):
     first_graph = True
     for i, g in enumerate(glist):
         if first_graph:
-            if scc_members:
+            if scc_members is not None:
                 SCCS = scc_members
             else:
                 SCCS = [s for s in strongly_connected_components(graph2nx(g))]

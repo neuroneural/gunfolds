@@ -276,10 +276,7 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     n = len(g_list)
     command = clingo_preamble(g_list[0])
     if scc:
-        if weighted and scc_members:
-            command += encode_list_sccs(g_list, scc_members)
-        else:
-            command += encode_list_sccs(g_list)
+        command += encode_list_sccs(g_list, scc_members)
     command += f"dagl({len(g_list[0])-1}). "
     command += glist2str(g_list, weighted=weighted, dm=dm, bdm=bdm) + ' '   # generate all graphs
     command += 'uk(1..'+str(max_urate)+').' + ' '
