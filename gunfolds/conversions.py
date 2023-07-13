@@ -808,13 +808,16 @@ def encode_sccs(g, idx, components=True, SCCS=None):
     return s
 
 
-def encode_list_sccs(glist):
+def encode_list_sccs(glist, scc_members=None):
     """
     Encodes strongly connected components of a list of ``gunfolds`` graph to ``clingo`` predicates 
 
     :param glist: a list of graphs that are under sampled versions of
         the same system
     :type glist: list of dictionaries (``gunfolds`` graphs)
+
+    :param scc_members: a list of dictionaries for nodes in each SCC
+    :type scc_members: list
     
     :returns: ``clingo`` predicates 
     :rtype: string
@@ -823,7 +826,10 @@ def encode_list_sccs(glist):
     first_graph = True
     for i, g in enumerate(glist):
         if first_graph:
-            SCCS = [s for s in strongly_connected_components(graph2nx(g))]
+            if scc_members is not None:
+                SCCS = scc_members
+            else:
+                SCCS = [s for s in strongly_connected_components(graph2nx(g))]
         s += encode_sccs(g, i+1, components=first_graph, SCCS=SCCS)
         first_graph = False
     # if the generating graph has an edge between non singleton SCCs that are
