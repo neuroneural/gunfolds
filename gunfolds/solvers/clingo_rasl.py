@@ -239,7 +239,7 @@ def glist2str(g_list, weighted=False, dm=None, bdm=None):
     return s
 
 
-def drasl_command(g_list, max_urate=0, weighted=False, scc=False, dm=None, bdm=None, edge_weights=(1, 1)):
+def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=None, dm=None, bdm=None, edge_weights=(1, 1)):
     """
     Given a list of graphs generates ``clingo`` codes
 
@@ -259,6 +259,9 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, dm=None, bdm=N
         either a singleton or have ``gcd=1``.  If `True` a much more
         efficient algorithm is employed.
     :type scc: (GUESS)boolean
+
+    :param scc_members: a list of dictionaries for nodes in each SCC
+    :type scc_members: list
 
     :param dm: a list of n-by-n 2-d square matrix of the weights for
         directed edges of each input n-node graph
@@ -282,7 +285,7 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, dm=None, bdm=N
     n = len(g_list)
     command = clingo_preamble(g_list[0])
     if scc:
-        command += encode_list_sccs(g_list)
+        command += encode_list_sccs(g_list, scc_members)
     command += f"dagl({len(g_list[0])-1}). "
     command += glist2str(g_list, weighted=weighted, dm=dm, bdm=bdm) + ' '   # generate all graphs
     command += 'uk(1..'+str(max_urate)+').' + ' '
@@ -295,7 +298,7 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, dm=None, bdm=N
     return command
 
 
-def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False,  dm=None,
+def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_members=None,  dm=None,
           bdm=None, pnum=None, edge_weights=(1, 1)):
     """
     Compute all candidate causal time-scale graphs that could have
@@ -327,6 +330,9 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False,  dm=Non
         efficient algorithm is employed.
     :type scc: boolean
 
+    :param scc_members: a list of dictionaries for nodes in each SCC
+    :type scc_members: list
+
     :param dm: a list of n-by-n 2-d square matrix of the weights for
         directed edges of each input n-node graph
     :type dm: list of numpy arrays
@@ -348,7 +354,7 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False,  dm=Non
     if not isinstance(glist, list):
         glist = [glist]
     return clingo(drasl_command(glist, max_urate=urate, weighted=weighted,
-                                scc=scc, dm=dm, bdm=bdm, edge_weights=edge_weights),
+                                scc=scc, scc_members=scc_members, dm=dm, bdm=bdm, edge_weights=edge_weights),
                   capsize=capsize, convert=drasl_jclingo2g,
                   timeout=timeout, exact=not weighted, pnum=pnum)
 
