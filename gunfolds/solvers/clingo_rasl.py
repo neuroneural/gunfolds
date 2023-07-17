@@ -131,6 +131,15 @@ def weighted_drasl_program(directed, bidirected):
     :~ not bidirected(X, Y, L), hbidirected(X, Y, W, K), node(X;Y), u(L, K), X < Y. [W@$bidirected,X,Y]
     :~ directed(X, Y, L), no_hdirected(X, Y, W, K), node(X;Y), u(L, K). [W@$directed,X,Y]
     :~ bidirected(X, Y, L), no_hbidirected(X, Y, W, K), node(X;Y), u(L, K), X < Y. [W@$bidirected,X,Y]
+
+    pastfork(X,Y,L) :- directed(Z, X, K), directed(Z, Y, K), node(X;Y;Z), X < Y, K < L-1, uk(K), u(L, _).
+    notequal(L-1,L) :- bidirected(X,Y,L), not pastfork(X,Y,L), node(X;Y), X < Y, u(L, _).
+    notequal(K,L) :- directed(X, Y, K), not directed(X, Y, L), node(X;Y), K<L, uk(K), u(L,_).
+    notequal(K,L) :- not directed(X, Y, K), directed(X, Y, L), node(X;Y), K<L, uk(K), u(L,_).
+    :- not notequal(K,L), K<L, uk(K), u(L,_).
+    nonempty(L) :- directed(X, Y, L), u(L,_).
+    nonempty(L) :- bidirected(X, Y, L), u(L,_).
+    :- not nonempty(L), u(L,_).
     """)
     return t.substitute(directed=directed, bidirected=bidirected)
 
