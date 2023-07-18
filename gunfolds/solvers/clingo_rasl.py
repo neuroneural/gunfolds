@@ -171,6 +171,11 @@ def drate(u, gnum, weighted=False):
     :param gnum: number of under sampled inputs
     :type gnum: integer
 
+    :param weighted: whether the input graphs are weighted or
+        precize.  If `True` but no weight matrices are provided -
+        all weights are set to `1`
+    :type weighted: boolean
+
     :returns: ``clingo`` code for under sampling with multiple under sampled inputs
     :rtype: string
     """
