@@ -12,7 +12,7 @@ Install the gunfolds package
    pip install gunfolds
 ```
 
-Install these additional packages to use gunfolds
+Additionally, install these packages to use gunfolds
 
 clingo installation
 -------------------
