@@ -117,7 +117,7 @@ def weighted_drasl_program(directed, bidirected):
     :param bidirected: priority of bidirected edges in optimization
         graph
     :type bidirected: integer
-    
+
     :returns: optimization part of the ``clingo`` code
     :rtype: string
     """
@@ -148,12 +148,12 @@ def rate(u, uname='u'):
     """
     Adds under sampling rate to ``clingo`` code
 
-    :param u: maximum under sampling rate 
+    :param u: maximum under sampling rate
     :type u: integer
-    
+
     :param uname: name of the parameter
     :type uname: string
-    
+
     :returns: predicate for under sampling rate
     :rtype: string
     """
@@ -161,20 +161,25 @@ def rate(u, uname='u'):
     return s
 
 
-def drate(u, gnum):
+def drate(u, gnum, weighted=False):
     """
     Replaces ``rate`` if there are multiple under sampled inputs
 
-    :param u: maximum under sampling rate 
+    :param u: maximum under sampling rate
     :type u: integer
-    
+
     :param gnum: number of under sampled inputs
     :type gnum: integer
-    
+
+    :param weighted: whether the input graphs are weighted or
+        precize.  If `True` but no weight matrices are provided -
+        all weights are set to `1`
+    :type weighted: boolean
+
     :returns: ``clingo`` code for under sampling with multiple under sampled inputs
     :rtype: string
     """
-    s = f"1 {{u(1..{u}, {gnum})}} 1."
+    s = f"1 {{u({int(weighted)+1}..{u}, {gnum})}} 1."
     return s
 
 
@@ -184,10 +189,10 @@ def rasl_command(g, urate=0):
 
     :param g: ``gunfolds`` graph
     :type g: dictionary (``gunfolds`` graphs)
-    
+
     :param urate: maximum undersampling rate to consider
     :type urate: integer
-    
+
     :returns: ``clingo`` code
     :rtype: string
     """
@@ -209,7 +214,7 @@ def glist2str(g_list, weighted=False, dm=None, bdm=None):
     :param g_list: a list of graphs that are undersampled versions of
         the same system
     :type g_list: list of dictionaries (``gunfolds`` graphs)
-    
+
     :param weighted: whether the input graphs are weighted or
         precize.  If `True` but no weight matrices are provided -
         all weights are set to `1`
@@ -222,7 +227,7 @@ def glist2str(g_list, weighted=False, dm=None, bdm=None):
     :param bdm: a list of *symmetric* n-by-n 2-d square matrix of the
         weights for bidirected edges of each input n-node graph
     :type bdm: list of numpy arrays
-    
+
     :returns: ``clingo`` predicates as a string
     :rtype: string
     """
@@ -246,15 +251,15 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     :param g_list: a list of graphs that are undersampled versions of
         the same system
     :type g_list: list of dictionaries (``gunfolds`` graphs)
-    
+
     :param max_urate: maximum under sampling rate
     :type max_urate: integer
-    
+
     :param weighted: whether the input graphs are weighted or
         precize.  If ``True`` but no weight matrices are provided -
         all weights are set to ``1``
     :type weighted: boolean
-    
+
     :param scc: whether to assume that each SCC in the input graph is
         either a singleton or have ``gcd=1``.  If `True` a much more
         efficient algorithm is employed.
@@ -270,11 +275,11 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     :param bdm: a list of *symmetric* n-by-n 2-d square matrix of the
         weights for bidirected edges of each input n-node graph
     :type bdm: list of numpy arrays
-    
+
     :param edge_weights: a tuple of 2 values, the first is importance of matching
         directed weights when solving optimization problem and the second is for bidirected.
     :type edge_weights: tuple with 2 elements
-    
+
     :returns: clingo code as a string
     :rtype: string
     """
@@ -289,7 +294,7 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     command += f"dagl({len(g_list[0])-1}). "
     command += glist2str(g_list, weighted=weighted, dm=dm, bdm=bdm) + ' '   # generate all graphs
     command += 'uk(1..'+str(max_urate)+').' + ' '
-    command += ' '.join([drate(max_urate, i+1) for i in range(n)]) + ' '
+    command += ' '.join([drate(max_urate, i+1, weighted=weighted) for i in range(n)]) + ' '
     command += weighted_drasl_program(edge_weights[0], edge_weights[1]) if weighted else drasl_program
     command += f":- M = N, {{u(M, 1..{n}); u(N, 1..{n})}} == 2, u(M, _), u(N, _). "
     command += "#show edge1/2. "
@@ -305,7 +310,7 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_mem
     generated all undersampled graphs at all possible undersampling
     rates up to ``urate`` in ``glist`` each at an unknown undersampling
     rate.
-    
+
     :param glist: a list of graphs that are undersampled versions of
         the same system
     :type glist: list of dictionaries (``gunfolds`` graphs)
@@ -347,7 +352,7 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_mem
     :param edge_weights: a tuple of 2 values, the first is importance
         of matching directed weights when solving optimization problem and the second is for bidirected.
     :type edge_weights: tuple with 2 elements
-    
+
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
@@ -376,7 +381,7 @@ def rasl(g, capsize, timeout=0, urate=0, pnum=None):
 
     :param pnum: number of parallel threads to run ``clingo`` on
     :type pnum: integer
-    
+
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
