@@ -1,7 +1,16 @@
 Installation
 ============
 
-Install these additional packages to use gunfolds
+Install gunfolds from pypi
+
+gunfolds installation
+---------------------
+
+.. code-block::
+
+   pip install gunfolds
+
+Additionally, install these packages to use gunfolds
 
 clingo installation
 -------------------
@@ -13,10 +22,6 @@ To install ``clingo`` package with **conda install** run one of the following co
 .. code-block::
 
    conda install -c conda-forge clingo
-   
-.. code-block::   
-
-   conda install -c "conda-forge/label/cf202003" clingo
    
 To install ``clingo`` package with **brew install** run the following command
 
@@ -33,10 +38,6 @@ To install ``graph-tool`` package with **conda install** run one of the followin
 .. code-block::
 
    conda install -c conda-forge graph-tool
-
-.. code-block::
-
-   conda install -c "conda-forge/label/cf202003" graph-tool
    
 To install ``graph-tool`` package with **brew install** run the following command
 
