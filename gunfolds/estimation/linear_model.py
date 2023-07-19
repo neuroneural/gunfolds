@@ -709,7 +709,7 @@ def data2AB(data, x0=None):
     B = np.ones((n, n))
     np.fill_diagonal(B, 0)
     B[np.triu_indices(n)] = 0
-    K = np.int(np.sum(abs(B)))  # abs(A)+abs(B)))
+    K = int(np.sum(abs(B)))  # abs(A)+abs(B)))
 
     a_idx = np.where(A != 0)
     b_idx = np.where(B != 0)
@@ -719,7 +719,7 @@ def data2AB(data, x0=None):
         s = x0.shape
         x = x0
     except AttributeError:
-        x = np.r_[A.flatten(), 0.1*np.randn(K)]
+        x = np.r_[A.flatten(), 0.1*np.random.randn(K)]
     o = optimize.fmin_bfgs(nllf2, x,
                            args=(np.double(A), np.double(B),
                                  YY, XX, YX, T, a_idx, b_idx),
@@ -767,7 +767,7 @@ def AB2intAB(A, B, th=0.09):
     return A, B
 
 
-def data2graph(data, x0=None):
+def data2graph(data, x0=None, th=0.0):
     """
     :param data:
     :type data:
@@ -779,8 +779,10 @@ def data2graph(data, x0=None):
     :rtype: 
     """
     A, B = data2AB(data, x0=x0)
-    Ab, Bb = AB2intAB(A, B)
-    return adjs2graph(Ab, Bb)
+    Ab = A.copy()
+    Bb = B.copy()
+    A, B = AB2intAB(A, B, th=th)
+    return adjs2graph(A, B), Ab, Bb
 
 
 def data2VARgraph(data, pval=0.05):
