@@ -709,7 +709,7 @@ def data2AB(data, x0=None):
     B = np.ones((n, n))
     np.fill_diagonal(B, 0)
     B[np.triu_indices(n)] = 0
-    K = int(np.sum(abs(B)))  # abs(A)+abs(B)))
+    K = np.sum(abs(B)).astype(int)  # abs(A)+abs(B)))
 
     a_idx = np.where(A != 0)
     b_idx = np.where(B != 0)
