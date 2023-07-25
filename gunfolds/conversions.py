@@ -503,14 +503,12 @@ def numbered_g2wclingo(g, num, directed_weights_matrix=None, bidirected_weights_
     n = len(g)
 
     if directed_weights_matrix is None:
-        directed_weights_matrix = np.ones((n, n)).astype('int')
-    else:
-        directed_weights_matrix = directed_weights_matrix.astype('int')
+        directed_weights_matrix = np.ones((n, n))
+    directed_weights_matrix = directed_weights_matrix.astype('int')
 
     if bidirected_weights_matrix is None:
-        bidirected_weights_matrix = np.ones((n, n)).astype('int')
-    else:
-        bidirected_weights_matrix = bidirected_weights_matrix.astype('int')
+        bidirected_weights_matrix = np.ones((n, n))
+    bidirected_weights_matrix = bidirected_weights_matrix.astype('int')
 
     assert directed_weights_matrix.shape[0] == n
     assert directed_weights_matrix.shape[1] == n
