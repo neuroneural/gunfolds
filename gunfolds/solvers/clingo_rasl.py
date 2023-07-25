@@ -233,8 +233,12 @@ def glist2str(g_list, weighted=False, dm=None, bdm=None):
     """
     if dm is None:
         dm = [None]*len(g_list)
+    else:
+        dm = [nd.astype('int') for nd in dm]
     if bdm is None:
         bdm = [None]*len(g_list)
+    else:
+        bdm = [nd.astype('int') for nd in bdm]
     s = ''
     for count, (g, D, B) in enumerate(zip(g_list, dm, bdm)):
         if weighted:
@@ -283,6 +287,11 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     :returns: clingo code as a string
     :rtype: string
     """
+    if dm is not None:
+        dm = [nd.astype('int') for nd in dm]
+    if bdm is not None:
+        bdm = [nd.astype('int') for nd in bdm]
+
     assert len({len(g) for g in g_list}) == 1, "Input graphs have variable number of nodes!"
 
     if not max_urate:
@@ -356,6 +365,10 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_mem
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
+    if dm is not None:
+        dm = [nd.astype('int') for nd in dm]
+    if bdm is not None:
+        bdm = [nd.astype('int') for nd in bdm]
     if not isinstance(glist, list):
         glist = [glist]
     return clingo(drasl_command(glist, max_urate=urate, weighted=weighted,
