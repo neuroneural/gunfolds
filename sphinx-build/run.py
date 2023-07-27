@@ -8,8 +8,8 @@ with open("getting_started.rst", "w") as rst_file:
     print(s, file=rst_file)
     print(len(s) * "=", file=rst_file)
     print(".. toctree::\n", file=rst_file)
-    print("   getting_started/installation\n   getting_started/examples\n   getting_started/benchmarks"
-          "\n   getting_started/contributors\n", file=rst_file)
+    print("   getting_started/installation\n   getting_started/tutorials\n   getting_started/contributors"
+          "\n   getting_started/publications\n ", file=rst_file)
 
 
 # extract function names from .py files
