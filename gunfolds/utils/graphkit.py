@@ -799,7 +799,7 @@ def bp_mean_degree_graph(node_num, degree, seed=None):
     :type node_num: integer
     
     :param degree: degree
-    :type degree: integer
+    :type degree: float
     
     :param seed: random seed
     :type seed: integer
@@ -1116,7 +1116,7 @@ def gcd1_bp_mean_degree_graph(node_num, degree, seed=None):
     :type node_num: integer
     
     :param degree: degree
-    :type degree: integer
+    :type degree: float
     
     :param seed: random seed
     :type seed: integer
