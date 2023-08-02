@@ -260,7 +260,7 @@ def linegraph(glist, sccs=True):
     return gr
 
 
-def plotg(g, sccs=True):
+def plotg(g, sccs=True, output=None, fmt='auto'):
     """
     Given a ``gunfolds`` graph, plots it in an interactive window
 
@@ -269,6 +269,12 @@ def plotg(g, sccs=True):
 
     :param sccs: whether to distinguish SCCs by color
     :type sccs: boolean
+
+    :param output: Output file name (or object). If not given, the graph will be displayed via interactive_window().
+    :type output: string or file object (optional, default: None)
+
+    :param fmt: Output file format. Possible values are ``"auto"``, ``"ps"``, ``"pdf"``, ``"svg"``, and ``"png"``. If the value is ``"auto"``, the format is guessed from the output parameter.
+    :type fmt: string or file object (optional, default: None)
     """
 
     gg = g2gt(g)
@@ -285,10 +291,10 @@ def plotg(g, sccs=True):
                    edge_control_points=gg.edge_properties['control'],
                    vertex_pen_width=1,
                    edge_color=gg.edge_properties['color'],
-                   vertex_fill_color=vcolors)
+                   vertex_fill_color=vcolors, output=output, fmt=fmt)
 
 
-def plotgunfolds(g, interactive=True, sccs=True):
+def plotgunfolds(g, sccs=True, output=None, fmt='auto'):
     """
     Given a ``gunfolds`` graph plots all of its undersamples versions arranged sequentially in a horizontal line.
 
@@ -300,6 +306,12 @@ def plotgunfolds(g, interactive=True, sccs=True):
 
     :param sccs: whether to distinguish SCCs by color
     :type sccs: boolean
+
+    :param output: Output file name (or object). If not given, the graph will be displayed via interactive_window().
+    :type output: string or file object (optional, default: None)
+
+    :param fmt: Output file format. Possible values are ``"auto"``, ``"ps"``, ``"pdf"``, ``"svg"``, and ``"png"``. If the value is ``"auto"``, the format is guessed from the output parameter.
+    :type fmt: string or file object (optional, default: None)
     """
 
     x = bfu.all_undersamples(g)
@@ -328,5 +340,5 @@ def plotgunfolds(g, interactive=True, sccs=True):
                    output_size=(f_w, f_h),
                    edge_color=gg.edge_properties['color'],
                    vertex_fill_color=vcolors,
-                   main=interactive
+                   output=output, fmt=fmt
                    )
