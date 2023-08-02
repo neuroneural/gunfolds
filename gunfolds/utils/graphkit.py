@@ -1087,19 +1087,25 @@ def merge_graphs(glist):
     return g
 
 
-def ensure_graph_gcd1(g):
+def ensure_graph_gcd1(g, ignore_singletons=True):
     """
     This function takes any graph, breaks it into SCCs and make sure each SCC has a gcd of 1
 
     :param g: ``gunfolds`` graph
     :type g: dictionary (``gunfolds`` graph)
-    
+
+    :param ignore_singletons: ignores singleton SCCs when adding a self-loop to make gcd=1
+    :type ignore_singletons: boolean
+
     :returns: a graph with ``gcd=1``
     :rtype: dictionary (``gunfolds`` graph)
     """
     G = graph2nx(g)
-    x = [ensure_gcd1(subgraph(g, c)) for c in nx.strongly_connected_components(G)]
-    return merge_graphs([g]+x)
+    if ignore_singletons:
+        x = [ensure_gcd1(subgraph(g, c)) for c in nx.strongly_connected_components(G) if len(c) > 1]
+    else:
+        x = [ensure_gcd1(subgraph(g, c)) for c in nx.strongly_connected_components(G)]
+    return merge_graphs([g] + x)
 
 
 def gcd1_bp_mean_degree_graph(node_num, degree, seed=None):
