@@ -392,11 +392,11 @@ def _normed_OCE(g1, g2):
     DEN = n*n                          # all posible directed edges
     BEN = n*(n-1)/2                    # all possible bidirected edges
     err = OCE(g1, g2)
-    nerr = {'directed': (err['directed'][0]/gt_DEN,
+    nerr = {'directed': (sdiv(err['directed'][0], gt_DEN),
                          sdiv(err['directed'][1], (DEN - gt_DEN))),
             'bidirected': (sdiv(err['bidirected'][0], gt_BEN),
                            sdiv(err['bidirected'][1], (BEN - gt_BEN))),
-            'total': ((err['directed'][0]+err['bidirected'][0])/(gt_DEN+gt_BEN),
+            'total': (sdiv((err['directed'][0]+err['bidirected'][0]), (gt_DEN+gt_BEN)),
                       sdiv((err['directed'][1]+err['bidirected'][1]),
                            (DEN+BEN - gt_BEN - gt_DEN)))
             }
