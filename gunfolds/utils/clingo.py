@@ -42,13 +42,15 @@ def run_clingo(command,
     """
     if pnum is None:
         pnum = PNUM
-    ctrl = clngo.Control(["--warn=no-atom-undefined","--configuration=tweety", "-t", str(int(pnum)) + ",split", "-n", str(capsize)])
+    ctrl = clngo.Control(
+        ["--warn=no-atom-undefined", "--configuration=tweety", "-t", str(int(pnum)) + ",split", "-n", str(capsize)])
     if not exact:
         ctrl.configuration.solve.opt_mode = "opt"
     ctrl.add("base", [], command.decode())
     ctrl.ground([("base", [])])
     models = []
     with ctrl.solve(yield_=True, async_=True) as handle:
+        while not handle.wait(timeout): pass
         for model in handle:
             models.append([str(atom) for atom in model.symbols(shown=True)])
     cost = ctrl.statistics["summary"]["costs"]
@@ -57,9 +59,9 @@ def run_clingo(command,
         if num_opt == 0.0:
             return {}, cost
         else:
-            return models, cost 
+            return models, cost
     return models, cost
-    
+
 
 def clingo(command, exact=True,
            convert=msl_jclingo2g,
@@ -99,7 +101,7 @@ def clingo(command, exact=True,
                         timeout=timeout,
                         capsize=capsize,
                         pnum=pnum)
-    if result[0]=={} or result[0]==[]:
+    if result[0] == {} or result[0] == []:
         return {}
     else:
         if not exact:
