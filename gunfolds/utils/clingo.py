@@ -14,6 +14,7 @@ def run_clingo(command,
                exact=True,
                timeout=0,
                capsize=CAPSIZE,
+               configuration="tweety",
                pnum=None):
     """
     Open sub-process and run clingo
@@ -31,6 +32,15 @@ def run_clingo(command,
     :param capsize: maximum number of candidates to return
     :type capsize: integer
 
+    :param configuration: Select configuration based on problem type
+        frumpy: Use conservative defaults
+        jumpy : Use aggressive defaults
+        tweety: Use defaults geared towards asp problems
+        handy : Use defaults geared towards large problems
+        crafty: Use defaults geared towards crafted problems
+        trendy: Use defaults geared towards industrial problems
+    :type configuration: string
+
     :param cpath: clingo path
     :type cpath: string
 
@@ -42,7 +52,7 @@ def run_clingo(command,
     """
     if pnum is None:
         pnum = PNUM
-    ctrl = clngo.Control(["--warn=no-atom-undefined","--configuration=tweety", "-t", str(int(pnum)) + ",split", "-n", str(capsize)])
+    ctrl = clngo.Control(["--warn=no-atom-undefined","--configuration=", configuration, "-t", str(int(pnum)) + ",split", "-n", str(capsize)])
     if not exact:
         ctrl.configuration.solve.opt_mode = "opt"
     ctrl.add("base", [], command.decode())
@@ -65,6 +75,7 @@ def clingo(command, exact=True,
            convert=msl_jclingo2g,
            timeout=0,
            capsize=CAPSIZE,
+           configuration="tweety",
            pnum=None):
     """
     Runs ``run_clingo`` and returns parsed equivalent class
@@ -85,6 +96,15 @@ def clingo(command, exact=True,
     :param capsize: maximum number of candidates to return
     :type capsize: integer
 
+    :param configuration: Select configuration based on problem type
+        frumpy: Use conservative defaults
+        jumpy : Use aggressive defaults
+        tweety: Use defaults geared towards asp problems
+        handy : Use defaults geared towards large problems
+        crafty: Use defaults geared towards crafted problems
+        trendy: Use defaults geared towards industrial problems
+    :type configuration: string
+
     :param cpath: clingo path
     :type cpath: string
 
@@ -98,6 +118,7 @@ def clingo(command, exact=True,
                         exact=exact,
                         timeout=timeout,
                         capsize=capsize,
+                        configuration=configuration,
                         pnum=pnum)
     if result[0]=={} or result[0]==[]:
         return {}
