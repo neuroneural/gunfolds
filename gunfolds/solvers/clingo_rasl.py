@@ -313,7 +313,7 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
 
 
 def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_members=None,  dm=None,
-          bdm=None, pnum=None, edge_weights=(1, 1)):
+          bdm=None, pnum=None, edge_weights=(1, 1), configuration="tweety"):
     """
     Compute all candidate causal time-scale graphs that could have
     generated all undersampled graphs at all possible undersampling
@@ -362,6 +362,15 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_mem
         of matching directed weights when solving optimization problem and the second is for bidirected.
     :type edge_weights: tuple with 2 elements
 
+    :param configuration: Select configuration based on problem type
+        frumpy: Use conservative defaults
+        jumpy : Use aggressive defaults
+        tweety: Use defaults geared towards asp problems
+        handy : Use defaults geared towards large problems
+        crafty: Use defaults geared towards crafted problems
+        trendy: Use defaults geared towards industrial problems
+    :type configuration: string
+
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
@@ -373,11 +382,11 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_mem
         glist = [glist]
     return clingo(drasl_command(glist, max_urate=urate, weighted=weighted,
                                 scc=scc, scc_members=scc_members, dm=dm, bdm=bdm, edge_weights=edge_weights),
-                  capsize=capsize, convert=drasl_jclingo2g,
+                  capsize=capsize, convert=drasl_jclingo2g, configuration=configuration,
                   timeout=timeout, exact=not weighted, pnum=pnum)
 
 
-def rasl(g, capsize, timeout=0, urate=0, pnum=None):
+def rasl(g, capsize, timeout=0, urate=0, pnum=None, configuration="tweety"):
     """
     :param g: ``gunfolds`` graph
     :type g: dictionary (``gunfolds`` graphs)
@@ -395,7 +404,16 @@ def rasl(g, capsize, timeout=0, urate=0, pnum=None):
     :param pnum: number of parallel threads to run ``clingo`` on
     :type pnum: integer
 
+    :param configuration: Select configuration based on problem type
+        frumpy: Use conservative defaults
+        jumpy : Use aggressive defaults
+        tweety: Use defaults geared towards asp problems
+        handy : Use defaults geared towards large problems
+        crafty: Use defaults geared towards crafted problems
+        trendy: Use defaults geared towards industrial problems
+    :type configuration: string
+
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
-    return clingo(rasl_command(g, urate=urate), capsize=capsize, convert=rasl_jclingo2g, timeout=timeout, pnum=pnum)
+    return clingo(rasl_command(g, urate=urate), capsize=capsize, configuration=configuration, convert=rasl_jclingo2g, timeout=timeout, pnum=pnum)

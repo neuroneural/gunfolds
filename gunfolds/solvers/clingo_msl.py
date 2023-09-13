@@ -74,7 +74,7 @@ def msl_command(g, urate=2, exact=True):
     return command
 
 
-def msl(g, capsize, exact=True, urate=2, timeout=0, pnum=None):
+def msl(g, capsize, exact=True, configuration="tweety", urate=2, timeout=0, pnum=None):
     """
     :param g: ``gunfolds`` graph
     :type g: dictionary (``gunfolds`` graphs)
@@ -91,6 +91,15 @@ def msl(g, capsize, exact=True, urate=2, timeout=0, pnum=None):
     :param timeout: timeout in seconds after which to interrupt
         computation (0 - no limit)
     :type timeout: integer
+
+    :param configuration: Select configuration based on problem type
+        frumpy: Use conservative defaults
+        jumpy : Use aggressive defaults
+        tweety: Use defaults geared towards asp problems
+        handy : Use defaults geared towards large problems
+        crafty: Use defaults geared towards crafted problems
+        trendy: Use defaults geared towards industrial problems
+    :type configuration: string
     
     :param pnum: number of parallel threads to run ``clingo`` on
     :type pnum: integer
@@ -99,7 +108,7 @@ def msl(g, capsize, exact=True, urate=2, timeout=0, pnum=None):
     :rtype: 
     """
     return clingo(msl_command(g, urate=urate, exact=True),
-                  capsize=capsize, convert=msl_jclingo2g, timeout=timeout, pnum=pnum)
+                  capsize=capsize, convert=msl_jclingo2g, timeout=timeout, configuration=configuration, pnum=pnum)
 
 
 def rasl_msl(g, capsize, urate=2, timeout=0, pnum=None):
