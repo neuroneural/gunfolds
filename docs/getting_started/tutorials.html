@@ -1,0 +1,465 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Contributors" href="contributors.html" /><link rel="prev" title="Installation" href="installation.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>Tutorials</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --font-stack: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --color-api-overall: green;
+  --color-api-pre-name: #005eff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../getting_started.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="publications.html">Publications</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../modules.html">gunfolds</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../conversions.html">conversions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../conversions/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conversions/external.html">external</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../conversions/internal.html">internal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../estimation/grangercausality.html">grangercausality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../estimation/linear_model.html">linear_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../estimation/pc.html">pc</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../solvers.html">solvers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../solvers/declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../solvers/declarative/clingo_msl.html">clingo_msl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../solvers/declarative/clingo_rasl.html">clingo_rasl</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../solvers/imperative.html">imperative</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../solvers/imperative/traversal.html">traversal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../solvers/imperative/unknownrate.html">unknownrate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../utils.html">utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utils/bfutils.html">bfutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/calc_procs.html">calc_procs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/comparison.html">comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/ecj.html">ecj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/graphkit.html">graphkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/myTimeout.html">myTimeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/neighborhoods.html">neighborhoods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/simpleloops.html">simpleloops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/zickle.html">zickle</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../viz/dbn2latex.html">dbn2latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../viz/gtool.html">gtool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/neuroneural/gunfolds/tree/master/sphinx-build/getting_started/tutorials.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="tutorials">
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h1>
+<p>Before we begin, make sure you have installed the gunfolds package. If not, you can follow the steps mentioned in the <a class="reference external" href="installation.html">Installation Guide</a> to use the gunfolds package.</p>
+<section id="graph-format">
+<h2>Graph Format<a class="headerlink" href="#graph-format" title="Link to this heading">#</a></h2>
+<p>In the gunfolds package, graphs are represented as a dictionary of dictionaries, where each node is associated with its neighboring nodes through their respective edges. This data structure
+efficiently captures the relationships between nodes and allows for easy manipulation and analysis of graph data. Let’s explore this representation in more detail:</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">3</span><span class="p">}}</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Here, g is a 3 node graph in which</div>
+</div>
+<blockquote>
+<div><div class="line-block">
+<div class="line">1: {2: 1} means node 1 is connected to node 2 with a directed edge</div>
+<div class="line">2: {3: 2} means node 2 is connected to node 3 with a bidirected edge</div>
+<div class="line">3: {1: 3} means node 3 is connected to node 1 with both directed and bidirected edge</div>
+</div>
+</div></blockquote>
+</section>
+<section id="graphkit-usage">
+<h2>graphkit Usage<a class="headerlink" href="#graphkit-usage" title="Link to this heading">#</a></h2>
+<p>graphkit is a powerful utility tool in the gunfolds package designed for creating, analyzing, and visualizing graphs.
+It simplifies the process of handling graphs and provides essential functionalities to work with nodes, edges, and graph properties.</p>
+<p>To import the graphkit module in your Python script or interactive environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gunfolds.utils</span> <span class="kn">import</span> <span class="n">graphkit</span>
+</pre></div>
+</div>
+<section id="how-to-create-a-ring-graph-with-some-added-edges">
+<h3>How to create a ring graph with some added edges?<a class="headerlink" href="#how-to-create-a-ring-graph-with-some-added-edges" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">graphkit</span><span class="o">.</span><span class="n">ringmore</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
+<span class="go">{1: {2: 1, 1: 1}, 2: {3: 1}, 3: {4: 1, 1: 1}, 4: {1: 1, 2: 1}}</span>
+</pre></div>
+</div>
+<p>In the gunfolds package, the <code class="docutils literal notranslate"><span class="pre">graphkit.ringmore()</span></code> function is used to generate a graph
+that extends the concept of a ring graph by adding additional edges between nodes, resulting
+in a more connected structure.</p>
+<dl>
+<dt>Here,</dt><dd><div class="line-block">
+<div class="line">n is the number of nodes</div>
+<div class="line">m is the number of additional edges to be added</div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="how-to-create-a-random-graph">
+<h3>How to create a random graph?<a class="headerlink" href="#how-to-create-a-random-graph" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">graphkit</span><span class="o">.</span><span class="n">bp_mean_degree_graph</span><span class="p">(</span><span class="n">node_num</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">degree</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
+<span class="go">{1: {1: 1, 2: 1, 3: 1, 4: 1}, 2: {3: 1, 4: 1}, 3: {1: 1, 2: 1, 3: 1}, 4: {3: 1, 4: 1}}</span>
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">graphkit.bp_mean_degree_graph()</span></code> generates a random graph with a specified number
+of nodes and a target mean degree.</p>
+</section>
+<section id="how-to-create-a-dag-connecting-multiple-scc-rings">
+<h3>How to create a DAG connecting multiple scc rings?<a class="headerlink" href="#how-to-create-a-dag-connecting-multiple-scc-rings" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">graphkit</span><span class="o">.</span><span class="n">ring_sccs</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_sccs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dens</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_cross_connections</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
+<span class="go">{1: {2: 1}, 2: {1: 1, 2: 1}, 3: {4: 1, 2: 1}, 4: {3: 1, 4: 1}, 5: {6: 1, 5: 1, 4: 1, 3: 1}, 6: {5: 1}}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gtool-usage">
+<h2>gtool Usage<a class="headerlink" href="#gtool-usage" title="Link to this heading">#</a></h2>
+<p>gtool is a powerful visualization tool</p>
+<p>To import the gtool module in your Python script or interactive environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gunfolds.utils</span> <span class="kn">import</span> <span class="n">gtool</span>
+</pre></div>
+</div>
+<section id="how-to-use-gtool-to-plot-graphs">
+<h3>How to use gtool to plot graphs?<a class="headerlink" href="#how-to-use-gtool-to-plot-graphs" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="bfutils-usage">
+<h2>bfutils Usage<a class="headerlink" href="#bfutils-usage" title="Link to this heading">#</a></h2>
+<p>To import the bfutils module in your Python script or interactive environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gunfolds.utils</span> <span class="kn">import</span> <span class="n">bfutils</span>
+</pre></div>
+</div>
+<section id="how-to-to-undersample-a-graph-by-one">
+<h3>How to to undersample a graph by one?<a class="headerlink" href="#how-to-to-undersample-a-graph-by-one" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">4</span><span class="p">:</span> <span class="p">{</span><span class="mi">5</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="mi">6</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">6</span><span class="p">:</span> <span class="p">{</span><span class="mi">4</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span> <span class="o">=</span> <span class="n">bfutils</span><span class="o">.</span><span class="n">increment</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>
+<span class="go">{1: {3: 1, 2: 1}, 2: {1: 1, 3: 3, 2: 1, 5: 2}, 3: {2: 3, 5: 2}, 4: {6: 1, 1: 1, 3: 1, 2: 1, 5: 2}, 5: {4: 3, 5: 1, 3: 2, 2: 2}, 6: {5: 1, 3: 1, 2: 1, 6: 1}}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-get-all-undersamplings-of-a-given-graph-g">
+<h3>How to get all undersamplings of a given graph g?<a class="headerlink" href="#how-to-get-all-undersamplings-of-a-given-graph-g" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">4</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">list_of_all_underssamplings</span> <span class="o">=</span> <span class="n">bfutils</span><span class="o">.</span><span class="n">all_undersamples</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">list_of_all_underssamplings</span>
+<span class="go">[{1: {2: 1}, 2: {3: 1, 2: 1}, 3: {1: 1}, 4: {1: 1, 3: 1, 2: 1}}, {1: {3: 3, 2: 3}, 2: {1: 3, 3: 3, 2: 1}, 3: {2: 3, 1: 2}, 4: {2: 1, 1: 1, 3: 1}}, {1: {1: 1, 3: 3, 2: 3}, 2: {2: 1, 1: 3, 3: 3}, 3: {3: 1, 2: 3, 1: 2}, 4: {3: 1, 2: 1, 1: 1}}, {1: {2: 3, 1: 1, 3: 3}, 2: {3: 3, 2: 1, 1: 3}, 3: {1: 3, 3: 1, 2: 3}, 4: {1: 1, 3: 1, 2: 1}}]</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-run-a-rasl-algorithm">
+<h3>How to run a rasl algorithm?<a class="headerlink" href="#how-to-run-a-rasl-algorithm" title="Link to this heading">#</a></h3>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="contributors.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Contributors</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="installation.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Installation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; neuroneural.net
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tutorials</a><ul>
+<li><a class="reference internal" href="#graph-format">Graph Format</a></li>
+<li><a class="reference internal" href="#graphkit-usage">graphkit Usage</a><ul>
+<li><a class="reference internal" href="#how-to-create-a-ring-graph-with-some-added-edges">How to create a ring graph with some added edges?</a></li>
+<li><a class="reference internal" href="#how-to-create-a-random-graph">How to create a random graph?</a></li>
+<li><a class="reference internal" href="#how-to-create-a-dag-connecting-multiple-scc-rings">How to create a DAG connecting multiple scc rings?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gtool-usage">gtool Usage</a><ul>
+<li><a class="reference internal" href="#how-to-use-gtool-to-plot-graphs">How to use gtool to plot graphs?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bfutils-usage">bfutils Usage</a><ul>
+<li><a class="reference internal" href="#how-to-to-undersample-a-graph-by-one">How to to undersample a graph by one?</a></li>
+<li><a class="reference internal" href="#how-to-get-all-undersamplings-of-a-given-graph-g">How to get all undersamplings of a given graph g?</a></li>
+<li><a class="reference internal" href="#how-to-run-a-rasl-algorithm">How to run a rasl algorithm?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

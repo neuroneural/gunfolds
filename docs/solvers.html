@@ -1,0 +1,872 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="declarative" href="solvers/declarative.html" /><link rel="prev" title="pc" href="estimation/pc.html" />
+
+    <link rel="shortcut icon" href="_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>solvers</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --font-stack: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --color-api-overall: green;
+  --color-api-pre-name: #005eff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/publications.html">Publications</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">gunfolds</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="conversions.html">conversions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="conversions/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conversions/external.html">external</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conversions/internal.html">internal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="estimation/grangercausality.html">grangercausality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="estimation/linear_model.html">linear_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="estimation/pc.html">pc</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">solvers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="solvers/declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_msl.html">clingo_msl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html">clingo_rasl</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="solvers/imperative.html">imperative</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html">traversal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html">unknownrate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="utils.html">utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html">bfutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/calc_procs.html">calc_procs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html">comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html">ecj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html">graphkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/myTimeout.html">myTimeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/neighborhoods.html">neighborhoods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/simpleloops.html">simpleloops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/zickle.html">zickle</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="viz/dbn2latex.html">dbn2latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="viz/gtool.html">gtool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/neuroneural/gunfolds/tree/master/sphinx-build/solvers.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="solvers">
+<h1>solvers<a class="headerlink" href="#solvers" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="solvers/declarative.html">declarative</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="solvers/declarative/clingo_msl.html">clingo_msl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_msl.html#g2clingo-msl">g2clingo_msl</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.g2clingo_msl"><code class="docutils literal notranslate"><span class="pre">g2clingo_msl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_msl.html#msl">msl</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.msl"><code class="docutils literal notranslate"><span class="pre">msl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_msl.html#msl-command">msl_command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.msl_command"><code class="docutils literal notranslate"><span class="pre">msl_command()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_msl.html#rasl-msl">rasl_msl</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.rasl_msl"><code class="docutils literal notranslate"><span class="pre">rasl_msl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_msl.html#rate">rate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.rate"><code class="docutils literal notranslate"><span class="pre">rate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="solvers/declarative/clingo_rasl.html">clingo_rasl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#drasl">drasl</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.drasl"><code class="docutils literal notranslate"><span class="pre">drasl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#drasl-command">drasl_command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.drasl_command"><code class="docutils literal notranslate"><span class="pre">drasl_command()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#drate">drate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.drate"><code class="docutils literal notranslate"><span class="pre">drate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#glist2str">glist2str</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.glist2str"><code class="docutils literal notranslate"><span class="pre">glist2str()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#rasl">rasl</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.rasl"><code class="docutils literal notranslate"><span class="pre">rasl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#rasl-command">rasl_command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.rasl_command"><code class="docutils literal notranslate"><span class="pre">rasl_command()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#rate">rate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.rate"><code class="docutils literal notranslate"><span class="pre">rate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#weighted-drasl-program">weighted_drasl_program</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.weighted_drasl_program"><code class="docutils literal notranslate"><span class="pre">weighted_drasl_program()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="solvers/imperative.html">imperative</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="solvers/imperative/traversal.html">traversal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#add2edges">add2edges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.add2edges"><code class="docutils literal notranslate"><span class="pre">add2edges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#addaaedge">addaAedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addaAedge"><code class="docutils literal notranslate"><span class="pre">addaAedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#addavpath">addaVpath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addaVpath"><code class="docutils literal notranslate"><span class="pre">addaVpath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#addacedge">addacedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addacedge"><code class="docutils literal notranslate"><span class="pre">addacedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#addanedge">addanedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addanedge"><code class="docutils literal notranslate"><span class="pre">addanedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#addapath">addapath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addapath"><code class="docutils literal notranslate"><span class="pre">addapath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#addavedge">addavedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addavedge"><code class="docutils literal notranslate"><span class="pre">addavedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#check3">check3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.check3"><code class="docutils literal notranslate"><span class="pre">check3()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checkaedge">checkAedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkAedge"><code class="docutils literal notranslate"><span class="pre">checkAedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checkapath">checkApath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkApath"><code class="docutils literal notranslate"><span class="pre">checkApath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checkable">checkable</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkable"><code class="docutils literal notranslate"><span class="pre">checkable()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checkbedges">checkbedges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkbedges"><code class="docutils literal notranslate"><span class="pre">checkbedges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checkcedge">checkcedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkcedge"><code class="docutils literal notranslate"><span class="pre">checkcedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checkedge">checkedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkedge"><code class="docutils literal notranslate"><span class="pre">checkedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checker">checker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checker"><code class="docutils literal notranslate"><span class="pre">checker()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checkerds">checkerDS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkerDS"><code class="docutils literal notranslate"><span class="pre">checkerDS()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#checkvedge">checkvedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkvedge"><code class="docutils literal notranslate"><span class="pre">checkvedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#childrenedges">childrenedges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.childrenedges"><code class="docutils literal notranslate"><span class="pre">childrenedges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#chunks">chunks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.chunks"><code class="docutils literal notranslate"><span class="pre">chunks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#cleanvedges">cleanVedges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.cleanVedges"><code class="docutils literal notranslate"><span class="pre">cleanVedges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#cleanedges">cleanedges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.cleanedges"><code class="docutils literal notranslate"><span class="pre">cleanedges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#cloneempty">cloneempty</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.cloneempty"><code class="docutils literal notranslate"><span class="pre">cloneempty()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#conformanceds">conformanceDS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.conformanceDS"><code class="docutils literal notranslate"><span class="pre">conformanceDS()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#del2edges">del2edges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.del2edges"><code class="docutils literal notranslate"><span class="pre">del2edges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#del-empty">del_empty</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.del_empty"><code class="docutils literal notranslate"><span class="pre">del_empty()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#delaaedge">delaAedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delaAedge"><code class="docutils literal notranslate"><span class="pre">delaAedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#delavpath">delaVpath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delaVpath"><code class="docutils literal notranslate"><span class="pre">delaVpath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#delacedge">delacedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delacedge"><code class="docutils literal notranslate"><span class="pre">delacedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#delanedge">delanedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delanedge"><code class="docutils literal notranslate"><span class="pre">delanedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#delapath">delapath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delapath"><code class="docutils literal notranslate"><span class="pre">delapath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#delavedge">delavedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delavedge"><code class="docutils literal notranslate"><span class="pre">delavedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#edge-function-idx">edge_function_idx</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.edge_function_idx"><code class="docutils literal notranslate"><span class="pre">edge_function_idx()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#edge-increment-ok">edge_increment_ok</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.edge_increment_ok"><code class="docutils literal notranslate"><span class="pre">edge_increment_ok()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#esig">esig</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.esig"><code class="docutils literal notranslate"><span class="pre">esig()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#forks">forks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.forks"><code class="docutils literal notranslate"><span class="pre">forks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#gpurgepath">gpurgepath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.gpurgepath"><code class="docutils literal notranslate"><span class="pre">gpurgepath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#gsig">gsig</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.gsig"><code class="docutils literal notranslate"><span class="pre">gsig()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#inorder-check2">inorder_check2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.inorder_check2"><code class="docutils literal notranslate"><span class="pre">inorder_check2()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#inorder-checks">inorder_checks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.inorder_checks"><code class="docutils literal notranslate"><span class="pre">inorder_checks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#invertcdselement">invertCDSelement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.invertCDSelement"><code class="docutils literal notranslate"><span class="pre">invertCDSelement()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#isaedge">isAedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isAedge"><code class="docutils literal notranslate"><span class="pre">isAedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#isapath">isApath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isApath"><code class="docutils literal notranslate"><span class="pre">isApath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#iscedge">isCedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isCedge"><code class="docutils literal notranslate"><span class="pre">isCedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#isedge">isedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isedge"><code class="docutils literal notranslate"><span class="pre">isedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#isvedge">isvedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isvedge"><code class="docutils literal notranslate"><span class="pre">isvedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#length-d-loopy-paths">length_d_loopy_paths</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.length_d_loopy_paths"><code class="docutils literal notranslate"><span class="pre">length_d_loopy_paths()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#length-d-paths">length_d_paths</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.length_d_paths"><code class="docutils literal notranslate"><span class="pre">length_d_paths()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#longpaths-pick">longpaths_pick</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.longpaths_pick"><code class="docutils literal notranslate"><span class="pre">longpaths_pick()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#make-allforks-and-rest">make_allforks_and_rest</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.make_allforks_and_rest"><code class="docutils literal notranslate"><span class="pre">make_allforks_and_rest()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#make-emptyforks">make_emptyforks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.make_emptyforks"><code class="docutils literal notranslate"><span class="pre">make_emptyforks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#make-fullforks">make_fullforks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.make_fullforks"><code class="docutils literal notranslate"><span class="pre">make_fullforks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#make-longpaths">make_longpaths</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.make_longpaths"><code class="docutils literal notranslate"><span class="pre">make_longpaths()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#makechains">makechains</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.makechains"><code class="docutils literal notranslate"><span class="pre">makechains()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#makesink">makesink</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.makesink"><code class="docutils literal notranslate"><span class="pre">makesink()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#makesinks">makesinks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.makesinks"><code class="docutils literal notranslate"><span class="pre">makesinks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#mask2edges">mask2edges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.mask2edges"><code class="docutils literal notranslate"><span class="pre">mask2edges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#maskaaedge">maskaAedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskaAedge"><code class="docutils literal notranslate"><span class="pre">maskaAedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#maskacedge">maskaCedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskaCedge"><code class="docutils literal notranslate"><span class="pre">maskaCedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#maskavpath">maskaVpath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskaVpath"><code class="docutils literal notranslate"><span class="pre">maskaVpath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#maskanedge">maskanedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskanedge"><code class="docutils literal notranslate"><span class="pre">maskanedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#maskapath">maskapath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskapath"><code class="docutils literal notranslate"><span class="pre">maskapath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#maskavedge">maskavedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskavedge"><code class="docutils literal notranslate"><span class="pre">maskavedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#memo-no-return">memo_no_return</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.memo_no_return"><code class="docutils literal notranslate"><span class="pre">memo_no_return()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2add2edges">ok2add2edges</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2add2edges"><code class="docutils literal notranslate"><span class="pre">ok2add2edges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2addaaedge">ok2addaAedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addaAedge"><code class="docutils literal notranslate"><span class="pre">ok2addaAedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2addavpath">ok2addaVpath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addaVpath"><code class="docutils literal notranslate"><span class="pre">ok2addaVpath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2addacedge">ok2addacedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addacedge"><code class="docutils literal notranslate"><span class="pre">ok2addacedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2addanedge">ok2addanedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addanedge"><code class="docutils literal notranslate"><span class="pre">ok2addanedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2addanedge1">ok2addanedge1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addanedge1"><code class="docutils literal notranslate"><span class="pre">ok2addanedge1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2addanedge2">ok2addanedge2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addanedge2"><code class="docutils literal notranslate"><span class="pre">ok2addanedge2()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2addapath">ok2addapath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addapath"><code class="docutils literal notranslate"><span class="pre">ok2addapath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#ok2addavedge">ok2addavedge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addavedge"><code class="docutils literal notranslate"><span class="pre">ok2addavedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#prune-sort-cds">prune_sort_CDS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.prune_sort_CDS"><code class="docutils literal notranslate"><span class="pre">prune_sort_CDS()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#prunepaths-1d">prunepaths_1D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.prunepaths_1D"><code class="docutils literal notranslate"><span class="pre">prunepaths_1D()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#purgepath">purgepath</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.purgepath"><code class="docutils literal notranslate"><span class="pre">purgepath()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#selfloops">selfloops</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.selfloops"><code class="docutils literal notranslate"><span class="pre">selfloops()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#signature">signature</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.signature"><code class="docutils literal notranslate"><span class="pre">signature()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#single-nodes">single_nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.single_nodes"><code class="docutils literal notranslate"><span class="pre">single_nodes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#supergraphs-in-eq">supergraphs_in_eq</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.supergraphs_in_eq"><code class="docutils literal notranslate"><span class="pre">supergraphs_in_eq()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#threedges-pick">threedges_pick</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.threedges_pick"><code class="docutils literal notranslate"><span class="pre">threedges_pick()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#try-till-d-path">try_till_d_path</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.try_till_d_path"><code class="docutils literal notranslate"><span class="pre">try_till_d_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#try-till-path">try_till_path</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.try_till_path"><code class="docutils literal notranslate"><span class="pre">try_till_path()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#twoedges-pick">twoedges_pick</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.twoedges_pick"><code class="docutils literal notranslate"><span class="pre">twoedges_pick()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#v2g22g1">v2g22g1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.v2g22g1"><code class="docutils literal notranslate"><span class="pre">v2g22g1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/traversal.html#vedgelist">vedgelist</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.vedgelist"><code class="docutils literal notranslate"><span class="pre">vedgelist()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="solvers/imperative/unknownrate.html">unknownrate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#add2set">add2set_</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.add2set_"><code class="docutils literal notranslate"><span class="pre">add2set_()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#add2set-loop">add2set_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.add2set_loop"><code class="docutils literal notranslate"><span class="pre">add2set_loop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#allsloops">allsloops</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.allsloops"><code class="docutils literal notranslate"><span class="pre">allsloops()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#bconflictor">bconflictor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.bconflictor"><code class="docutils literal notranslate"><span class="pre">bconflictor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#build-loop-step">build_loop_step</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.build_loop_step"><code class="docutils literal notranslate"><span class="pre">build_loop_step()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#cacheconflicts">cacheconflicts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.cacheconflicts"><code class="docutils literal notranslate"><span class="pre">cacheconflicts()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#conflictor">conflictor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.conflictor"><code class="docutils literal notranslate"><span class="pre">conflictor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#conflictor-set">conflictor_set</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.conflictor_set"><code class="docutils literal notranslate"><span class="pre">conflictor_set()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#conflictors">conflictors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.conflictors"><code class="docutils literal notranslate"><span class="pre">conflictors()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#confpairs">confpairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.confpairs"><code class="docutils literal notranslate"><span class="pre">confpairs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#delaloop">delAloop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.delAloop"><code class="docutils literal notranslate"><span class="pre">delAloop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#del-loop">del_loop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.del_loop"><code class="docutils literal notranslate"><span class="pre">del_loop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#e2num">e2num</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.e2num"><code class="docutils literal notranslate"><span class="pre">e2num()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#ekey2e">ekey2e</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.ekey2e"><code class="docutils literal notranslate"><span class="pre">ekey2e()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#forward-loop-match">forward_loop_match</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.forward_loop_match"><code class="docutils literal notranslate"><span class="pre">forward_loop_match()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#gen-loops">gen_loops</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.gen_loops"><code class="docutils literal notranslate"><span class="pre">gen_loops()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#iteqclass">iteqclass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.iteqclass"><code class="docutils literal notranslate"><span class="pre">iteqclass()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#lconflictors">lconflictors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.lconflictors"><code class="docutils literal notranslate"><span class="pre">lconflictors()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#lconfpairs">lconfpairs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.lconfpairs"><code class="docutils literal notranslate"><span class="pre">lconfpairs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#le2num">le2num</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.le2num"><code class="docutils literal notranslate"><span class="pre">le2num()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#liteqclass">liteqclass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.liteqclass"><code class="docutils literal notranslate"><span class="pre">liteqclass()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#loop2graph">loop2graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.loop2graph"><code class="docutils literal notranslate"><span class="pre">loop2graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#main">main</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#matchaloop">matchAloop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.matchAloop"><code class="docutils literal notranslate"><span class="pre">matchAloop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#perm-circular">perm_circular</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.perm_circular"><code class="docutils literal notranslate"><span class="pre">perm_circular()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#prune-conflicts">prune_conflicts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.prune_conflicts"><code class="docutils literal notranslate"><span class="pre">prune_conflicts()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#prune-loops">prune_loops</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.prune_loops"><code class="docutils literal notranslate"><span class="pre">prune_loops()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#reverse">reverse</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.reverse"><code class="docutils literal notranslate"><span class="pre">reverse()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#reverse-edge-match">reverse_edge_match</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.reverse_edge_match"><code class="docutils literal notranslate"><span class="pre">reverse_edge_match()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#reverse-loop-match">reverse_loop_match</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.reverse_loop_match"><code class="docutils literal notranslate"><span class="pre">reverse_loop_match()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#skip-conflict">skip_conflict</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.skip_conflict"><code class="docutils literal notranslate"><span class="pre">skip_conflict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#skip-conflictors">skip_conflictors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.skip_conflictors"><code class="docutils literal notranslate"><span class="pre">skip_conflictors()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="solvers/imperative/unknownrate.html#start-progress-bar">start_progress_bar</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.start_progress_bar"><code class="docutils literal notranslate"><span class="pre">start_progress_bar()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="solvers/declarative.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">declarative</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="estimation/pc.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">pc</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; neuroneural.net
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

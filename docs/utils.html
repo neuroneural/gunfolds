@@ -1,0 +1,852 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="bfutils" href="utils/bfutils.html" /><link rel="prev" title="unknownrate" href="solvers/imperative/unknownrate.html" />
+
+    <link rel="shortcut icon" href="_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>utils</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --font-stack: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --color-api-overall: green;
+  --color-api-pre-name: #005eff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/publications.html">Publications</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">gunfolds</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="conversions.html">conversions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="conversions/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conversions/external.html">external</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conversions/internal.html">internal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="estimation/grangercausality.html">grangercausality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="estimation/linear_model.html">linear_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="estimation/pc.html">pc</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="solvers.html">solvers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="solvers/declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_msl.html">clingo_msl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html">clingo_rasl</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="solvers/imperative.html">imperative</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html">traversal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html">unknownrate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">utils</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html">bfutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/calc_procs.html">calc_procs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html">comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html">ecj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html">graphkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/myTimeout.html">myTimeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/neighborhoods.html">neighborhoods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/simpleloops.html">simpleloops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/zickle.html">zickle</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="viz/dbn2latex.html">dbn2latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="viz/gtool.html">gtool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/neuroneural/gunfolds/tree/master/sphinx-build/utils.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="utils">
+<h1>utils<a class="headerlink" href="#utils" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="utils/bfutils.html">bfutils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#all-undersamples">all_undersamples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.all_undersamples"><code class="docutils literal notranslate"><span class="pre">all_undersamples()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#bidirected-inc">bidirected_inc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.bidirected_inc"><code class="docutils literal notranslate"><span class="pre">bidirected_inc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#call-u-conflicts">call_u_conflicts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_conflicts"><code class="docutils literal notranslate"><span class="pre">call_u_conflicts()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#call-u-conflicts2">call_u_conflicts2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_conflicts2"><code class="docutils literal notranslate"><span class="pre">call_u_conflicts2()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#call-u-conflicts-d">call_u_conflicts_d</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_conflicts_d"><code class="docutils literal notranslate"><span class="pre">call_u_conflicts_d()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#call-u-equals">call_u_equals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_equals"><code class="docutils literal notranslate"><span class="pre">call_u_equals()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#call-u-equals2">call_u_equals2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_equals2"><code class="docutils literal notranslate"><span class="pre">call_u_equals2()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#call-undersamples">call_undersamples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.call_undersamples"><code class="docutils literal notranslate"><span class="pre">call_undersamples()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#cc-all">cc_all</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.cc_all"><code class="docutils literal notranslate"><span class="pre">cc_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#cc-undersamples">cc_undersamples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.cc_undersamples"><code class="docutils literal notranslate"><span class="pre">cc_undersamples()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#check-conflict">check_conflict</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.check_conflict"><code class="docutils literal notranslate"><span class="pre">check_conflict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#id1">check_conflict_</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.check_conflict_"><code class="docutils literal notranslate"><span class="pre">check_conflict_()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#check-equality">check_equality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.check_equality"><code class="docutils literal notranslate"><span class="pre">check_equality()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#compact-call-undersamples">compact_call_undersamples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.compact_call_undersamples"><code class="docutils literal notranslate"><span class="pre">compact_call_undersamples()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#compat">compat</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.compat"><code class="docutils literal notranslate"><span class="pre">compat()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#compatible">compatible</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.compatible"><code class="docutils literal notranslate"><span class="pre">compatible()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#dens2edgenum">dens2edgenum</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.dens2edgenum"><code class="docutils literal notranslate"><span class="pre">dens2edgenum()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#dincrement-u">dincrement_u</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.dincrement_u"><code class="docutils literal notranslate"><span class="pre">dincrement_u()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#directed-inc">directed_inc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.directed_inc"><code class="docutils literal notranslate"><span class="pre">directed_inc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#edgenum2dens">edgenum2dens</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.edgenum2dens"><code class="docutils literal notranslate"><span class="pre">edgenum2dens()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#forms-loop">forms_loop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.forms_loop"><code class="docutils literal notranslate"><span class="pre">forms_loop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#iall">iall</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.iall"><code class="docutils literal notranslate"><span class="pre">iall()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#icompat">icompat</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.icompat"><code class="docutils literal notranslate"><span class="pre">icompat()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#ilength">ilength</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.ilength"><code class="docutils literal notranslate"><span class="pre">ilength()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#increment">increment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.increment"><code class="docutils literal notranslate"><span class="pre">increment()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#increment-u">increment_u</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.increment_u"><code class="docutils literal notranslate"><span class="pre">increment_u()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#is-sclique">is_sclique</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.is_sclique"><code class="docutils literal notranslate"><span class="pre">is_sclique()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#loadgraphs">loadgraphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.loadgraphs"><code class="docutils literal notranslate"><span class="pre">loadgraphs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#make-rect">make_rect</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.make_rect"><code class="docutils literal notranslate"><span class="pre">make_rect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#overshoot">overshoot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.overshoot"><code class="docutils literal notranslate"><span class="pre">overshoot()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#pure-directed-inc">pure_directed_inc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.pure_directed_inc"><code class="docutils literal notranslate"><span class="pre">pure_directed_inc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#savegraphs">savegraphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.savegraphs"><code class="docutils literal notranslate"><span class="pre">savegraphs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/bfutils.html#undersample">undersample</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html#gunfolds.utils.bfutils.undersample"><code class="docutils literal notranslate"><span class="pre">undersample()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/calc_procs.html">calc_procs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/calc_procs.html#get-process-count">get_process_count</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/calc_procs.html#gunfolds.utils.calc_procs.get_process_count"><code class="docutils literal notranslate"><span class="pre">get_process_count()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/clingo.html">clingo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/clingo.html#id1">clingo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/clingo.html#gunfolds.utils.clingo.clingo"><code class="docutils literal notranslate"><span class="pre">clingo()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/clingo.html#run-clingo">run_clingo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/clingo.html#gunfolds.utils.clingo.run_clingo"><code class="docutils literal notranslate"><span class="pre">run_clingo()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/comparison.html">comparison</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#sm-converging">SM_converging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.SM_converging"><code class="docutils literal notranslate"><span class="pre">SM_converging()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#sm-fixed">SM_fixed</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.SM_fixed"><code class="docutils literal notranslate"><span class="pre">SM_fixed()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#compatible-at-u">compatible_at_u</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.compatible_at_u"><code class="docutils literal notranslate"><span class="pre">compatible_at_u()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#gcd4scc">gcd4scc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.gcd4scc"><code class="docutils literal notranslate"><span class="pre">gcd4scc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#has-root">has_root</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.has_root"><code class="docutils literal notranslate"><span class="pre">has_root()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#has-self-loops">has_self_loops</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.has_self_loops"><code class="docutils literal notranslate"><span class="pre">has_self_loops()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#has-sink">has_sink</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.has_sink"><code class="docutils literal notranslate"><span class="pre">has_sink()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#randscc">randSCC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.randSCC"><code class="docutils literal notranslate"><span class="pre">randSCC()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/comparison.html#search-match">search_match</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html#gunfolds.utils.comparison.search_match"><code class="docutils literal notranslate"><span class="pre">search_match()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/ecj.html">ecj</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#clonebfree">cloneBfree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.cloneBfree"><code class="docutils literal notranslate"><span class="pre">cloneBfree()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#dfs-topsort">dfs_topsort</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.dfs_topsort"><code class="docutils literal notranslate"><span class="pre">dfs_topsort()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#gcd">gcd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.gcd"><code class="docutils literal notranslate"><span class="pre">gcd()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#has-unit-cycle">has_unit_cycle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.has_unit_cycle"><code class="docutils literal notranslate"><span class="pre">has_unit_cycle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#listgcd">listgcd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.listgcd"><code class="docutils literal notranslate"><span class="pre">listgcd()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#listgcd-r">listgcd_r</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.listgcd_r"><code class="docutils literal notranslate"><span class="pre">listgcd_r()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#reachable">reachable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.reachable"><code class="docutils literal notranslate"><span class="pre">reachable()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#scc">scc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.scc"><code class="docutils literal notranslate"><span class="pre">scc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#tr">tr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.tr"><code class="docutils literal notranslate"><span class="pre">tr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/ecj.html#walk">walk</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html#gunfolds.utils.ecj.walk"><code class="docutils literal notranslate"><span class="pre">walk()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/graphkit.html">graphkit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#oce">OCE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.OCE"><code class="docutils literal notranslate"><span class="pre">OCE()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#id1">_OCE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit._OCE"><code class="docutils literal notranslate"><span class="pre">_OCE()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#normed-oce">_normed_OCE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit._normed_OCE"><code class="docutils literal notranslate"><span class="pre">_normed_OCE()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#normed-undirected-oce">_normed_undirected_OCE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit._normed_undirected_OCE"><code class="docutils literal notranslate"><span class="pre">_normed_undirected_OCE()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#undirected-oce">_undirected_OCE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit._undirected_OCE"><code class="docutils literal notranslate"><span class="pre">_undirected_OCE()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#addaring">addAring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.addAring"><code class="docutils literal notranslate"><span class="pre">addAring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#addanedge">addanedge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.addanedge"><code class="docutils literal notranslate"><span class="pre">addanedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#addedges">addedges</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.addedges"><code class="docutils literal notranslate"><span class="pre">addedges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#bedgelist">bedgelist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.bedgelist"><code class="docutils literal notranslate"><span class="pre">bedgelist()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#bidirected-no-fork">bidirected_no_fork</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.bidirected_no_fork"><code class="docutils literal notranslate"><span class="pre">bidirected_no_fork()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#bp-mean-degree-graph">bp_mean_degree_graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.bp_mean_degree_graph"><code class="docutils literal notranslate"><span class="pre">bp_mean_degree_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#bp-pow-degree-graph">bp_pow_degree_graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.bp_pow_degree_graph"><code class="docutils literal notranslate"><span class="pre">bp_pow_degree_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#cerror">cerror</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.cerror"><code class="docutils literal notranslate"><span class="pre">cerror()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#clean-leaf-nodes">clean_leaf_nodes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.clean_leaf_nodes"><code class="docutils literal notranslate"><span class="pre">clean_leaf_nodes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#complement">complement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.complement"><code class="docutils literal notranslate"><span class="pre">complement()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#degree-ring">degree_ring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.degree_ring"><code class="docutils literal notranslate"><span class="pre">degree_ring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#delanedge">delanedge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.delanedge"><code class="docutils literal notranslate"><span class="pre">delanedge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#deledges">deledges</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.deledges"><code class="docutils literal notranslate"><span class="pre">deledges()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#density">density</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.density"><code class="docutils literal notranslate"><span class="pre">density()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#digonly">digonly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.digonly"><code class="docutils literal notranslate"><span class="pre">digonly()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#edgelist">edgelist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.edgelist"><code class="docutils literal notranslate"><span class="pre">edgelist()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#ensure-gcd1">ensure_gcd1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.ensure_gcd1"><code class="docutils literal notranslate"><span class="pre">ensure_gcd1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#ensure-graph-gcd1">ensure_graph_gcd1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.ensure_graph_gcd1"><code class="docutils literal notranslate"><span class="pre">ensure_graph_gcd1()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#fullyconnected">fullyconnected</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.fullyconnected"><code class="docutils literal notranslate"><span class="pre">fullyconnected()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#gcd1-bp-mean-degree-graph">gcd1_bp_mean_degree_graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.gcd1_bp_mean_degree_graph"><code class="docutils literal notranslate"><span class="pre">gcd1_bp_mean_degree_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#gcd4scc">gcd4scc</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.gcd4scc"><code class="docutils literal notranslate"><span class="pre">gcd4scc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#gtranspose">gtranspose</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.gtranspose"><code class="docutils literal notranslate"><span class="pre">gtranspose()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#inbedgelist">inbedgelist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.inbedgelist"><code class="docutils literal notranslate"><span class="pre">inbedgelist()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#inedgelist">inedgelist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.inedgelist"><code class="docutils literal notranslate"><span class="pre">inedgelist()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#isdedgesubset">isdedgesubset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.isdedgesubset"><code class="docutils literal notranslate"><span class="pre">isdedgesubset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#isedgesubset">isedgesubset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.isedgesubset"><code class="docutils literal notranslate"><span class="pre">isedgesubset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#mean-degree-graph">mean_degree_graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.mean_degree_graph"><code class="docutils literal notranslate"><span class="pre">mean_degree_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#merge-graphs">merge_graphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.merge_graphs"><code class="docutils literal notranslate"><span class="pre">merge_graphs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#merge-list">merge_list</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.merge_list"><code class="docutils literal notranslate"><span class="pre">merge_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#no-children">no_children</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.no_children"><code class="docutils literal notranslate"><span class="pre">no_children()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#no-parents">no_parents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.no_parents"><code class="docutils literal notranslate"><span class="pre">no_parents()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#oerror">oerror</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.oerror"><code class="docutils literal notranslate"><span class="pre">oerror()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#pow-degree-graph">pow_degree_graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.pow_degree_graph"><code class="docutils literal notranslate"><span class="pre">pow_degree_graph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#randh">randH</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.randH"><code class="docutils literal notranslate"><span class="pre">randH()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#randomdag">randomDAG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.randomDAG"><code class="docutils literal notranslate"><span class="pre">randomDAG()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#randomtril">randomTRIL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.randomTRIL"><code class="docutils literal notranslate"><span class="pre">randomTRIL()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#remove-loop">remove_loop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.remove_loop"><code class="docutils literal notranslate"><span class="pre">remove_loop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#remove-tril-singletons">remove_tril_singletons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.remove_tril_singletons"><code class="docutils literal notranslate"><span class="pre">remove_tril_singletons()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#ring">ring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.ring"><code class="docutils literal notranslate"><span class="pre">ring()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#ring-sccs">ring_sccs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.ring_sccs"><code class="docutils literal notranslate"><span class="pre">ring_sccs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#ringarcs">ringarcs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.ringarcs"><code class="docutils literal notranslate"><span class="pre">ringarcs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#ringmore">ringmore</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.ringmore"><code class="docutils literal notranslate"><span class="pre">ringmore()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#scale-free">scale_free</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.scale_free"><code class="docutils literal notranslate"><span class="pre">scale_free()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#scc-unreachable">scc_unreachable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.scc_unreachable"><code class="docutils literal notranslate"><span class="pre">scc_unreachable()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#selfloop">selfloop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.selfloop"><code class="docutils literal notranslate"><span class="pre">selfloop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#shift-labels">shift_labels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.shift_labels"><code class="docutils literal notranslate"><span class="pre">shift_labels()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#shift-list-labels">shift_list_labels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.shift_list_labels"><code class="docutils literal notranslate"><span class="pre">shift_list_labels()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#subgraph">subgraph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.subgraph"><code class="docutils literal notranslate"><span class="pre">subgraph()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#superclique">superclique</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.superclique"><code class="docutils literal notranslate"><span class="pre">superclique()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#udensity">udensity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.udensity"><code class="docutils literal notranslate"><span class="pre">udensity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#undedgelist">undedgelist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.undedgelist"><code class="docutils literal notranslate"><span class="pre">undedgelist()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#upairs">upairs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.upairs"><code class="docutils literal notranslate"><span class="pre">upairs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/graphkit.html#update-graph">update_graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html#gunfolds.utils.graphkit.update_graph"><code class="docutils literal notranslate"><span class="pre">update_graph()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/myTimeout.html">myTimeout</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/myTimeout.html#timeout">timeout</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/myTimeout.html#gunfolds.utils.myTimeout.timeout"><code class="docutils literal notranslate"><span class="pre">timeout()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/neighborhoods.html">neighborhoods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/neighborhoods.html#find-nearest-reachable">find_nearest_reachable</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.find_nearest_reachable"><code class="docutils literal notranslate"><span class="pre">find_nearest_reachable()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/neighborhoods.html#hamming-neighbors">hamming_neighbors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.hamming_neighbors"><code class="docutils literal notranslate"><span class="pre">hamming_neighbors()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/neighborhoods.html#ncr">ncr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.ncr"><code class="docutils literal notranslate"><span class="pre">ncr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/neighborhoods.html#num-natstep">num_nATstep</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.num_nATstep"><code class="docutils literal notranslate"><span class="pre">num_nATstep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/neighborhoods.html#num-neighbors">num_neighbors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.num_neighbors"><code class="docutils literal notranslate"><span class="pre">num_neighbors()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/simpleloops.html">simpleloops</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/simpleloops.html#print-loops">print_loops</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/simpleloops.html#gunfolds.utils.simpleloops.print_loops"><code class="docutils literal notranslate"><span class="pre">print_loops()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/simpleloops.html#simple-loops">simple_loops</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/simpleloops.html#gunfolds.utils.simpleloops.simple_loops"><code class="docutils literal notranslate"><span class="pre">simple_loops()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils/zickle.html">zickle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/zickle.html#load">load</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/zickle.html#gunfolds.utils.zickle.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils/zickle.html#save">save</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/zickle.html#gunfolds.utils.zickle.save"><code class="docutils literal notranslate"><span class="pre">save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="utils/bfutils.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">bfutils</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="solvers/imperative/unknownrate.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">unknownrate</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; neuroneural.net
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

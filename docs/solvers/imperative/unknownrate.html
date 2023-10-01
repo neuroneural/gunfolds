@@ -1,0 +1,1216 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="utils" href="../../utils.html" /><link rel="prev" title="traversal" href="traversal.html" />
+
+    <link rel="shortcut icon" href="../../_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>unknownrate</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --font-stack: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --color-api-overall: green;
+  --color-api-pre-name: #005eff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../_static/light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../_static/dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/publications.html">Publications</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../modules.html">gunfolds</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../conversions.html">conversions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../conversions/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../conversions/external.html">external</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../conversions/internal.html">internal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../estimation/grangercausality.html">grangercausality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../estimation/linear_model.html">linear_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../estimation/pc.html">pc</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../solvers.html">solvers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../declarative/clingo_msl.html">clingo_msl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../declarative/clingo_rasl.html">clingo_rasl</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../imperative.html">imperative</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="traversal.html">traversal</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">unknownrate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../utils.html">utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/bfutils.html">bfutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/calc_procs.html">calc_procs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/comparison.html">comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/ecj.html">ecj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/graphkit.html">graphkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/myTimeout.html">myTimeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/neighborhoods.html">neighborhoods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/simpleloops.html">simpleloops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/zickle.html">zickle</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../viz/dbn2latex.html">dbn2latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../viz/gtool.html">gtool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/neuroneural/gunfolds/tree/master/sphinx-build/solvers/imperative/unknownrate.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="unknownrate">
+<h1>unknownrate<a class="headerlink" href="#unknownrate" title="Link to this heading">#</a></h1>
+<section id="add2set">
+<h2>add2set_<a class="headerlink" href="#add2set" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.add2set_">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">add2set_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ccf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#add2set_"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.add2set_" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ds</strong> – </p></li>
+<li><p><strong>H</strong> – </p></li>
+<li><p><strong>cp</strong> – </p></li>
+<li><p><strong>ccf</strong> – </p></li>
+<li><p><strong>iter</strong> – </p></li>
+<li><p><strong>verbose</strong> – </p></li>
+<li><p><strong>capsize</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="add2set-loop">
+<h2>add2set_loop<a class="headerlink" href="#add2set-loop" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.add2set_loop">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">add2set_loop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ccf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#add2set_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.add2set_loop" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ds</strong> – </p></li>
+<li><p><strong>H</strong> – </p></li>
+<li><p><strong>cp</strong> – </p></li>
+<li><p><strong>ccf</strong> – </p></li>
+<li><p><strong>iter</strong> – </p></li>
+<li><p><strong>verbose</strong> – </p></li>
+<li><p><strong>capsize</strong> – </p></li>
+<li><p><strong>currsize</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="allsloops">
+<h2>allsloops<a class="headerlink" href="#allsloops" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.allsloops">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">allsloops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#allsloops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.allsloops" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>(</em><em>GUESS</em><em>)</em><em>integer</em>) – </p></li>
+<li><p><strong>asl</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="bconflictor">
+<h2>bconflictor<a class="headerlink" href="#bconflictor" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.bconflictor">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">bconflictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#bconflictor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.bconflictor" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>H</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="build-loop-step">
+<h2>build_loop_step<a class="headerlink" href="#build-loop-step" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.build_loop_step">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">build_loop_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#build_loop_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.build_loop_step" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ds</strong> – </p></li>
+<li><p><strong>loop</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+<li><p><strong>iter</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="cacheconflicts">
+<h2>cacheconflicts<a class="headerlink" href="#cacheconflicts" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.cacheconflicts">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">cacheconflicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#cacheconflicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.cacheconflicts" title="Link to this definition">#</a></dt>
+<dd><p>Given a number representation of a graph and an iterable of
+conflicting subgraphs return True if the graph conflicts with any
+of them and false otherwise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num</strong> – the number representation of a graph</p></li>
+<li><p><strong>cache</strong> – an iterable of number representations of conflicting graphs</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="conflictor">
+<h2>conflictor<a class="headerlink" href="#conflictor" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.conflictor">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">conflictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#conflictor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.conflictor" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>H</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="conflictor-set">
+<h2>conflictor_set<a class="headerlink" href="#conflictor-set" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.conflictor_set">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">conflictor_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#conflictor_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.conflictor_set" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>H</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="conflictors">
+<h2>conflictors<a class="headerlink" href="#conflictors" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.conflictors">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">conflictors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#conflictors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.conflictors" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>H</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="confpairs">
+<h2>confpairs<a class="headerlink" href="#confpairs" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.confpairs">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">confpairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#confpairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.confpairs" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>H</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="delaloop">
+<h2>delAloop<a class="headerlink" href="#delaloop" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.delAloop">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">delAloop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#delAloop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.delAloop" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> – (GUESS)graph that generates the loop</p></li>
+<li><p><strong>g</strong> – </p></li>
+<li><p><strong>loop</strong> – (GUESS)the reference loop</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="del-loop">
+<h2>del_loop<a class="headerlink" href="#del-loop" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.del_loop">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">del_loop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#del_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.del_loop" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ds</strong> – </p></li>
+<li><p><strong>H</strong> – </p></li>
+<li><p><strong>iter</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="e2num">
+<h2>e2num<a class="headerlink" href="#e2num" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.e2num">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">e2num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#e2num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.e2num" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ekey2e">
+<h2>ekey2e<a class="headerlink" href="#ekey2e" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.ekey2e">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">ekey2e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ekey</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#ekey2e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.ekey2e" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ekey</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="forward-loop-match">
+<h2>forward_loop_match<a class="headerlink" href="#forward-loop-match" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.forward_loop_match">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">forward_loop_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#forward_loop_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.forward_loop_match" title="Link to this definition">#</a></dt>
+<dd><p>Start with an empty graph and keep adding simple loops until
+the loop is generated at some undersampling rate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loop</strong> – binary encoding of the loop</p></li>
+<li><p><strong>n</strong> – number of nodes in the graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="gen-loops">
+<h2>gen_loops<a class="headerlink" href="#gen-loops" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.gen_loops">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">gen_loops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#gen_loops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.gen_loops" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>(</em><em>GUESS</em><em>)</em><em>integer</em>) – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="iteqclass">
+<h2>iteqclass<a class="headerlink" href="#iteqclass" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.iteqclass">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">iteqclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#iteqclass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.iteqclass" title="Link to this definition">#</a></dt>
+<dd><p>Find all graphs in the same equivalence class with respect to
+graph H and any undesampling rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>H</strong> – </p></li>
+<li><p><strong>verbose</strong> – </p></li>
+<li><p><strong>capsize</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="lconflictors">
+<h2>lconflictors<a class="headerlink" href="#lconflictors" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.lconflictors">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">lconflictors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sloops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#lconflictors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.lconflictors" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>H</strong> – </p></li>
+<li><p><strong>sloops</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="lconfpairs">
+<h2>lconfpairs<a class="headerlink" href="#lconfpairs" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.lconfpairs">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">lconfpairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sloops</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#lconfpairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.lconfpairs" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>H</strong> – </p></li>
+<li><p><strong>cap</strong> – </p></li>
+<li><p><strong>sloops</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="le2num">
+<h2>le2num<a class="headerlink" href="#le2num" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.le2num">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">le2num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#le2num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.le2num" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>elist</strong> – list of edges to check</p></li>
+<li><p><strong>n</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="liteqclass">
+<h2>liteqclass<a class="headerlink" href="#liteqclass" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.liteqclass">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">liteqclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#liteqclass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.liteqclass" title="Link to this definition">#</a></dt>
+<dd><p>Find all graphs in the same equivalence class with respect to
+graph H and any undesampling rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>H</strong> – </p></li>
+<li><p><strong>verbose</strong> – </p></li>
+<li><p><strong>capsize</strong> – </p></li>
+<li><p><strong>asl</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="loop2graph">
+<h2>loop2graph<a class="headerlink" href="#loop2graph" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.loop2graph">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">loop2graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#loop2graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.loop2graph" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<em>(</em><em>GUESS</em><em>)</em><em>integer</em>) – </p></li>
+<li><p><strong>n</strong> (<em>(</em><em>GUESS</em><em>)</em><em>integer</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="main">
+<h2>main<a class="headerlink" href="#main" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.main">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.main" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="matchaloop">
+<h2>matchAloop<a class="headerlink" href="#matchaloop" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.matchAloop">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">matchAloop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#matchAloop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.matchAloop" title="Link to this definition">#</a></dt>
+<dd><p>Returns a set of minimal graphs that generate this loop</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loop</strong> – binary encoding of the loop</p></li>
+<li><p><strong>n</strong> – number of nodes in the graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="perm-circular">
+<h2>perm_circular<a class="headerlink" href="#perm-circular" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.perm_circular">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">perm_circular</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#perm_circular"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.perm_circular" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<em>(</em><em>GUESS</em><em>)</em><em>integer</em>) – </p></li>
+<li><p><strong>cp</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="prune-conflicts">
+<h2>prune_conflicts<a class="headerlink" href="#prune-conflicts" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.prune_conflicts">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">prune_conflicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#prune_conflicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.prune_conflicts" title="Link to this definition">#</a></dt>
+<dd><p>Checks if adding an edge from the list to graph g causes a
+conflict with respect to H and if it does removes the edge
+from the list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>H</strong> – the undersampled graph</p></li>
+<li><p><strong>g</strong> – a graph under construction</p></li>
+<li><p><strong>elist</strong> – list of edges to check</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="prune-loops">
+<h2>prune_loops<a class="headerlink" href="#prune-loops" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.prune_loops">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">prune_loops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#prune_loops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.prune_loops" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loops</strong> – </p></li>
+<li><p><strong>H</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="reverse">
+<h2>reverse<a class="headerlink" href="#reverse" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.reverse">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#reverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.reverse" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>H</strong> – </p></li>
+<li><p><strong>verbose</strong> – </p></li>
+<li><p><strong>capsize</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="reverse-edge-match">
+<h2>reverse_edge_match<a class="headerlink" href="#reverse-edge-match" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.reverse_edge_match">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">reverse_edge_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#reverse_edge_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.reverse_edge_match" title="Link to this definition">#</a></dt>
+<dd><p>Start with a graph and keep removing loops while the loop is still matched</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> – graph that generates the loop</p></li>
+<li><p><strong>g</strong> – </p></li>
+<li><p><strong>loop</strong> – the reference loop</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="reverse-loop-match">
+<h2>reverse_loop_match<a class="headerlink" href="#reverse-loop-match" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.reverse_loop_match">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">reverse_loop_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#reverse_loop_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.reverse_loop_match" title="Link to this definition">#</a></dt>
+<dd><p>Start with a graph and keep removing loops while the loop is still matched</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> – graph that generates the loop</p></li>
+<li><p><strong>g</strong> – </p></li>
+<li><p><strong>loop</strong> – the reference loop</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="skip-conflict">
+<h2>skip_conflict<a class="headerlink" href="#skip-conflict" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.skip_conflict">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">skip_conflict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#skip_conflict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.skip_conflict" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g1</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>ds</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="skip-conflictors">
+<h2>skip_conflictors<a class="headerlink" href="#skip-conflictors" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.skip_conflictors">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">skip_conflictors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ccf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#skip_conflictors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.skip_conflictors" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gnum</strong> – </p></li>
+<li><p><strong>ccf</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="start-progress-bar">
+<h2>start_progress_bar<a class="headerlink" href="#start-progress-bar" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.unknownrate.start_progress_bar">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.unknownrate.</span></span><span class="sig-name descname"><span class="pre">start_progress_bar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/unknownrate.html#start_progress_bar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.unknownrate.start_progress_bar" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>iter</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+<li><p><strong>verbose</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../../utils.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">utils</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="traversal.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">traversal</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; neuroneural.net
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">unknownrate</a><ul>
+<li><a class="reference internal" href="#add2set">add2set_</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.add2set_"><code class="docutils literal notranslate"><span class="pre">add2set_()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#add2set-loop">add2set_loop</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.add2set_loop"><code class="docutils literal notranslate"><span class="pre">add2set_loop()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#allsloops">allsloops</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.allsloops"><code class="docutils literal notranslate"><span class="pre">allsloops()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bconflictor">bconflictor</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.bconflictor"><code class="docutils literal notranslate"><span class="pre">bconflictor()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-loop-step">build_loop_step</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.build_loop_step"><code class="docutils literal notranslate"><span class="pre">build_loop_step()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cacheconflicts">cacheconflicts</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.cacheconflicts"><code class="docutils literal notranslate"><span class="pre">cacheconflicts()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conflictor">conflictor</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.conflictor"><code class="docutils literal notranslate"><span class="pre">conflictor()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conflictor-set">conflictor_set</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.conflictor_set"><code class="docutils literal notranslate"><span class="pre">conflictor_set()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conflictors">conflictors</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.conflictors"><code class="docutils literal notranslate"><span class="pre">conflictors()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#confpairs">confpairs</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.confpairs"><code class="docutils literal notranslate"><span class="pre">confpairs()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delaloop">delAloop</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.delAloop"><code class="docutils literal notranslate"><span class="pre">delAloop()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#del-loop">del_loop</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.del_loop"><code class="docutils literal notranslate"><span class="pre">del_loop()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#e2num">e2num</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.e2num"><code class="docutils literal notranslate"><span class="pre">e2num()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ekey2e">ekey2e</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.ekey2e"><code class="docutils literal notranslate"><span class="pre">ekey2e()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#forward-loop-match">forward_loop_match</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.forward_loop_match"><code class="docutils literal notranslate"><span class="pre">forward_loop_match()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gen-loops">gen_loops</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.gen_loops"><code class="docutils literal notranslate"><span class="pre">gen_loops()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iteqclass">iteqclass</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.iteqclass"><code class="docutils literal notranslate"><span class="pre">iteqclass()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lconflictors">lconflictors</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.lconflictors"><code class="docutils literal notranslate"><span class="pre">lconflictors()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lconfpairs">lconfpairs</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.lconfpairs"><code class="docutils literal notranslate"><span class="pre">lconfpairs()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#le2num">le2num</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.le2num"><code class="docutils literal notranslate"><span class="pre">le2num()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#liteqclass">liteqclass</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.liteqclass"><code class="docutils literal notranslate"><span class="pre">liteqclass()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#loop2graph">loop2graph</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.loop2graph"><code class="docutils literal notranslate"><span class="pre">loop2graph()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#main">main</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#matchaloop">matchAloop</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.matchAloop"><code class="docutils literal notranslate"><span class="pre">matchAloop()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#perm-circular">perm_circular</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.perm_circular"><code class="docutils literal notranslate"><span class="pre">perm_circular()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#prune-conflicts">prune_conflicts</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.prune_conflicts"><code class="docutils literal notranslate"><span class="pre">prune_conflicts()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#prune-loops">prune_loops</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.prune_loops"><code class="docutils literal notranslate"><span class="pre">prune_loops()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reverse">reverse</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.reverse"><code class="docutils literal notranslate"><span class="pre">reverse()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reverse-edge-match">reverse_edge_match</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.reverse_edge_match"><code class="docutils literal notranslate"><span class="pre">reverse_edge_match()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reverse-loop-match">reverse_loop_match</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.reverse_loop_match"><code class="docutils literal notranslate"><span class="pre">reverse_loop_match()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#skip-conflict">skip_conflict</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.skip_conflict"><code class="docutils literal notranslate"><span class="pre">skip_conflict()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#skip-conflictors">skip_conflictors</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.skip_conflictors"><code class="docutils literal notranslate"><span class="pre">skip_conflictors()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#start-progress-bar">start_progress_bar</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.unknownrate.start_progress_bar"><code class="docutils literal notranslate"><span class="pre">start_progress_bar()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

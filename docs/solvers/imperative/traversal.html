@@ -1,0 +1,2571 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="unknownrate" href="unknownrate.html" /><link rel="prev" title="imperative" href="../imperative.html" />
+
+    <link rel="shortcut icon" href="../../_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>traversal</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --font-stack: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --color-api-overall: green;
+  --color-api-pre-name: #005eff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../_static/light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../_static/dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started/publications.html">Publications</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../modules.html">gunfolds</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../conversions.html">conversions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../conversions/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../conversions/external.html">external</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../conversions/internal.html">internal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../estimation/grangercausality.html">grangercausality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../estimation/linear_model.html">linear_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../estimation/pc.html">pc</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../../solvers.html">solvers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="../declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../declarative/clingo_msl.html">clingo_msl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../declarative/clingo_rasl.html">clingo_rasl</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="../imperative.html">imperative</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">traversal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="unknownrate.html">unknownrate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../utils.html">utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/bfutils.html">bfutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/calc_procs.html">calc_procs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/comparison.html">comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/ecj.html">ecj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/graphkit.html">graphkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/myTimeout.html">myTimeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/neighborhoods.html">neighborhoods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/simpleloops.html">simpleloops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../utils/zickle.html">zickle</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../viz/dbn2latex.html">dbn2latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../viz/gtool.html">gtool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/neuroneural/gunfolds/tree/master/sphinx-build/solvers/imperative/traversal.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="traversal">
+<h1>traversal<a class="headerlink" href="#traversal" title="Link to this heading">#</a></h1>
+<section id="add2edges">
+<h2>add2edges<a class="headerlink" href="#add2edges" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.add2edges">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">add2edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#add2edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.add2edges" title="Link to this definition">#</a></dt>
+<dd><p>Break edge e[0] -&gt; e[1] into two pieces
+e[0] -&gt; p and p -&gt; e[1]
+and add them to g</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="addaaedge">
+<h2>addaAedge<a class="headerlink" href="#addaaedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.addaAedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">addaAedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#addaAedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.addaAedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="addavpath">
+<h2>addaVpath<a class="headerlink" href="#addavpath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.addaVpath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">addaVpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#addaVpath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.addaVpath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="addacedge">
+<h2>addacedge<a class="headerlink" href="#addacedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.addacedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">addacedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#addacedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.addacedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="addanedge">
+<h2>addanedge<a class="headerlink" href="#addanedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.addanedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">addanedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#addanedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.addanedge" title="Link to this definition">#</a></dt>
+<dd><p>Add edge e[0] -&gt; e[1] to g</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="addapath">
+<h2>addapath<a class="headerlink" href="#addapath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.addapath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">addapath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#addapath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.addapath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="addavedge">
+<h2>addavedge<a class="headerlink" href="#addavedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.addavedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">addavedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#addavedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.addavedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="check3">
+<h2>check3<a class="headerlink" href="#check3" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.check3">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">check3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#check3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.check3" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e1</strong> – </p></li>
+<li><p><strong>e2</strong> – </p></li>
+<li><p><strong>e3</strong> – </p></li>
+<li><p><strong>j1</strong> – </p></li>
+<li><p><strong>j2</strong> – </p></li>
+<li><p><strong>j3</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>f</strong> – </p></li>
+<li><p><strong>c</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checkaedge">
+<h2>checkAedge<a class="headerlink" href="#checkaedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checkAedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checkAedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checkAedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checkAedge" title="Link to this definition">#</a></dt>
+<dd><p>Nodes to check to merge the virtual nodes of A ( b-&gt;a&lt;-c )</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checkapath">
+<h2>checkApath<a class="headerlink" href="#checkapath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checkApath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checkApath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checkApath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checkApath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checkable">
+<h2>checkable<a class="headerlink" href="#checkable" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checkable">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checkable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checkable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checkable" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>g2</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checkbedges">
+<h2>checkbedges<a class="headerlink" href="#checkbedges" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checkbedges">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checkbedges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checkbedges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checkbedges" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>bel</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checkcedge">
+<h2>checkcedge<a class="headerlink" href="#checkcedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checkcedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checkcedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checkcedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checkcedge" title="Link to this definition">#</a></dt>
+<dd><p>Nodes to check to merge the virtual nodes of <code class="docutils literal notranslate"><span class="pre">c</span></code> ( a-&gt;b-&gt;c )</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checkedge">
+<h2>checkedge<a class="headerlink" href="#checkedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checkedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checkedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checkedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checkedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checker">
+<h2>checker<a class="headerlink" href="#checker" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checker">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ee</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checker" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – </p></li>
+<li><p><strong>ee</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checkerds">
+<h2>checkerDS<a class="headerlink" href="#checkerds" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checkerDS">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checkerDS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ee</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checkerDS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checkerDS" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – </p></li>
+<li><p><strong>ee</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="checkvedge">
+<h2>checkvedge<a class="headerlink" href="#checkvedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.checkvedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">checkvedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#checkvedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.checkvedge" title="Link to this definition">#</a></dt>
+<dd><p>Nodes to check to merge the virtual nodes of <code class="docutils literal notranslate"><span class="pre">v</span></code> ( b&lt;-a-&gt;c )</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="childrenedges">
+<h2>childrenedges<a class="headerlink" href="#childrenedges" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.childrenedges">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">childrenedges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#childrenedges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.childrenedges" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>(</em><em>guess</em><em>)</em><em>string</em>) – single node string</p></li>
+<li><p><strong>c</strong> – mutable list of children of node n (will be changed as a side effect)</p></li>
+<li><p><strong>el</strong> – list of edges available for construction (side effect change)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="chunks">
+<h2>chunks<a class="headerlink" href="#chunks" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.chunks">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">chunks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#chunks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.chunks" title="Link to this definition">#</a></dt>
+<dd><p>Yield successive n-sized chunks from l.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> – </p></li>
+<li><p><strong>n</strong> (<em>integer</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="cleanvedges">
+<h2>cleanVedges<a class="headerlink" href="#cleanvedges" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.cleanVedges">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">cleanVedges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#cleanVedges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.cleanVedges" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="cleanedges">
+<h2>cleanedges<a class="headerlink" href="#cleanedges" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.cleanedges">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">cleanedges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#cleanedges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.cleanedges" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="cloneempty">
+<h2>cloneempty<a class="headerlink" href="#cloneempty" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.cloneempty">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">cloneempty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#cloneempty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.cloneempty" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="conformanceds">
+<h2>conformanceDS<a class="headerlink" href="#conformanceds" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.conformanceDS">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">conformanceDS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#conformanceDS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.conformanceDS" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>gg</strong> – </p></li>
+<li><p><strong>order</strong> – </p></li>
+<li><p><strong>f</strong> – </p></li>
+<li><p><strong>c</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="del2edges">
+<h2>del2edges<a class="headerlink" href="#del2edges" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.del2edges">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">del2edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#del2edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.del2edges" title="Link to this definition">#</a></dt>
+<dd><p>Restore the graph as it was before adding e[0]-&gt;p and p-&gt;e[1]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="del-empty">
+<h2>del_empty<a class="headerlink" href="#del-empty" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.del_empty">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">del_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#del_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.del_empty" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="delaaedge">
+<h2>delaAedge<a class="headerlink" href="#delaaedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.delaAedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">delaAedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#delaAedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.delaAedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="delavpath">
+<h2>delaVpath<a class="headerlink" href="#delavpath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.delaVpath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">delaVpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#delaVpath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.delaVpath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="delacedge">
+<h2>delacedge<a class="headerlink" href="#delacedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.delacedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">delacedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#delacedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.delacedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="delanedge">
+<h2>delanedge<a class="headerlink" href="#delanedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.delanedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">delanedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#delanedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.delanedge" title="Link to this definition">#</a></dt>
+<dd><p>Delete edge e[0] -&gt; e[1] from g if it was not there before</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="delapath">
+<h2>delapath<a class="headerlink" href="#delapath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.delapath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">delapath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#delapath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.delapath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="delavedge">
+<h2>delavedge<a class="headerlink" href="#delavedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.delavedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">delavedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#delavedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.delavedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>b</strong> – </p></li>
+<li><p><strong>mask</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="edge-function-idx">
+<h2>edge_function_idx<a class="headerlink" href="#edge-function-idx" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.edge_function_idx">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">edge_function_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#edge_function_idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.edge_function_idx" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>edge</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="edge-increment-ok">
+<h2>edge_increment_ok<a class="headerlink" href="#edge-increment-ok" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.edge_increment_ok">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">edge_increment_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#edge_increment_ok"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.edge_increment_ok" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – start</p></li>
+<li><p><strong>m</strong> – middle</p></li>
+</ul>
+</dd>
+</dl>
+<p>:param e : end
+:type e:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="esig">
+<h2>esig<a class="headerlink" href="#esig" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.esig">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">esig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#esig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.esig" title="Link to this definition">#</a></dt>
+<dd><p>Turns edge list into a hash string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="forks">
+<h2>forks<a class="headerlink" href="#forks" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.forks">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">forks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doempty=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#forks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.forks" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>(</em><em>guess</em><em>)</em><em>string</em>) – single node string</p></li>
+<li><p><strong>c</strong> – mutable list of children of node n (will be changed as a side effect)</p></li>
+<li><p><strong>el</strong> – list of edges available for construction (side effect change)</p></li>
+<li><p><strong>bl</strong> – list of bidirected edges</p></li>
+<li><p><strong>doempty</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="gpurgepath">
+<h2>gpurgepath<a class="headerlink" href="#gpurgepath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.gpurgepath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">gpurgepath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#gpurgepath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.gpurgepath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>path</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="gsig">
+<h2>gsig<a class="headerlink" href="#gsig" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.gsig">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">gsig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#gsig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.gsig" title="Link to this definition">#</a></dt>
+<dd><p>Turns input graph <code class="docutils literal notranslate"><span class="pre">g</span></code> into a hash string using edges</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="inorder-check2">
+<h2>inorder_check2<a class="headerlink" href="#inorder-check2" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.inorder_check2">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">inorder_check2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#inorder_check2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.inorder_check2" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e1</strong> – </p></li>
+<li><p><strong>e2</strong> – </p></li>
+<li><p><strong>j1</strong> – </p></li>
+<li><p><strong>j2</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>f</strong> – </p></li>
+<li><p><strong>c</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="inorder-checks">
+<h2>inorder_checks<a class="headerlink" href="#inorder-checks" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.inorder_checks">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">inorder_checks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#inorder_checks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.inorder_checks" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>gg</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="invertcdselement">
+<h2>invertCDSelement<a class="headerlink" href="#invertcdselement" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.invertCDSelement">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">invertCDSelement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#invertCDSelement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.invertCDSelement" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d_i</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="isaedge">
+<h2>isAedge<a class="headerlink" href="#isaedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.isAedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">isAedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#isAedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.isAedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="isapath">
+<h2>isApath<a class="headerlink" href="#isapath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.isApath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">isApath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#isApath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.isApath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="iscedge">
+<h2>isCedge<a class="headerlink" href="#iscedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.isCedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">isCedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#isCedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.isCedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="isedge">
+<h2>isedge<a class="headerlink" href="#isedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.isedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">isedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#isedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.isedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="isvedge">
+<h2>isvedge<a class="headerlink" href="#isvedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.isvedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">isvedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#isvedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.isvedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="length-d-loopy-paths">
+<h2>length_d_loopy_paths<a class="headerlink" href="#length-d-loopy-paths" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.length_d_loopy_paths">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">length_d_loopy_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#length_d_loopy_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.length_d_loopy_paths" title="Link to this definition">#</a></dt>
+<dd><p>Iterate over nodes in <code class="docutils literal notranslate"><span class="pre">G</span></code> reachable from <code class="docutils literal notranslate"><span class="pre">s</span></code> in exactly d steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> format graph</p></li>
+<li><p><strong>s</strong> – </p></li>
+<li><p><strong>dt</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="length-d-paths">
+<h2>length_d_paths<a class="headerlink" href="#length-d-paths" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.length_d_paths">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">length_d_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#length_d_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.length_d_paths" title="Link to this definition">#</a></dt>
+<dd><p>Iterate over nodes in G reachable from s in exactly d steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – </p></li>
+<li><p><strong>s</strong> – </p></li>
+<li><p><strong>d</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="longpaths-pick">
+<h2>longpaths_pick<a class="headerlink" href="#longpaths-pick" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.longpaths_pick">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">longpaths_pick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#longpaths_pick"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.longpaths_pick" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>l</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="make-allforks-and-rest">
+<h2>make_allforks_and_rest<a class="headerlink" href="#make-allforks-and-rest" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.make_allforks_and_rest">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">make_allforks_and_rest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dofullforks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#make_allforks_and_rest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.make_allforks_and_rest" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>el</strong> – list of edges available for construction (side effect change)</p></li>
+<li><p><strong>bl</strong> – (GUESS)list of bidirected edges</p></li>
+<li><p><strong>dofullforks</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="make-emptyforks">
+<h2>make_emptyforks<a class="headerlink" href="#make-emptyforks" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.make_emptyforks">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">make_emptyforks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#make_emptyforks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.make_emptyforks" title="Link to this definition">#</a></dt>
+<dd><p>An empty fork is a fork without the bidirected edge</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>(</em><em>guess</em><em>)</em><em>string</em>) – single node string</p></li>
+<li><p><strong>c</strong> – mutable list of children of node n (will be changed as a side effect)</p></li>
+<li><p><strong>el</strong> – list of edges available for construction (side effect change)</p></li>
+<li><p><strong>bl</strong> – list of bidirected edges</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="make-fullforks">
+<h2>make_fullforks<a class="headerlink" href="#make-fullforks" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.make_fullforks">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">make_fullforks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#make_fullforks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.make_fullforks" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>(</em><em>guess</em><em>)</em><em>string</em>) – single node string</p></li>
+<li><p><strong>c</strong> – mutable list of children of node n (will be changed as a side effect)</p></li>
+<li><p><strong>el</strong> – list of edges available for construction (side effect change)</p></li>
+<li><p><strong>bl</strong> – list of bidirected edges</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="make-longpaths">
+<h2>make_longpaths<a class="headerlink" href="#make-longpaths" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.make_longpaths">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">make_longpaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">el</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#make_longpaths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.make_longpaths" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>el</strong> – (GUESS)list of edges available for construction (side effect change)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="makechains">
+<h2>makechains<a class="headerlink" href="#makechains" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.makechains">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">makechains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#makechains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.makechains" title="Link to this definition">#</a></dt>
+<dd><p>Greedily construct 2 edge chains from edge list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>l</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="makesink">
+<h2>makesink<a class="headerlink" href="#makesink" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.makesink">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">makesink</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">es</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#makesink"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.makesink" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>es</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="makesinks">
+<h2>makesinks<a class="headerlink" href="#makesinks" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.makesinks">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">makesinks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#makesinks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.makesinks" title="Link to this definition">#</a></dt>
+<dd><p>Greedily construct 2 edge sinks ( b-&gt;a&lt;-c ) from edge list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>l</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="mask2edges">
+<h2>mask2edges<a class="headerlink" href="#mask2edges" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.mask2edges">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">mask2edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#mask2edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.mask2edges" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="maskaaedge">
+<h2>maskaAedge<a class="headerlink" href="#maskaaedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.maskaAedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">maskaAedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#maskaAedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.maskaAedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="maskacedge">
+<h2>maskaCedge<a class="headerlink" href="#maskacedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.maskaCedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">maskaCedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#maskaCedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.maskaCedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="maskavpath">
+<h2>maskaVpath<a class="headerlink" href="#maskavpath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.maskaVpath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">maskaVpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#maskaVpath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.maskaVpath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="maskanedge">
+<h2>maskanedge<a class="headerlink" href="#maskanedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.maskanedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">maskanedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#maskanedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.maskanedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="maskapath">
+<h2>maskapath<a class="headerlink" href="#maskapath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.maskapath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">maskapath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#maskapath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.maskapath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="maskavedge">
+<h2>maskavedge<a class="headerlink" href="#maskavedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.maskavedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">maskavedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#maskavedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.maskavedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="memo-no-return">
+<h2>memo_no_return<a class="headerlink" href="#memo-no-return" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.memo_no_return">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">memo_no_return</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#memo_no_return"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.memo_no_return" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2add2edges">
+<h2>ok2add2edges<a class="headerlink" href="#ok2add2edges" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2add2edges">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2add2edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2add2edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2add2edges" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2addaaedge">
+<h2>ok2addaAedge<a class="headerlink" href="#ok2addaaedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2addaAedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2addaAedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2addaAedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2addaAedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2addavpath">
+<h2>ok2addaVpath<a class="headerlink" href="#ok2addavpath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2addaVpath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2addaVpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2addaVpath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2addaVpath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>rate</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2addacedge">
+<h2>ok2addacedge<a class="headerlink" href="#ok2addacedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2addacedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2addacedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2addacedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2addacedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2addanedge">
+<h2>ok2addanedge<a class="headerlink" href="#ok2addanedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2addanedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2addanedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2addanedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2addanedge" title="Link to this definition">#</a></dt>
+<dd><p>:param s : start
+:type s:</p>
+<p>:param e : end
+:type e:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>rate</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2addanedge1">
+<h2>ok2addanedge1<a class="headerlink" href="#ok2addanedge1" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2addanedge1">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2addanedge1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2addanedge1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2addanedge1" title="Link to this definition">#</a></dt>
+<dd><p>:param s : start
+:type s:</p>
+<p>:param e : end
+:type e:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>rate</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2addanedge2">
+<h2>ok2addanedge2<a class="headerlink" href="#ok2addanedge2" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2addanedge2">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2addanedge2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2addanedge2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2addanedge2" title="Link to this definition">#</a></dt>
+<dd><p>:param s : start
+:type s:</p>
+<p>:param e : end
+:type e:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>rate</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2addapath">
+<h2>ok2addapath<a class="headerlink" href="#ok2addapath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2addapath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2addapath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2addapath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2addapath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ok2addavedge">
+<h2>ok2addavedge<a class="headerlink" href="#ok2addavedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.ok2addavedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">ok2addavedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#ok2addavedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.ok2addavedge" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e</strong> – </p></li>
+<li><p><strong>p</strong> – </p></li>
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="prune-sort-cds">
+<h2>prune_sort_CDS<a class="headerlink" href="#prune-sort-cds" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.prune_sort_CDS">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">prune_sort_CDS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#prune_sort_CDS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.prune_sort_CDS" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cds</strong> – </p></li>
+<li><p><strong>pool</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="prunepaths-1d">
+<h2>prunepaths_1D<a class="headerlink" href="#prunepaths-1d" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.prunepaths_1D">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">prunepaths_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#prunepaths_1D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.prunepaths_1D" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>path</strong> – </p></li>
+<li><p><strong>conn</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="purgepath">
+<h2>purgepath<a class="headerlink" href="#purgepath" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.purgepath">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">purgepath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#purgepath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.purgepath" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – </p></li>
+<li><p><strong>l</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="selfloops">
+<h2>selfloops<a class="headerlink" href="#selfloops" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.selfloops">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">selfloops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#selfloops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.selfloops" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> – </p></li>
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="signature">
+<h2>signature<a class="headerlink" href="#signature" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.signature">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edges</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#signature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.signature" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>edges</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="single-nodes">
+<h2>single_nodes<a class="headerlink" href="#single-nodes" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.single_nodes">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">single_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#single_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.single_nodes" title="Link to this definition">#</a></dt>
+<dd><p>Returns a list of singleton nodes allowed for merging with <code class="docutils literal notranslate"><span class="pre">v</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> – </p></li>
+<li><p><strong>g2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of singleton nodes allowed for merging with <code class="docutils literal notranslate"><span class="pre">v</span></code></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="supergraphs-in-eq">
+<h2>supergraphs_in_eq<a class="headerlink" href="#supergraphs-in-eq" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.supergraphs_in_eq">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">supergraphs_in_eq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#supergraphs_in_eq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.supergraphs_in_eq" title="Link to this definition">#</a></dt>
+<dd><p>Find  all supergraphs of <code class="docutils literal notranslate"><span class="pre">g</span></code>  that are also in  the same equivalence
+class with respect to g2 and the rate.
+Currently works only for bfu.undersample by 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>rate</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="threedges-pick">
+<h2>threedges_pick<a class="headerlink" href="#threedges-pick" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.threedges_pick">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">threedges_pick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#threedges_pick"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.threedges_pick" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>l</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="try-till-d-path">
+<h2>try_till_d_path<a class="headerlink" href="#try-till-d-path" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.try_till_d_path">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">try_till_d_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#try_till_d_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.try_till_d_path" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>d</strong> – </p></li>
+<li><p><strong>gt</strong> – </p></li>
+<li><p><strong>order</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="try-till-path">
+<h2>try_till_path<a class="headerlink" href="#try-till-path" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.try_till_path">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">try_till_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#try_till_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.try_till_path" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>gt</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="twoedges-pick">
+<h2>twoedges_pick<a class="headerlink" href="#twoedges-pick" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.twoedges_pick">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">twoedges_pick</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#twoedges_pick"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.twoedges_pick" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>l</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="v2g22g1">
+<h2>v2g22g1<a class="headerlink" href="#v2g22g1" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.v2g22g1">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">v2g22g1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#v2g22g1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.v2g22g1" title="Link to this definition">#</a></dt>
+<dd><p>Computes all g1 that are in the equivalence class for g2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g2</strong> – </p></li>
+<li><p><strong>capsize</strong> – </p></li>
+<li><p><strong>verbose</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="vedgelist">
+<h2>vedgelist<a class="headerlink" href="#vedgelist" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.traversal.vedgelist">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.traversal.</span></span><span class="sig-name descname"><span class="pre">vedgelist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathtoo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/traversal.html#vedgelist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.traversal.vedgelist" title="Link to this definition">#</a></dt>
+<dd><p>Returns a list of tuples for edges of g and forks
+a superugly organically grown function that badly needs refactoring</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>pathtoo</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="unknownrate.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">unknownrate</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../imperative.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">imperative</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; neuroneural.net
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">traversal</a><ul>
+<li><a class="reference internal" href="#add2edges">add2edges</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.add2edges"><code class="docutils literal notranslate"><span class="pre">add2edges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#addaaedge">addaAedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.addaAedge"><code class="docutils literal notranslate"><span class="pre">addaAedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#addavpath">addaVpath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.addaVpath"><code class="docutils literal notranslate"><span class="pre">addaVpath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#addacedge">addacedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.addacedge"><code class="docutils literal notranslate"><span class="pre">addacedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#addanedge">addanedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.addanedge"><code class="docutils literal notranslate"><span class="pre">addanedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#addapath">addapath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.addapath"><code class="docutils literal notranslate"><span class="pre">addapath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#addavedge">addavedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.addavedge"><code class="docutils literal notranslate"><span class="pre">addavedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#check3">check3</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.check3"><code class="docutils literal notranslate"><span class="pre">check3()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkaedge">checkAedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checkAedge"><code class="docutils literal notranslate"><span class="pre">checkAedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkapath">checkApath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checkApath"><code class="docutils literal notranslate"><span class="pre">checkApath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkable">checkable</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checkable"><code class="docutils literal notranslate"><span class="pre">checkable()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkbedges">checkbedges</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checkbedges"><code class="docutils literal notranslate"><span class="pre">checkbedges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkcedge">checkcedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checkcedge"><code class="docutils literal notranslate"><span class="pre">checkcedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkedge">checkedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checkedge"><code class="docutils literal notranslate"><span class="pre">checkedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checker">checker</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checker"><code class="docutils literal notranslate"><span class="pre">checker()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkerds">checkerDS</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checkerDS"><code class="docutils literal notranslate"><span class="pre">checkerDS()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#checkvedge">checkvedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.checkvedge"><code class="docutils literal notranslate"><span class="pre">checkvedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#childrenedges">childrenedges</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.childrenedges"><code class="docutils literal notranslate"><span class="pre">childrenedges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#chunks">chunks</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.chunks"><code class="docutils literal notranslate"><span class="pre">chunks()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cleanvedges">cleanVedges</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.cleanVedges"><code class="docutils literal notranslate"><span class="pre">cleanVedges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cleanedges">cleanedges</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.cleanedges"><code class="docutils literal notranslate"><span class="pre">cleanedges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cloneempty">cloneempty</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.cloneempty"><code class="docutils literal notranslate"><span class="pre">cloneempty()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conformanceds">conformanceDS</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.conformanceDS"><code class="docutils literal notranslate"><span class="pre">conformanceDS()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#del2edges">del2edges</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.del2edges"><code class="docutils literal notranslate"><span class="pre">del2edges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#del-empty">del_empty</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.del_empty"><code class="docutils literal notranslate"><span class="pre">del_empty()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delaaedge">delaAedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.delaAedge"><code class="docutils literal notranslate"><span class="pre">delaAedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delavpath">delaVpath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.delaVpath"><code class="docutils literal notranslate"><span class="pre">delaVpath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delacedge">delacedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.delacedge"><code class="docutils literal notranslate"><span class="pre">delacedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delanedge">delanedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.delanedge"><code class="docutils literal notranslate"><span class="pre">delanedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delapath">delapath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.delapath"><code class="docutils literal notranslate"><span class="pre">delapath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delavedge">delavedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.delavedge"><code class="docutils literal notranslate"><span class="pre">delavedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#edge-function-idx">edge_function_idx</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.edge_function_idx"><code class="docutils literal notranslate"><span class="pre">edge_function_idx()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#edge-increment-ok">edge_increment_ok</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.edge_increment_ok"><code class="docutils literal notranslate"><span class="pre">edge_increment_ok()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#esig">esig</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.esig"><code class="docutils literal notranslate"><span class="pre">esig()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#forks">forks</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.forks"><code class="docutils literal notranslate"><span class="pre">forks()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gpurgepath">gpurgepath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.gpurgepath"><code class="docutils literal notranslate"><span class="pre">gpurgepath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gsig">gsig</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.gsig"><code class="docutils literal notranslate"><span class="pre">gsig()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inorder-check2">inorder_check2</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.inorder_check2"><code class="docutils literal notranslate"><span class="pre">inorder_check2()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inorder-checks">inorder_checks</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.inorder_checks"><code class="docutils literal notranslate"><span class="pre">inorder_checks()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#invertcdselement">invertCDSelement</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.invertCDSelement"><code class="docutils literal notranslate"><span class="pre">invertCDSelement()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#isaedge">isAedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.isAedge"><code class="docutils literal notranslate"><span class="pre">isAedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#isapath">isApath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.isApath"><code class="docutils literal notranslate"><span class="pre">isApath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#iscedge">isCedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.isCedge"><code class="docutils literal notranslate"><span class="pre">isCedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#isedge">isedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.isedge"><code class="docutils literal notranslate"><span class="pre">isedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#isvedge">isvedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.isvedge"><code class="docutils literal notranslate"><span class="pre">isvedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#length-d-loopy-paths">length_d_loopy_paths</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.length_d_loopy_paths"><code class="docutils literal notranslate"><span class="pre">length_d_loopy_paths()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#length-d-paths">length_d_paths</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.length_d_paths"><code class="docutils literal notranslate"><span class="pre">length_d_paths()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#longpaths-pick">longpaths_pick</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.longpaths_pick"><code class="docutils literal notranslate"><span class="pre">longpaths_pick()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-allforks-and-rest">make_allforks_and_rest</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.make_allforks_and_rest"><code class="docutils literal notranslate"><span class="pre">make_allforks_and_rest()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-emptyforks">make_emptyforks</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.make_emptyforks"><code class="docutils literal notranslate"><span class="pre">make_emptyforks()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-fullforks">make_fullforks</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.make_fullforks"><code class="docutils literal notranslate"><span class="pre">make_fullforks()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-longpaths">make_longpaths</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.make_longpaths"><code class="docutils literal notranslate"><span class="pre">make_longpaths()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#makechains">makechains</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.makechains"><code class="docutils literal notranslate"><span class="pre">makechains()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#makesink">makesink</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.makesink"><code class="docutils literal notranslate"><span class="pre">makesink()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#makesinks">makesinks</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.makesinks"><code class="docutils literal notranslate"><span class="pre">makesinks()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mask2edges">mask2edges</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.mask2edges"><code class="docutils literal notranslate"><span class="pre">mask2edges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maskaaedge">maskaAedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.maskaAedge"><code class="docutils literal notranslate"><span class="pre">maskaAedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maskacedge">maskaCedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.maskaCedge"><code class="docutils literal notranslate"><span class="pre">maskaCedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maskavpath">maskaVpath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.maskaVpath"><code class="docutils literal notranslate"><span class="pre">maskaVpath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maskanedge">maskanedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.maskanedge"><code class="docutils literal notranslate"><span class="pre">maskanedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maskapath">maskapath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.maskapath"><code class="docutils literal notranslate"><span class="pre">maskapath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#maskavedge">maskavedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.maskavedge"><code class="docutils literal notranslate"><span class="pre">maskavedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#memo-no-return">memo_no_return</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.memo_no_return"><code class="docutils literal notranslate"><span class="pre">memo_no_return()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2add2edges">ok2add2edges</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2add2edges"><code class="docutils literal notranslate"><span class="pre">ok2add2edges()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2addaaedge">ok2addaAedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2addaAedge"><code class="docutils literal notranslate"><span class="pre">ok2addaAedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2addavpath">ok2addaVpath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2addaVpath"><code class="docutils literal notranslate"><span class="pre">ok2addaVpath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2addacedge">ok2addacedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2addacedge"><code class="docutils literal notranslate"><span class="pre">ok2addacedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2addanedge">ok2addanedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2addanedge"><code class="docutils literal notranslate"><span class="pre">ok2addanedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2addanedge1">ok2addanedge1</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2addanedge1"><code class="docutils literal notranslate"><span class="pre">ok2addanedge1()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2addanedge2">ok2addanedge2</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2addanedge2"><code class="docutils literal notranslate"><span class="pre">ok2addanedge2()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2addapath">ok2addapath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2addapath"><code class="docutils literal notranslate"><span class="pre">ok2addapath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ok2addavedge">ok2addavedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.ok2addavedge"><code class="docutils literal notranslate"><span class="pre">ok2addavedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#prune-sort-cds">prune_sort_CDS</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.prune_sort_CDS"><code class="docutils literal notranslate"><span class="pre">prune_sort_CDS()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#prunepaths-1d">prunepaths_1D</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.prunepaths_1D"><code class="docutils literal notranslate"><span class="pre">prunepaths_1D()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#purgepath">purgepath</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.purgepath"><code class="docutils literal notranslate"><span class="pre">purgepath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#selfloops">selfloops</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.selfloops"><code class="docutils literal notranslate"><span class="pre">selfloops()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#signature">signature</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.signature"><code class="docutils literal notranslate"><span class="pre">signature()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#single-nodes">single_nodes</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.single_nodes"><code class="docutils literal notranslate"><span class="pre">single_nodes()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#supergraphs-in-eq">supergraphs_in_eq</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.supergraphs_in_eq"><code class="docutils literal notranslate"><span class="pre">supergraphs_in_eq()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#threedges-pick">threedges_pick</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.threedges_pick"><code class="docutils literal notranslate"><span class="pre">threedges_pick()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#try-till-d-path">try_till_d_path</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.try_till_d_path"><code class="docutils literal notranslate"><span class="pre">try_till_d_path()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#try-till-path">try_till_path</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.try_till_path"><code class="docutils literal notranslate"><span class="pre">try_till_path()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#twoedges-pick">twoedges_pick</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.twoedges_pick"><code class="docutils literal notranslate"><span class="pre">twoedges_pick()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#v2g22g1">v2g22g1</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.v2g22g1"><code class="docutils literal notranslate"><span class="pre">v2g22g1()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vedgelist">vedgelist</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.traversal.vedgelist"><code class="docutils literal notranslate"><span class="pre">vedgelist()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

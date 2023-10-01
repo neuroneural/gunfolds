@@ -1,0 +1,1281 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <link rel="shortcut icon" href="_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 --><title>Index - </title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --font-stack: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --color-api-overall: green;
+  --color-api-pre-name: #005eff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="_static/light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/publications.html">Publications</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">gunfolds</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="conversions.html">conversions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="conversions/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conversions/external.html">external</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conversions/internal.html">internal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="estimation/grangercausality.html">grangercausality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="estimation/linear_model.html">linear_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="estimation/pc.html">pc</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="solvers.html">solvers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="solvers/declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_msl.html">clingo_msl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="solvers/declarative/clingo_rasl.html">clingo_rasl</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="solvers/imperative.html">imperative</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/traversal.html">traversal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="solvers/imperative/unknownrate.html">unknownrate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="utils.html">utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="utils/bfutils.html">bfutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/calc_procs.html">calc_procs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/comparison.html">comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/ecj.html">ecj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/graphkit.html">graphkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/myTimeout.html">myTimeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/neighborhoods.html">neighborhoods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/simpleloops.html">simpleloops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils/zickle.html">zickle</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="viz/dbn2latex.html">dbn2latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="viz/gtool.html">gtool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a> | <a href="#X"><strong>X</strong></a></div>
+</section>
+<section id="_" class="genindex-section">
+  <h2>_</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit._normed_OCE">_normed_OCE() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit._normed_undirected_OCE">_normed_undirected_OCE() (in module gunfolds.utils.graphkit)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit._OCE">_OCE() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit._undirected_OCE">_undirected_OCE() (in module gunfolds.utils.graphkit)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.a2edgetuple">a2edgetuple() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.AB2intAB">AB2intAB() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.add2edges">add2edges() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.add2set_">add2set_() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.add2set_loop">add2set_loop() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addaAedge">addaAedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addacedge">addacedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addanedge">addanedge() (in module gunfolds.solvers.traversal)</a>
+
+        <ul>
+          <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.addanedge">(in module gunfolds.utils.graphkit)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addapath">addapath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.addAring">addAring() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addavedge">addavedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.addaVpath">addaVpath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.addedges">addedges() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.addselfedge">addselfedge() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.adjs2graph">adjs2graph() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.all_undersamples">all_undersamples() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.allsloops">allsloops() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.amap">amap() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.bconflictor">bconflictor() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.bedgelist">bedgelist() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.bg2num">bg2num() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.bidirected_inc">bidirected_inc() (in module gunfolds.utils.bfutils)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.bidirected_no_fork">bidirected_no_fork() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.bnf2CG">bnf2CG() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.bp_mean_degree_graph">bp_mean_degree_graph() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.bp_pow_degree_graph">bp_pow_degree_graph() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.build_loop_step">build_loop_step() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.c2edgepairs">c2edgepairs() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.cacheconflicts">cacheconflicts() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_conflicts">call_u_conflicts() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_conflicts2">call_u_conflicts2() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_conflicts_d">call_u_conflicts_d() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_equals">call_u_equals() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.call_u_equals2">call_u_equals2() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.call_undersamples">call_undersamples() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.cc_all">cc_all() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.cc_undersamples">cc_undersamples() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.cdbn_single">cdbn_single() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.cdbnprint">cdbnprint() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.cdbnsingle">cdbnsingle() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.cdbnwrap">cdbnwrap() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.cerror">cerror() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.check3">check3() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.check_conflict">check_conflict() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.check_conflict_">check_conflict_() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.check_equality">check_equality() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkable">checkable() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkAedge">checkAedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkApath">checkApath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkbedges">checkbedges() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkcedge">checkcedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkedge">checkedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checker">checker() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkerDS">checkerDS() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.checkvedge">checkvedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.childrenedges">childrenedges() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.chunks">chunks() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.circ_position">circ_position() (in module gunfolds.viz.gtool)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.clean_leaf_nodes">clean_leaf_nodes() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.cleanedges">cleanedges() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.cleanVedges">cleanVedges() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/clingo.html#gunfolds.utils.clingo.clingo">clingo() (in module gunfolds.utils.clingo)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.clingo2num">clingo2num() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.clingo_preamble">clingo_preamble() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.clingo_wedge">clingo_wedge() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.cloneBfree">cloneBfree() (in module gunfolds.utils.ecj)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.cloneempty">cloneempty() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.colorcomponents">colorcomponents() (in module gunfolds.viz.gtool)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.compact_call_undersamples">compact_call_undersamples() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.compat">compat() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.compatible">compatible() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.compatible_at_u">compatible_at_u() (in module gunfolds.utils.comparison)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.complement">complement() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.conflictor">conflictor() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.conflictor_set">conflictor_set() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.conflictors">conflictors() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.conformanceDS">conformanceDS() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.confpairs">confpairs() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.data2AB">data2AB() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.data2graph">data2graph() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.data2VARgraph">data2VARgraph() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.dbnprint">dbnprint() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.decide_absences">decide_absences() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.degree_ring">degree_ring() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.del2edges">del2edges() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.del_empty">del_empty() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.del_loop">del_loop() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delaAedge">delaAedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delacedge">delacedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.delAloop">delAloop() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delanedge">delanedge() (in module gunfolds.solvers.traversal)</a>
+
+        <ul>
+          <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.delanedge">(in module gunfolds.utils.graphkit)</a>
+</li>
+        </ul></li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delapath">delapath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delavedge">delavedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.delaVpath">delaVpath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.deledges">deledges() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.dens2edgenum">dens2edgenum() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.density">density() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.dfs_topsort">dfs_topsort() (in module gunfolds.utils.ecj)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.dict2graph">dict2graph() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.dict_format_converter">dict_format_converter() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.digonly">digonly() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.dincrement_u">dincrement_u() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.directed_inc">directed_inc() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.dpc">dpc() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.drasl">drasl() (in module gunfolds.solvers.clingo_rasl)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.drasl_command">drasl_command() (in module gunfolds.solvers.clingo_rasl)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.drasl_jclingo2g">drasl_jclingo2g() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.drate">drate() (in module gunfolds.solvers.clingo_rasl)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.drawsamplesLG">drawsamplesLG() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.drawsamplesMA">drawsamplesMA() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.e2num">e2num() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.edge_function_idx">edge_function_idx() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.edge_increment_ok">edge_increment_ok() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.edgelist">edgelist() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.edgenum2dens">edgenum2dens() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.edgepairs2g">edgepairs2g() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.ekey2e">ekey2e() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.emacs_vars">emacs_vars() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.encode_list_sccs">encode_list_sccs() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.encode_sccs">encode_sccs() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.ensure_gcd1">ensure_gcd1() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.ensure_graph_gcd1">ensure_graph_gcd1() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.esig">esig() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.estimateG">estimateG() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.estimateSVAR">estimateSVAR() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.every_edge_control_points">every_edge_control_points() (in module gunfolds.viz.gtool)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.fdr">fdr() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.fdrCutoff">fdrCutoff() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.fdrQ">fdrQ() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.find_nearest_reachable">find_nearest_reachable() (in module gunfolds.utils.neighborhoods)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.foldplot">foldplot() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.forks">forks() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.forms_loop">forms_loop() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.forward_loop_match">forward_loop_match() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.fullyconnected">fullyconnected() (in module gunfolds.utils.graphkit)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.G2AH">G2AH() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.g2clingo">g2clingo() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.g2clingo_msl">g2clingo_msl() (in module gunfolds.solvers.clingo_msl)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.g2gt">g2gt() (in module gunfolds.viz.gtool)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.g2ian">g2ian() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/external.html#gunfolds.conversions.g2ig">g2ig() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.g2num">g2num() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.G2SVAR">G2SVAR() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.g2vec">g2vec() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.g2wclingo">g2wclingo() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.g_single">g_single() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="estimation/grangercausality.html#gunfolds.estimation.grangercausality.gc">gc() (in module gunfolds.estimation.grangercausality)</a>
+</li>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.gcd">gcd() (in module gunfolds.utils.ecj)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.gcd1_bp_mean_degree_graph">gcd1_bp_mean_degree_graph() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.gcd4scc">gcd4scc() (in module gunfolds.utils.comparison)</a>
+
+        <ul>
+          <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.gcd4scc">(in module gunfolds.utils.graphkit)</a>
+</li>
+        </ul></li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.gen_loops">gen_loops() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.genData">genData() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/calc_procs.html#gunfolds.utils.calc_procs.get_process_count">get_process_count() (in module gunfolds.utils.calc_procs)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.getAgraph">getAgraph() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.getangle">getangle() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.getAring">getAring() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.getscreensize">getscreensize() (in module gunfolds.viz.gtool)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.glist2str">glist2str() (in module gunfolds.solvers.clingo_rasl)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.gmatrix_fold">gmatrix_fold() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.gmatrix_list">gmatrix_list() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.gprint">gprint() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.gpurgepath">gpurgepath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.graph2adj">graph2adj() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.graph2badj">graph2badj() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.graph2dict">graph2dict() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="conversions/external.html#gunfolds.conversions.graph2dot">graph2dot() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/external.html#gunfolds.conversions.graph2nx">graph2nx() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.gsig">gsig() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.gsingle">gsingle() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.gt2g">gt2g() (in module gunfolds.viz.gtool)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.gtranspose">gtranspose() (in module gunfolds.utils.graphkit)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.hamming_neighbors">hamming_neighbors() (in module gunfolds.utils.neighborhoods)</a>
+</li>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.has_root">has_root() (in module gunfolds.utils.comparison)</a>
+</li>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.has_self_loops">has_self_loops() (in module gunfolds.utils.comparison)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.has_sink">has_sink() (in module gunfolds.utils.comparison)</a>
+</li>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.has_unit_cycle">has_unit_cycle() (in module gunfolds.utils.ecj)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.hshift">hshift() (in module gunfolds.viz.gtool)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.iall">iall() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.ian2g">ian2g() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.icompat">icompat() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.ilength">ilength() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.inbedgelist">inbedgelist() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.increment">increment() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.increment_u">increment_u() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.independent">independent() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.independent_">independent_() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.inedgelist">inedgelist() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.initRandomMatrix">initRandomMatrix() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.inorder_check2">inorder_check2() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.inorder_checks">inorder_checks() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.invertCDSelement">invertCDSelement() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.is_sclique">is_sclique() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isAedge">isAedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isApath">isApath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isCedge">isCedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.isdedgesubset">isdedgesubset() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isedge">isedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.isedgesubset">isedgesubset() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.isvedge">isvedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.iteqclass">iteqclass() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="K" class="genindex-section">
+  <h2>K</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.kernel">kernel() (in module gunfolds.estimation.pc)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.lconflictors">lconflictors() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.lconfpairs">lconfpairs() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.le2num">le2num() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.length_d_loopy_paths">length_d_loopy_paths() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.length_d_paths">length_d_paths() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.linegraph">linegraph() (in module gunfolds.viz.gtool)</a>
+</li>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.listgcd">listgcd() (in module gunfolds.utils.ecj)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.listgcd_r">listgcd_r() (in module gunfolds.utils.ecj)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.listplace">listplace() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.liteqclass">liteqclass() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="utils/zickle.html#gunfolds.utils.zickle.load">load() (in module gunfolds.utils.zickle)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.loadgraphs">loadgraphs() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.longpaths_pick">longpaths_pick() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.loop2graph">loop2graph() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.main">main() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.make_allforks_and_rest">make_allforks_and_rest() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.make_emptyforks">make_emptyforks() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.make_fullforks">make_fullforks() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.make_longpaths">make_longpaths() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.make_rect">make_rect() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.makechains">makechains() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.makesink">makesink() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.makesinks">makesinks() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.mask2edges">mask2edges() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskaAedge">maskaAedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskaCedge">maskaCedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskanedge">maskanedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskapath">maskapath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskavedge">maskavedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.maskaVpath">maskaVpath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.matchAloop">matchAloop() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.matrix_edges">matrix_edges() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.matrix_end">matrix_end() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.matrix_fold">matrix_fold() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.matrix_grid">matrix_grid() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.matrix_list">matrix_list() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.matrix_start">matrix_start() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.mean_degree_graph">mean_degree_graph() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.memo_no_return">memo_no_return() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.merge_graphs">merge_graphs() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.merge_list">merge_list() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.moment22">moment22() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.msl">msl() (in module gunfolds.solvers.clingo_msl)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.msl_command">msl_command() (in module gunfolds.solvers.clingo_msl)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.msl_jclingo2g">msl_jclingo2g() (in module gunfolds.conversions)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.ncr">ncr() (in module gunfolds.utils.neighborhoods)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.nllf">nllf() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.nllf2">nllf2() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.no_children">no_children() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.no_parents">no_parents() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.nodenum">nodenum() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.noiseData">noiseData() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.np_fisherZ">np_fisherZ() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.npG2SVAR">npG2SVAR() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.num2CG">num2CG() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.num_nATstep">num_nATstep() (in module gunfolds.utils.neighborhoods)</a>
+</li>
+        <li><a href="utils/neighborhoods.html#gunfolds.utils.neighborhoods.num_neighbors">num_neighbors() (in module gunfolds.utils.neighborhoods)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.numbered_g2clingo">numbered_g2clingo() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.numbered_g2wclingo">numbered_g2wclingo() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/external.html#gunfolds.conversions.nx2graph">nx2graph() (in module gunfolds.conversions)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.OCE">OCE() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.oerror">oerror() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2add2edges">ok2add2edges() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addaAedge">ok2addaAedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addacedge">ok2addacedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addanedge">ok2addanedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addanedge1">ok2addanedge1() (in module gunfolds.solvers.traversal)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addanedge2">ok2addanedge2() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addapath">ok2addapath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addavedge">ok2addavedge() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.ok2addaVpath">ok2addaVpath() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.old_g2clingo">old_g2clingo() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.output_graph_figure">output_graph_figure() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.overshoot">overshoot() (in module gunfolds.utils.bfutils)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.paintSCC">paintSCC() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.perm_circular">perm_circular() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.plotg">plotg() (in module gunfolds.viz.gtool)</a>
+</li>
+        <li><a href="viz/gtool.html#gunfolds.viz.gtool.plotgunfolds">plotgunfolds() (in module gunfolds.viz.gtool)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.pow_degree_graph">pow_degree_graph() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.presence_probs">presence_probs() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/simpleloops.html#gunfolds.utils.simpleloops.print_loops">print_loops() (in module gunfolds.utils.simpleloops)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.prune_conflicts">prune_conflicts() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.prune_loops">prune_loops() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.prune_sort_CDS">prune_sort_CDS() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.prunepaths_1D">prunepaths_1D() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.pure_directed_inc">pure_directed_inc() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.purgepath">purgepath() (in module gunfolds.solvers.traversal)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.randH">randH() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.randomDAG">randomDAG() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.randomSVAR">randomSVAR() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.randomSVARs">randomSVARs() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.randomTRIL">randomTRIL() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.randSCC">randSCC() (in module gunfolds.utils.comparison)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.randweights">randweights() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.rasl">rasl() (in module gunfolds.solvers.clingo_rasl)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.rasl_a2edgetuple">rasl_a2edgetuple() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.rasl_c2edgepairs">rasl_c2edgepairs() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.rasl_command">rasl_command() (in module gunfolds.solvers.clingo_rasl)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.rasl_jclingo2g">rasl_jclingo2g() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.rasl_msl">rasl_msl() (in module gunfolds.solvers.clingo_msl)</a>
+</li>
+        <li><a href="conversions/clingo.html#gunfolds.conversions.rate">rate() (in module gunfolds.conversions)</a>
+
+        <ul>
+          <li><a href="solvers/declarative/clingo_msl.html#gunfolds.solvers.clingo_msl.rate">(in module gunfolds.solvers.clingo_msl)</a>
+</li>
+          <li><a href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.rate">(in module gunfolds.solvers.clingo_rasl)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.reachable">reachable() (in module gunfolds.utils.ecj)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.remove_loop">remove_loop() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.remove_tril_singletons">remove_tril_singletons() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="estimation/pc.html#gunfolds.estimation.pc.residuals_">residuals_() (in module gunfolds.estimation.pc)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.reverse">reverse() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.reverse_edge_match">reverse_edge_match() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.reverse_loop_match">reverse_loop_match() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.ring">ring() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.ring_sccs">ring_sccs() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.ringarcs">ringarcs() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.ringmore">ringmore() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/clingo.html#gunfolds.utils.clingo.run_clingo">run_clingo() (in module gunfolds.utils.clingo)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.sampleWeights">sampleWeights() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="utils/zickle.html#gunfolds.utils.zickle.save">save() (in module gunfolds.utils.zickle)</a>
+</li>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.savegraphs">savegraphs() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.scale_free">scale_free() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.scc">scc() (in module gunfolds.utils.ecj)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.scc_unreachable">scc_unreachable() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.scoreAGraph">scoreAGraph() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.search_match">search_match() (in module gunfolds.utils.comparison)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.selfloop">selfloop() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.selfloops">selfloops() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.shift_labels">shift_labels() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.shift_list_labels">shift_list_labels() (in module gunfolds.utils.graphkit)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.signature">signature() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/simpleloops.html#gunfolds.utils.simpleloops.simple_loops">simple_loops() (in module gunfolds.utils.simpleloops)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.single_nodes">single_nodes() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.skip_conflict">skip_conflict() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.skip_conflictors">skip_conflictors() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.SM_converging">SM_converging() (in module gunfolds.utils.comparison)</a>
+</li>
+        <li><a href="utils/comparison.html#gunfolds.utils.comparison.SM_fixed">SM_fixed() (in module gunfolds.utils.comparison)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.stableVAR">stableVAR() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="solvers/imperative/unknownrate.html#gunfolds.solvers.unknownrate.start_progress_bar">start_progress_bar() (in module gunfolds.solvers.unknownrate)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.subgraph">subgraph() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.superclique">superclique() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.supergraphs_in_eq">supergraphs_in_eq() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.symchol">symchol() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.threedges_pick">threedges_pick() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="utils/myTimeout.html#gunfolds.utils.myTimeout.timeout">timeout() (in module gunfolds.utils.myTimeout)</a>
+</li>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.tr">tr() (in module gunfolds.utils.ecj)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.transitionMatrix">transitionMatrix() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.transitionMatrix2">transitionMatrix2() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.transitionMatrix3">transitionMatrix3() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.transitionMatrix4">transitionMatrix4() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.try_till_d_path">try_till_d_path() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.try_till_path">try_till_path() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.twoedges_pick">twoedges_pick() (in module gunfolds.solvers.traversal)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.udensity">udensity() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.ug2num">ug2num() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.undedgelist">undedgelist() (in module gunfolds.utils.graphkit)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/bfutils.html#gunfolds.utils.bfutils.undersample">undersample() (in module gunfolds.utils.bfutils)</a>
+</li>
+        <li><a href="viz/dbn2latex.html#gunfolds.viz.dbn2latex.unfoldplot">unfoldplot() (in module gunfolds.viz.dbn2latex)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.upairs">upairs() (in module gunfolds.utils.graphkit)</a>
+</li>
+        <li><a href="utils/graphkit.html#gunfolds.utils.graphkit.update_graph">update_graph() (in module gunfolds.utils.graphkit)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.v2g22g1">v2g22g1() (in module gunfolds.solvers.traversal)</a>
+</li>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.VARbic">VARbic() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="conversions/internal.html#gunfolds.conversions.vec2adj">vec2adj() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="conversions/internal.html#gunfolds.conversions.vec2g">vec2g() (in module gunfolds.conversions)</a>
+</li>
+        <li><a href="solvers/imperative/traversal.html#gunfolds.solvers.traversal.vedgelist">vedgelist() (in module gunfolds.solvers.traversal)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="utils/ecj.html#gunfolds.utils.ecj.walk">walk() (in module gunfolds.utils.ecj)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.weight_and_mask">weight_and_mask() (in module gunfolds.estimation.linear_model)</a>
+</li>
+        <li><a href="solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.weighted_drasl_program">weighted_drasl_program() (in module gunfolds.solvers.clingo_rasl)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="X" class="genindex-section">
+  <h2>X</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="estimation/linear_model.html#gunfolds.estimation.linear_model.x2M">x2M() (in module gunfolds.estimation.linear_model)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; neuroneural.net
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

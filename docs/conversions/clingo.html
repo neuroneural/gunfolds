@@ -1,0 +1,820 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="external" href="external.html" /><link rel="prev" title="conversions" href="../conversions.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>clingo</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --font-stack: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --color-api-overall: green;
+  --color-api-pre-name: #005eff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/publications.html">Publications</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">gunfolds</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../conversions.html">conversions</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="external.html">external</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal.html">internal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../estimation/grangercausality.html">grangercausality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../estimation/linear_model.html">linear_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../estimation/pc.html">pc</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../solvers.html">solvers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../solvers/declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../solvers/declarative/clingo_msl.html">clingo_msl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../solvers/declarative/clingo_rasl.html">clingo_rasl</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../solvers/imperative.html">imperative</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../solvers/imperative/traversal.html">traversal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../solvers/imperative/unknownrate.html">unknownrate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../utils.html">utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utils/bfutils.html">bfutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/calc_procs.html">calc_procs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/comparison.html">comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/ecj.html">ecj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/graphkit.html">graphkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/myTimeout.html">myTimeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/neighborhoods.html">neighborhoods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/simpleloops.html">simpleloops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/zickle.html">zickle</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../viz/dbn2latex.html">dbn2latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../viz/gtool.html">gtool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/neuroneural/gunfolds/tree/master/sphinx-build/conversions/clingo.rst" title="Edit this page">
+    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+    </svg>
+    <span class="visually-hidden">Edit this page</span>
+  </a>
+</div><div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="clingo">
+<h1>clingo<a class="headerlink" href="#clingo" title="Link to this heading">#</a></h1>
+<section id="a2edgetuple">
+<h2>a2edgetuple<a class="headerlink" href="#a2edgetuple" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.a2edgetuple">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">a2edgetuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#a2edgetuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.a2edgetuple" title="Link to this definition">#</a></dt>
+<dd><p>Converts the output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code> into list of edges and under sampling rates for <code class="docutils literal notranslate"><span class="pre">drasl</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>answer</strong> (<em>string</em>) – output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of edges and under sampling rates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a tuple of lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="c2edgepairs">
+<h2>c2edgepairs<a class="headerlink" href="#c2edgepairs" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.c2edgepairs">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">c2edgepairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#c2edgepairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.c2edgepairs" title="Link to this definition">#</a></dt>
+<dd><p>Converts <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates to edge pairs for <code class="docutils literal notranslate"><span class="pre">drasl</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>clist</strong> (<em>list</em><em> of </em><em>strings</em>) – <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of edge pairs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="clingo2num">
+<h2>clingo2num<a class="headerlink" href="#clingo2num" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.clingo2num">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">clingo2num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#clingo2num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.clingo2num" title="Link to this definition">#</a></dt>
+<dd><p>Converts the output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code> into list of edges and under sampling rates for <code class="docutils literal notranslate"><span class="pre">drasl</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>string</em>) – output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of edges and under sampling rates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a tuple of lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="clingo-preamble">
+<h2>clingo_preamble<a class="headerlink" href="#clingo-preamble" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.clingo_preamble">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">clingo_preamble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#clingo_preamble"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.clingo_preamble" title="Link to this definition">#</a></dt>
+<dd><p>Converts number of nodes into a <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="clingo-wedge">
+<h2>clingo_wedge<a class="headerlink" href="#clingo-wedge" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.clingo_wedge">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">clingo_wedge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'edge'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#clingo_wedge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.clingo_wedge" title="Link to this definition">#</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate for weighted edge</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>integer</em>) – outgoing edge</p></li>
+<li><p><strong>y</strong> (<em>integer</em>) – incoming edge</p></li>
+<li><p><strong>w</strong> (<em>integer</em>) – weight</p></li>
+<li><p><strong>n</strong> (<em>integer</em>) – number of nodes</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – name of the variable for <code class="docutils literal notranslate"><span class="pre">clingo</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate for weighted edge</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="drasl-jclingo2g">
+<h2>drasl_jclingo2g<a class="headerlink" href="#drasl-jclingo2g" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.drasl_jclingo2g">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">drasl_jclingo2g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#drasl_jclingo2g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.drasl_jclingo2g" title="Link to this definition">#</a></dt>
+<dd><p>Converts the output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code> to <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph for <code class="docutils literal notranslate"><span class="pre">drasl</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>output_g</strong> (<em>string</em>) – the output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code> for <code class="docutils literal notranslate"><span class="pre">drasl</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="encode-list-sccs">
+<h2>encode_list_sccs<a class="headerlink" href="#encode-list-sccs" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.encode_list_sccs">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">encode_list_sccs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">glist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scc_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#encode_list_sccs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.encode_list_sccs" title="Link to this definition">#</a></dt>
+<dd><p>Encodes strongly connected components of a list of <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph to <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>glist</strong> (list of dictionaries (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – a list of graphs that are under sampled versions of
+the same system</p></li>
+<li><p><strong>scc_members</strong> (<em>list</em>) – a list of dictionaries for nodes in each SCC</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="encode-sccs">
+<h2>encode_sccs<a class="headerlink" href="#encode-sccs" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.encode_sccs">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">encode_sccs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SCCS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#encode_sccs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.encode_sccs" title="Link to this definition">#</a></dt>
+<dd><p>Encodes strongly connected components of <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph to <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>idx</strong> (<em>integer</em>) – index of the graph</p></li>
+<li><p><strong>components</strong> (<em>boolean</em>) – If True, encodes SCC components and memberships to <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates</p></li>
+<li><p><strong>SCCS</strong> (<em>list</em>) – SCC membership of nodes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="g2clingo">
+<h2>g2clingo<a class="headerlink" href="#g2clingo" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.g2clingo">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">g2clingo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hdirected'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bidirected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hbidirected'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">both_bidirected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preamble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#g2clingo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.g2clingo" title="Link to this definition">#</a></dt>
+<dd><p>Convert a graph to a string of grounded terms for clingo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>directed</strong> (<em>string</em>) – name of the variable for directed edges in the observed graph</p></li>
+<li><p><strong>bidirected</strong> (<em>string</em>) – name of the variable for  bidirected edges in the observed graph</p></li>
+<li><p><strong>both_bidirected</strong> (<em>boolean</em>) – (Ask)</p></li>
+<li><p><strong>preamble</strong> (<em>boolean</em>) – (Ask)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:{</span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">3</span><span class="p">}}</span>
+<span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">an</span> <span class="n">edge</span> <span class="k">with</span> <span class="n">node</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="n">edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span>
+<span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">an</span> <span class="n">conf</span> <span class="k">with</span> <span class="n">node</span> <span class="mi">4</span> <span class="o">=&gt;</span> <span class="n">conf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span>
+<span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">both</span> <span class="n">edge</span> <span class="ow">and</span> <span class="n">conf</span> <span class="k">with</span> <span class="n">node</span> <span class="mi">5</span> <span class="o">=&gt;</span> <span class="n">edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span> <span class="n">conf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="g2wclingo">
+<h2>g2wclingo<a class="headerlink" href="#g2wclingo" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.g2wclingo">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">g2wclingo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#g2wclingo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.g2wclingo" title="Link to this definition">#</a></dt>
+<dd><p>Convert a graph to a string of grounded terms for <code class="docutils literal notranslate"><span class="pre">clingo</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="msl-jclingo2g">
+<h2>msl_jclingo2g<a class="headerlink" href="#msl-jclingo2g" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.msl_jclingo2g">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">msl_jclingo2g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#msl_jclingo2g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.msl_jclingo2g" title="Link to this definition">#</a></dt>
+<dd><p>Converts the output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code> to <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph for <code class="docutils literal notranslate"><span class="pre">rasl_msl</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>output_g</strong> (<em>string</em>) – the output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code> for <code class="docutils literal notranslate"><span class="pre">rasl_msl</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="numbered-g2clingo">
+<h2>numbered_g2clingo<a class="headerlink" href="#numbered-g2clingo" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.numbered_g2clingo">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">numbered_g2clingo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hdirected'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bidirected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hbidirected'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#numbered_g2clingo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.numbered_g2clingo" title="Link to this definition">#</a></dt>
+<dd><p>Convert a graph to a string of grounded terms for clingo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>n</strong> (<em>integer</em>) – number of nodes</p></li>
+<li><p><strong>directed</strong> (<em>string</em>) – name of the variable for directed edges in the observed graph</p></li>
+<li><p><strong>bidirected</strong> (<em>string</em>) – name of the variable for  bidirected edges in the observed graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>string</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Example</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:{</span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">3</span><span class="p">}}</span>
+<span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">an</span> <span class="n">edge</span> <span class="k">with</span> <span class="n">node</span> <span class="mi">3</span> <span class="o">=&gt;</span> <span class="n">edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span>
+<span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">an</span> <span class="n">conf</span> <span class="k">with</span> <span class="n">node</span> <span class="mi">4</span> <span class="o">=&gt;</span> <span class="n">conf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span>
+<span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="n">node</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">both</span> <span class="n">edge</span> <span class="ow">and</span> <span class="n">conf</span> <span class="k">with</span> <span class="n">node</span> <span class="mi">5</span> <span class="o">=&gt;</span> <span class="n">edge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span> <span class="n">conf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="numbered-g2wclingo">
+<h2>numbered_g2wclingo<a class="headerlink" href="#numbered-g2wclingo" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.numbered_g2wclingo">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">numbered_g2wclingo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed_weights_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bidirected_weights_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hdirected'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bidirected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hbidirected'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#numbered_g2wclingo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.numbered_g2wclingo" title="Link to this definition">#</a></dt>
+<dd><p>Convert a graph to a string of grounded terms for <code class="docutils literal notranslate"><span class="pre">clingo</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>num</strong> (<em>integer</em>) – index of the graph in the resulting clingo command</p></li>
+<li><p><strong>directed_weights_matrix</strong> (<em>numpy matrices</em>) – directed weight matrix</p></li>
+<li><p><strong>bidirected_weights_matrix</strong> (<em>numpy matrices</em>) – bidirected weight matrix</p></li>
+<li><p><strong>directed</strong> (<em>string</em>) – name of the directed edges in the observed graph</p></li>
+<li><p><strong>bidirected</strong> (<em>string</em>) – name of the bidirected edges in the observed
+graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="old-g2clingo">
+<h2>old_g2clingo<a class="headerlink" href="#old-g2clingo" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.old_g2clingo">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">old_g2clingo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#old_g2clingo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.old_g2clingo" title="Link to this definition">#</a></dt>
+<dd><p>(Ask)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>file</strong> – (Ask)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rasl-a2edgetuple">
+<h2>rasl_a2edgetuple<a class="headerlink" href="#rasl-a2edgetuple" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.rasl_a2edgetuple">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">rasl_a2edgetuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">answer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#rasl_a2edgetuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.rasl_a2edgetuple" title="Link to this definition">#</a></dt>
+<dd><p>Returns list of edges and the under sampling rate for <code class="docutils literal notranslate"><span class="pre">rasl</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>answer</strong> (<em>string</em>) – output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of edges and the under sampling rate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a tuple of list and an integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rasl-c2edgepairs">
+<h2>rasl_c2edgepairs<a class="headerlink" href="#rasl-c2edgepairs" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.rasl_c2edgepairs">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">rasl_c2edgepairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#rasl_c2edgepairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.rasl_c2edgepairs" title="Link to this definition">#</a></dt>
+<dd><p>Converts <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates to edge pairs for <code class="docutils literal notranslate"><span class="pre">rasl</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>clist</strong> (<em>list</em><em> of </em><em>strings</em>) – <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of edge pairs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rasl-jclingo2g">
+<h2>rasl_jclingo2g<a class="headerlink" href="#rasl-jclingo2g" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.rasl_jclingo2g">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">rasl_jclingo2g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#rasl_jclingo2g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.rasl_jclingo2g" title="Link to this definition">#</a></dt>
+<dd><p>Converts the output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code> to <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph for <code class="docutils literal notranslate"><span class="pre">rasl</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>output_g</strong> (<em>string</em>) – the output of <code class="docutils literal notranslate"><span class="pre">clingo</span></code> for <code class="docutils literal notranslate"><span class="pre">rasl</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="rate">
+<h2>rate<a class="headerlink" href="#rate" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.rate">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.rate" title="Link to this definition">#</a></dt>
+<dd><p>Converts under sampling rate to <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>u</strong> (<em>integer</em>) – maximum under sampling rate</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicate for under sampling rate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="external.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">external</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../conversions.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">conversions</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; neuroneural.net
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">clingo</a><ul>
+<li><a class="reference internal" href="#a2edgetuple">a2edgetuple</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.a2edgetuple"><code class="docutils literal notranslate"><span class="pre">a2edgetuple()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#c2edgepairs">c2edgepairs</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.c2edgepairs"><code class="docutils literal notranslate"><span class="pre">c2edgepairs()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clingo2num">clingo2num</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.clingo2num"><code class="docutils literal notranslate"><span class="pre">clingo2num()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clingo-preamble">clingo_preamble</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.clingo_preamble"><code class="docutils literal notranslate"><span class="pre">clingo_preamble()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clingo-wedge">clingo_wedge</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.clingo_wedge"><code class="docutils literal notranslate"><span class="pre">clingo_wedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#drasl-jclingo2g">drasl_jclingo2g</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.drasl_jclingo2g"><code class="docutils literal notranslate"><span class="pre">drasl_jclingo2g()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#encode-list-sccs">encode_list_sccs</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.encode_list_sccs"><code class="docutils literal notranslate"><span class="pre">encode_list_sccs()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#encode-sccs">encode_sccs</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.encode_sccs"><code class="docutils literal notranslate"><span class="pre">encode_sccs()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#g2clingo">g2clingo</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.g2clingo"><code class="docutils literal notranslate"><span class="pre">g2clingo()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#g2wclingo">g2wclingo</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.g2wclingo"><code class="docutils literal notranslate"><span class="pre">g2wclingo()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#msl-jclingo2g">msl_jclingo2g</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.msl_jclingo2g"><code class="docutils literal notranslate"><span class="pre">msl_jclingo2g()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numbered-g2clingo">numbered_g2clingo</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.numbered_g2clingo"><code class="docutils literal notranslate"><span class="pre">numbered_g2clingo()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numbered-g2wclingo">numbered_g2wclingo</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.numbered_g2wclingo"><code class="docutils literal notranslate"><span class="pre">numbered_g2wclingo()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#old-g2clingo">old_g2clingo</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.old_g2clingo"><code class="docutils literal notranslate"><span class="pre">old_g2clingo()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rasl-a2edgetuple">rasl_a2edgetuple</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.rasl_a2edgetuple"><code class="docutils literal notranslate"><span class="pre">rasl_a2edgetuple()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rasl-c2edgepairs">rasl_c2edgepairs</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.rasl_c2edgepairs"><code class="docutils literal notranslate"><span class="pre">rasl_c2edgepairs()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rasl-jclingo2g">rasl_jclingo2g</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.rasl_jclingo2g"><code class="docutils literal notranslate"><span class="pre">rasl_jclingo2g()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rate">rate</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.rate"><code class="docutils literal notranslate"><span class="pre">rate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
