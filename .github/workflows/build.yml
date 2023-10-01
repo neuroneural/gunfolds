@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies and Build HTML files   
         run: |
           conda install -c conda-forge graph-tool
-          conda install -c conda-forge sphinx
+          pip install Sphinx
           git clone https://github.com/potassco/clorm
           cd clorm
           pip install .
