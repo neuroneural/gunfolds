@@ -1,0 +1,39 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+permissions:
+  contents: write
+jobs:
+  build-and-deploy:
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup conda
+        uses: s-weigand/setup-conda@v1
+        with:
+          activate-conda: true
+          conda-channels: anaconda, conda-forge
+          
+      - name: Install dependencies and Build HTML files   
+        run: |
+          conda install -c conda-forge graph-tool
+          conda install -c conda-forge sphinx
+          git clone https://github.com/potassco/clorm
+          cd clorm
+          pip install .
+          cd ..
+          python3 setup.py install
+          pip install sphinx-copybutton
+          pip install furo
+          cd sphinx-build
+          make clean html
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: sphinx-build/_build/html
+          target-folder: docs
