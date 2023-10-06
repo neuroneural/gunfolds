@@ -90,7 +90,7 @@ def run_clingo(command,
     return models, cost
     
 
-def  clingo(command, exact=True,
+def clingo(command, exact=True,
            convert=msl_jclingo2g,
            timeout=0,
            capsize=CAPSIZE,
