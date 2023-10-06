@@ -15,7 +15,8 @@ def run_clingo(command,
                timeout=0,
                capsize=CAPSIZE,
                configuration="tweety",
-               pnum=None):
+               pnum=None,
+               optim=None):
     """
     Open sub-process and run clingo
 
@@ -47,20 +48,38 @@ def run_clingo(command,
     :param pnum: number of parallel threads to run clingo on
     :type pnum: integer
 
+    :param optim: a list containing configuration for optimization algorithm and optionally a bound  [<arg>, <bound>]
+        <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
+        opt   : Find optimal model
+        enum  : Find models with costs <= <bound>
+        optN  : Find optimum, then enumerate optimal models
+        ignore: Ignore optimize statements
+        <bound> : Set initial bound for objective function(s)
+    :type optim: list
+
     :returns: results of equivalent class
     :rtype: dictionary
     """
+    if optim is None:
+        optim = ['optN']
     if pnum is None:
         pnum = PNUM
+    if len(optim) == 1:
+        optim_option = optim[0]
+    elif len(optim) == 2:
+        optim_option = f"{optim[0]}, {optim[1]}"
+    else:
+        raise ValueError("The 'optim' list must have either one or two elements.")
+
     ctrl = clngo.Control(["--warn=no-atom-undefined","--configuration=", configuration, "-t", str(int(pnum)) + ",split", "-n", str(capsize)])
     if not exact:
-        ctrl.configuration.solve.opt_mode = "opt"
+        ctrl.configuration.solve.opt_mode = optim_option
     ctrl.add("base", [], command.decode())
     ctrl.ground([("base", [])])
     models = []
     with ctrl.solve(yield_=True, async_=True) as handle:
         for model in handle:
-            models.append([str(atom) for atom in model.symbols(shown=True)])
+            models.append(([str(atom) for atom in model.symbols(shown=True)], model.cost))
     cost = ctrl.statistics["summary"]["costs"]
     num_opt = ctrl.statistics["summary"]["models"]["optimal"]
     if not exact:
@@ -71,11 +90,12 @@ def run_clingo(command,
     return models, cost
     
 
-def clingo(command, exact=True,
+def  clingo(command, exact=True,
            convert=msl_jclingo2g,
            timeout=0,
            capsize=CAPSIZE,
-           configuration="tweety",
+           configuration="crafty",
+           optim=None,
            pnum=None):
     """
     Runs ``run_clingo`` and returns parsed equivalent class
@@ -105,6 +125,15 @@ def clingo(command, exact=True,
         trendy: Use defaults geared towards industrial problems
     :type configuration: string
 
+    :param optim: a list containing configuration for optimization algorithm and optionally a bound  [<arg>, <bound>]
+        <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
+        opt   : Find optimal model
+        enum  : Find models with costs <= <bound>
+        optN  : Find optimum, then enumerate optimal models
+        ignore: Ignore optimize statements
+        <bound> : Set initial bound for objective function(s)
+    :type optim: list
+
     :param cpath: clingo path
     :type cpath: string
 
@@ -114,17 +143,20 @@ def clingo(command, exact=True,
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
+    if optim is None:
+        optim = ['optN']
     result = run_clingo(command,
                         exact=exact,
                         timeout=timeout,
                         capsize=capsize,
                         configuration=configuration,
-                        pnum=pnum)
+                        pnum=pnum,
+                        optim=optim)
     if result[0]=={} or result[0]==[]:
         return {}
     else:
         if not exact:
-            r = (convert(result[0][-1]), result[1])
+            r = {(convert(value[0]), value[1][0]) for value in result[0]}
         else:
-            r = {convert(value) for value in result[0]}
+            r = {convert(value[0]) for value in result[0]}
     return r

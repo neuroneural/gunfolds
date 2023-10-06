@@ -312,8 +312,8 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     return command
 
 
-def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_members=None,  dm=None,
-          bdm=None, pnum=None, edge_weights=(1, 1), configuration="tweety"):
+def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_members=None, dm=None,
+          bdm=None, pnum=None, edge_weights=(1, 1), configuration="crafty", optim=None):
     """
     Compute all candidate causal time-scale graphs that could have
     generated all undersampled graphs at all possible undersampling
@@ -371,9 +371,20 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_mem
         trendy: Use defaults geared towards industrial problems
     :type configuration: string
 
+    :param optim: a list containing configuration for optimization algorithm and optionally a bound  [<arg>, <bound>]
+        <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
+        opt   : Find optimal model
+        enum  : Find models with costs <= <bound>
+        optN  : Find optimum, then enumerate optimal models
+        ignore: Ignore optimize statements
+        <bound> : Set initial bound for objective function(s)
+    :type optim: list
+
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
+    if optim is None:
+        optim = ['optN']
     if dm is not None:
         dm = [nd.astype('int') for nd in dm]
     if bdm is not None:
@@ -383,7 +394,7 @@ def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_mem
     return clingo(drasl_command(glist, max_urate=urate, weighted=weighted,
                                 scc=scc, scc_members=scc_members, dm=dm, bdm=bdm, edge_weights=edge_weights),
                   capsize=capsize, convert=drasl_jclingo2g, configuration=configuration,
-                  timeout=timeout, exact=not weighted, pnum=pnum)
+                  timeout=timeout, exact=not weighted, pnum=pnum, optim=optim)
 
 
 def rasl(g, capsize, timeout=0, urate=0, pnum=None, configuration="tweety"):
