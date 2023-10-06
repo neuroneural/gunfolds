@@ -5,7 +5,6 @@ import clingo as clngo
 import json
 from gunfolds.utils.calc_procs import get_process_count
 
-CAPSIZE = 1000
 CLINGO_LIMIT = 64
 PNUM = min(CLINGO_LIMIT, get_process_count(1))
 
@@ -13,7 +12,7 @@ PNUM = min(CLINGO_LIMIT, get_process_count(1))
 def run_clingo(command,
                exact=True,
                timeout=0,
-               capsize=CAPSIZE,
+               capsize=None,
                configuration="tweety",
                pnum=None,
                optim=None):
@@ -42,8 +41,6 @@ def run_clingo(command,
         trendy: Use defaults geared towards industrial problems
     :type configuration: string
 
-    :param cpath: clingo path
-    :type cpath: string
 
     :param pnum: number of parallel threads to run clingo on
     :type pnum: integer
@@ -71,7 +68,10 @@ def run_clingo(command,
     else:
         raise ValueError("The 'optim' list must have either one or two elements.")
 
-    ctrl = clngo.Control(["--warn=no-atom-undefined","--configuration=", configuration, "-t", str(int(pnum)) + ",split", "-n", str(capsize)])
+    clingo_control = ["--warn=no-atom-undefined", "--configuration=", configuration, "-t", str(int(pnum)) + ",split"]
+    if capsize is not None:
+        clingo_control += ["-n", str(capsize)]
+    ctrl = clngo.Control(clingo_control)
     if not exact:
         ctrl.configuration.solve.opt_mode = optim_option
     ctrl.add("base", [], command.decode())
@@ -93,7 +93,7 @@ def run_clingo(command,
 def clingo(command, exact=True,
            convert=msl_jclingo2g,
            timeout=0,
-           capsize=CAPSIZE,
+           capsize=None,
            configuration="crafty",
            optim=None,
            pnum=None):
@@ -134,9 +134,6 @@ def clingo(command, exact=True,
         <bound> : Set initial bound for objective function(s)
     :type optim: list
 
-    :param cpath: clingo path
-    :type cpath: string
-
     :param pnum: number of parallel threads to run clingo on
     :type pnum: integer
 
@@ -152,7 +149,7 @@ def clingo(command, exact=True,
                         configuration=configuration,
                         pnum=pnum,
                         optim=optim)
-    if result[0]=={} or result[0]==[]:
+    if result[0] == {} or result[0] == []:
         return {}
     else:
         if not exact:

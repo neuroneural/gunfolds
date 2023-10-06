@@ -312,7 +312,7 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     return command
 
 
-def drasl(glist, capsize, timeout=0, urate=0, weighted=False, scc=False, scc_members=None, dm=None,
+def drasl(glist, capsize=None, timeout=0, urate=0, weighted=False, scc=False, scc_members=None, dm=None,
           bdm=None, pnum=None, edge_weights=(1, 1), configuration="crafty", optim=None):
     """
     Compute all candidate causal time-scale graphs that could have
