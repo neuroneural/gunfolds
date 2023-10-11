@@ -387,10 +387,6 @@ def drasl(glist, capsize=CAPSIZE, timeout=0, urate=0, weighted=False, scc=False,
         - <bound> : Set initial bound for objective function(s)
     :type optim: string
     
-    :returns: unique number for each graph considering only directed edges
-    :rtype: long integer
-    """
-
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
