@@ -280,23 +280,30 @@
 <li><p><strong>timeout</strong> (<em>integer</em>) – timeout in seconds after which to interrupt
 computation (0 - no limit)</p></li>
 <li><p><strong>capsize</strong> (<em>integer</em>) – maximum number of candidates to return</p></li>
-<li><p><strong>configuration</strong> (<em>string</em>) – Select configuration based on problem type
-frumpy: Use conservative defaults
-jumpy : Use aggressive defaults
-tweety: Use defaults geared towards asp problems
-handy : Use defaults geared towards large problems
-crafty: Use defaults geared towards crafted problems
-trendy: Use defaults geared towards industrial problems</p></li>
-<li><p><strong>optim</strong> (<em>string</em>) – <p>a comma separated string containing configuration for optimization algorithm and optionally a bound
-[&lt;arg&gt;[, &lt;bound&gt;]]</p>
-<blockquote>
-<div><p>&lt;arg&gt;: &lt;mode {opt|enum|optN|ignore}&gt;[,&lt;bound&gt;…]
-opt   : Find optimal model
-enum  : Find models with costs &lt;= &lt;bound&gt;
-optN  : Find optimum, then enumerate optimal models
-ignore: Ignore optimize statements
-&lt;bound&gt; : Set initial bound for objective function(s)</p>
-</div></blockquote>
+<li><p><strong>configuration</strong> (<em>string</em>) – <p>Select configuration based on problem type</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">frumpy</span></code> : Use conservative defaults</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jumpy</span></code> : Use aggressive defaults</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tweety</span></code> : Use defaults geared towards asp problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handy</span></code> : Use defaults geared towards large problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crafty</span></code> : Use defaults geared towards crafted problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trendy</span></code> : Use defaults geared towards industrial problems</p></li>
+</ul>
+</p></li>
+<li><p><strong>optim</strong> (<em>string</em>) – <p>a comma separated string containing configuration for optimization algorithm and optionally a bound [&lt;arg&gt;[, &lt;bound&gt;]]</p>
+<ul>
+<li><dl class="simple">
+<dt>&lt;arg&gt;<span class="classifier">&lt;mode {opt|enum|optN|ignore}&gt;</span></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">opt</span></code> : Find optimal model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enum</span></code> : Find models with costs &lt;= &lt;bound&gt;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optN</span></code> : Find optimum, then enumerate optimal models</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ignore</span></code> : Ignore optimize statements</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>&lt;bound&gt; : Set initial bound for objective function(s)</p></li>
+</ul>
 </p></li>
 <li><p><strong>pnum</strong> (<em>integer</em>) – number of parallel threads to run clingo on</p></li>
 </ul>
@@ -325,24 +332,31 @@ ignore: Ignore optimize statements
 <li><p><strong>timeout</strong> (<em>integer</em>) – timeout in seconds after which to interrupt
 computation (0 - no limit)</p></li>
 <li><p><strong>capsize</strong> (<em>integer</em>) – maximum number of candidates to return</p></li>
-<li><p><strong>configuration</strong> (<em>string</em>) – Select configuration based on problem type
-frumpy: Use conservative defaults
-jumpy : Use aggressive defaults
-tweety: Use defaults geared towards asp problems
-handy : Use defaults geared towards large problems
-crafty: Use defaults geared towards crafted problems
-trendy: Use defaults geared towards industrial problems</p></li>
+<li><p><strong>configuration</strong> (<em>string</em>) – <p>Select configuration based on problem type</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">frumpy</span></code> : Use conservative defaults</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jumpy</span></code> : Use aggressive defaults</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tweety</span></code> : Use defaults geared towards asp problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handy</span></code> : Use defaults geared towards large problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crafty</span></code> : Use defaults geared towards crafted problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trendy</span></code> : Use defaults geared towards industrial problems</p></li>
+</ul>
+</p></li>
 <li><p><strong>pnum</strong> (<em>integer</em>) – number of parallel threads to run clingo on</p></li>
-<li><p><strong>optim</strong> (<em>string</em>) – <p>a comma separated string containing configuration for optimization algorithm and optionally a bound
-[&lt;arg&gt;[, &lt;bound&gt;]]</p>
-<blockquote>
-<div><p>&lt;arg&gt;: &lt;mode {opt|enum|optN|ignore}&gt;[,&lt;bound&gt;…]
-opt   : Find optimal model
-enum  : Find models with costs &lt;= &lt;bound&gt;
-optN  : Find optimum, then enumerate optimal models
-ignore: Ignore optimize statements
-&lt;bound&gt; : Set initial bound for objective function(s)</p>
-</div></blockquote>
+<li><p><strong>optim</strong> (<em>string</em>) – <p>a comma separated string containing configuration for optimization algorithm and optionally a bound [&lt;arg&gt;[, &lt;bound&gt;]]</p>
+<ul>
+<li><dl class="simple">
+<dt>&lt;arg&gt;<span class="classifier">&lt;mode {opt|enum|optN|ignore}&gt;</span></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">opt</span></code> : Find optimal model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enum</span></code> : Find models with costs &lt;= &lt;bound&gt;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optN</span></code> : Find optimum, then enumerate optimal models</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ignore</span></code> : Ignore optimize statements</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>&lt;bound&gt; : Set initial bound for objective function(s)</p></li>
+</ul>
 </p></li>
 </ul>
 </dd>

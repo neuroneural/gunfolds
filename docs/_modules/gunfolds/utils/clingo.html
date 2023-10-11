@@ -290,26 +290,27 @@
 <span class="sd">    :type capsize: integer</span>
 
 <span class="sd">    :param configuration: Select configuration based on problem type</span>
-<span class="sd">        frumpy: Use conservative defaults</span>
-<span class="sd">        jumpy : Use aggressive defaults</span>
-<span class="sd">        tweety: Use defaults geared towards asp problems</span>
-<span class="sd">        handy : Use defaults geared towards large problems</span>
-<span class="sd">        crafty: Use defaults geared towards crafted problems</span>
-<span class="sd">        trendy: Use defaults geared towards industrial problems</span>
+
+<span class="sd">        - ``frumpy`` : Use conservative defaults</span>
+<span class="sd">        - ``jumpy`` : Use aggressive defaults</span>
+<span class="sd">        - ``tweety`` : Use defaults geared towards asp problems</span>
+<span class="sd">        - ``handy`` : Use defaults geared towards large problems</span>
+<span class="sd">        - ``crafty`` : Use defaults geared towards crafted problems</span>
+<span class="sd">        - ``trendy`` : Use defaults geared towards industrial problems</span>
 <span class="sd">    :type configuration: string</span>
 
 
 <span class="sd">    :param pnum: number of parallel threads to run clingo on</span>
 <span class="sd">    :type pnum: integer</span>
 
-<span class="sd">    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound</span>
-<span class="sd">     [&lt;arg&gt;[, &lt;bound&gt;]]</span>
-<span class="sd">        &lt;arg&gt;: &lt;mode {opt|enum|optN|ignore}&gt;[,&lt;bound&gt;...]</span>
-<span class="sd">        opt   : Find optimal model</span>
-<span class="sd">        enum  : Find models with costs &lt;= &lt;bound&gt;</span>
-<span class="sd">        optN  : Find optimum, then enumerate optimal models</span>
-<span class="sd">        ignore: Ignore optimize statements</span>
-<span class="sd">        &lt;bound&gt; : Set initial bound for objective function(s)</span>
+<span class="sd">    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound [&lt;arg&gt;[, &lt;bound&gt;]]</span>
+<span class="sd">        </span>
+<span class="sd">        - &lt;arg&gt; : &lt;mode {opt|enum|optN|ignore}&gt;</span>
+<span class="sd">            - ``opt`` : Find optimal model</span>
+<span class="sd">            - ``enum`` : Find models with costs &lt;= &lt;bound&gt;</span>
+<span class="sd">            - ``optN`` : Find optimum, then enumerate optimal models</span>
+<span class="sd">            - ``ignore`` : Ignore optimize statements</span>
+<span class="sd">        - &lt;bound&gt; : Set initial bound for objective function(s)</span>
 <span class="sd">    :type optim: string</span>
 
 <span class="sd">    :returns: results of equivalent class</span>
@@ -367,22 +368,23 @@
 <span class="sd">    :type capsize: integer</span>
 
 <span class="sd">    :param configuration: Select configuration based on problem type</span>
-<span class="sd">        frumpy: Use conservative defaults</span>
-<span class="sd">        jumpy : Use aggressive defaults</span>
-<span class="sd">        tweety: Use defaults geared towards asp problems</span>
-<span class="sd">        handy : Use defaults geared towards large problems</span>
-<span class="sd">        crafty: Use defaults geared towards crafted problems</span>
-<span class="sd">        trendy: Use defaults geared towards industrial problems</span>
+
+<span class="sd">        - ``frumpy`` : Use conservative defaults</span>
+<span class="sd">        - ``jumpy`` : Use aggressive defaults</span>
+<span class="sd">        - ``tweety`` : Use defaults geared towards asp problems</span>
+<span class="sd">        - ``handy`` : Use defaults geared towards large problems</span>
+<span class="sd">        - ``crafty`` : Use defaults geared towards crafted problems</span>
+<span class="sd">        - ``trendy`` : Use defaults geared towards industrial problems</span>
 <span class="sd">    :type configuration: string</span>
 
-<span class="sd">    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound</span>
-<span class="sd">     [&lt;arg&gt;[, &lt;bound&gt;]]</span>
-<span class="sd">        &lt;arg&gt;: &lt;mode {opt|enum|optN|ignore}&gt;[,&lt;bound&gt;...]</span>
-<span class="sd">        opt   : Find optimal model</span>
-<span class="sd">        enum  : Find models with costs &lt;= &lt;bound&gt;</span>
-<span class="sd">        optN  : Find optimum, then enumerate optimal models</span>
-<span class="sd">        ignore: Ignore optimize statements</span>
-<span class="sd">        &lt;bound&gt; : Set initial bound for objective function(s)</span>
+<span class="sd">    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound [&lt;arg&gt;[, &lt;bound&gt;]]</span>
+<span class="sd">        </span>
+<span class="sd">        - &lt;arg&gt; : &lt;mode {opt|enum|optN|ignore}&gt;</span>
+<span class="sd">            - ``opt`` : Find optimal model</span>
+<span class="sd">            - ``enum`` : Find models with costs &lt;= &lt;bound&gt;</span>
+<span class="sd">            - ``optN`` : Find optimum, then enumerate optimal models</span>
+<span class="sd">            - ``ignore`` : Ignore optimize statements</span>
+<span class="sd">        - &lt;bound&gt; : Set initial bound for objective function(s)</span>
 <span class="sd">    :type optim: string</span>
 
 <span class="sd">    :param pnum: number of parallel threads to run clingo on</span>
