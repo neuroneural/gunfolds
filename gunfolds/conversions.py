@@ -110,6 +110,7 @@ def graph2dot(g, filename):
 def nx2graph(G):
     """
     Convert NetworkX format graph to ``gunfolds`` graph ignoring bidirected edges
+    
     :param G: ``gunfolds`` format graph
     :type G: dictionary (``gunfolds`` graphs)
     
