@@ -32,26 +32,27 @@ def run_clingo(command,
     :type capsize: integer
 
     :param configuration: Select configuration based on problem type
-        frumpy: Use conservative defaults
-        jumpy : Use aggressive defaults
-        tweety: Use defaults geared towards asp problems
-        handy : Use defaults geared towards large problems
-        crafty: Use defaults geared towards crafted problems
-        trendy: Use defaults geared towards industrial problems
+
+        - ``frumpy`` : Use conservative defaults
+        - ``jumpy`` : Use aggressive defaults
+        - ``tweety`` : Use defaults geared towards asp problems
+        - ``handy`` : Use defaults geared towards large problems
+        - ``crafty`` : Use defaults geared towards crafted problems
+        - ``trendy`` : Use defaults geared towards industrial problems
     :type configuration: string
 
 
     :param pnum: number of parallel threads to run clingo on
     :type pnum: integer
 
-    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound
-     [<arg>[, <bound>]]
-        <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
-        opt   : Find optimal model
-        enum  : Find models with costs <= <bound>
-        optN  : Find optimum, then enumerate optimal models
-        ignore: Ignore optimize statements
-        <bound> : Set initial bound for objective function(s)
+    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound [<arg>[, <bound>]]
+        
+        - <arg> : <mode {opt|enum|optN|ignore}>
+            - ``opt`` : Find optimal model
+            - ``enum`` : Find models with costs <= <bound>
+            - ``optN`` : Find optimum, then enumerate optimal models
+            - ``ignore`` : Ignore optimize statements
+        - <bound> : Set initial bound for objective function(s)
     :type optim: string
 
     :returns: results of equivalent class
@@ -106,22 +107,23 @@ def clingo(command, exact=True,
     :type capsize: integer
 
     :param configuration: Select configuration based on problem type
-        frumpy: Use conservative defaults
-        jumpy : Use aggressive defaults
-        tweety: Use defaults geared towards asp problems
-        handy : Use defaults geared towards large problems
-        crafty: Use defaults geared towards crafted problems
-        trendy: Use defaults geared towards industrial problems
+
+        - ``frumpy`` : Use conservative defaults
+        - ``jumpy`` : Use aggressive defaults
+        - ``tweety`` : Use defaults geared towards asp problems
+        - ``handy`` : Use defaults geared towards large problems
+        - ``crafty`` : Use defaults geared towards crafted problems
+        - ``trendy`` : Use defaults geared towards industrial problems
     :type configuration: string
 
-    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound
-     [<arg>[, <bound>]]
-        <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
-        opt   : Find optimal model
-        enum  : Find models with costs <= <bound>
-        optN  : Find optimum, then enumerate optimal models
-        ignore: Ignore optimize statements
-        <bound> : Set initial bound for objective function(s)
+    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound [<arg>[, <bound>]]
+        
+        - <arg> : <mode {opt|enum|optN|ignore}>
+            - ``opt`` : Find optimal model
+            - ``enum`` : Find models with costs <= <bound>
+            - ``optN`` : Find optimum, then enumerate optimal models
+            - ``ignore`` : Ignore optimize statements
+        - <bound> : Set initial bound for objective function(s)
     :type optim: string
 
     :param pnum: number of parallel threads to run clingo on
