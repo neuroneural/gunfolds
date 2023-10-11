@@ -267,27 +267,271 @@
 <h1>clingo_rasl<a class="headerlink" href="#clingo-rasl" title="Link to this heading">#</a></h1>
 <section id="drasl">
 <h2>drasl<a class="headerlink" href="#drasl" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.clingo_rasl.drasl">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.clingo_rasl.</span></span><span class="sig-name descname"><span class="pre">drasl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">glist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">urate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scc_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bdm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pnum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'crafty'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'optN'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/clingo_rasl.html#drasl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.clingo_rasl.drasl" title="Link to this definition">#</a></dt>
+<dd><p>Compute all candidate causal time-scale graphs that could have
+generated all undersampled graphs at all possible undersampling
+rates up to <code class="docutils literal notranslate"><span class="pre">urate</span></code> in <code class="docutils literal notranslate"><span class="pre">glist</span></code> each at an unknown undersampling
+rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>glist</strong> (list of dictionaries (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – a list of graphs that are undersampled versions of
+the same system</p></li>
+<li><p><strong>capsize</strong> (<em>integer</em>) – maximum number of candidates to return</p></li>
+<li><p><strong>timeout</strong> (<em>integer</em>) – timeout in seconds after which to interrupt
+computation (0 - no limit)</p></li>
+<li><p><strong>urate</strong> (<em>integer</em>) – maximum undersampling rate to consider</p></li>
+<li><p><strong>weighted</strong> (<em>boolean</em>) – whether the input graphs are weighted or
+imprecize.  If <code class="docutils literal notranslate"><span class="pre">True</span></code> but no weight matrices are provided -
+all weights are set to <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><strong>scc</strong> (<em>boolean</em>) – whether to assume that each SCC in the input graph is
+either a singleton or have <code class="docutils literal notranslate"><span class="pre">gcd=1</span></code>.  If <code class="docutils literal notranslate"><span class="pre">True</span></code> a much more
+efficient algorithm is employed.</p></li>
+<li><p><strong>scc_members</strong> (<em>list</em>) – a list of sets for nodes in each SCC</p></li>
+<li><p><strong>dm</strong> (<em>list</em><em> of </em><em>numpy arrays</em>) – a list of n-by-n 2-d square matrix of the weights for
+directed edges of each input n-node graph</p></li>
+<li><p><strong>bdm</strong> (<em>list</em><em> of </em><em>numpy arrays</em>) – a list of <em>symmetric</em> n-by-n 2-d square matrix of the
+weights for bidirected edges of each input n-node graph</p></li>
+<li><p><strong>pnum</strong> (<em>integer</em>) – number of parallel threads to run <code class="docutils literal notranslate"><span class="pre">clingo</span></code> on</p></li>
+<li><p><strong>edge_weights</strong> (<em>tuple with 2 elements</em>) – a tuple of 2 values, the first is importance
+of matching directed weights when solving optimization problem and the second is for bidirected.</p></li>
+<li><p><strong>configuration</strong> (<em>string</em>) – <p>Select configuration based on problem type</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">frumpy</span></code> : Use conservative defaults</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jumpy</span></code> : Use aggressive defaults</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tweety</span></code> : Use defaults geared towards asp problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handy</span></code> : Use defaults geared towards large problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crafty</span></code> : Use defaults geared towards crafted problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trendy</span></code> : Use defaults geared towards industrial problems</p></li>
+</ul>
+</p></li>
+<li><p><strong>optim</strong> (<em>string</em>) – <p>a comma separated string containing configuration for optimization algorithm and optionally a bound [&lt;arg&gt;[, &lt;bound&gt;]]</p>
+<ul>
+<li><dl class="simple">
+<dt>&lt;arg&gt;<span class="classifier">&lt;mode {opt|enum|optN|ignore}&gt;</span></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">opt</span></code> : Find optimal model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enum</span></code> : Find models with costs &lt;= &lt;bound&gt;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optN</span></code> : Find optimum, then enumerate optimal models</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ignore</span></code> : Ignore optimize statements</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>&lt;bound&gt; : Set initial bound for objective function(s)</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>results of parsed equivalent class</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="drasl-command">
 <h2>drasl_command<a class="headerlink" href="#drasl-command" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.clingo_rasl.drasl_command">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.clingo_rasl.</span></span><span class="sig-name descname"><span class="pre">drasl_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_urate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scc_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bdm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1,</span> <span class="pre">1)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/clingo_rasl.html#drasl_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.clingo_rasl.drasl_command" title="Link to this definition">#</a></dt>
+<dd><p>Given a list of graphs generates <code class="docutils literal notranslate"><span class="pre">clingo</span></code> codes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g_list</strong> (list of dictionaries (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – a list of graphs that are undersampled versions of
+the same system</p></li>
+<li><p><strong>max_urate</strong> (<em>integer</em>) – maximum under sampling rate</p></li>
+<li><p><strong>weighted</strong> (<em>boolean</em>) – whether the input graphs are weighted or
+precize.  If <code class="docutils literal notranslate"><span class="pre">True</span></code> but no weight matrices are provided -
+all weights are set to <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><strong>scc</strong> (<em>(</em><em>GUESS</em><em>)</em><em>boolean</em>) – whether to assume that each SCC in the input graph is
+either a singleton or have <code class="docutils literal notranslate"><span class="pre">gcd=1</span></code>.  If <cite>True</cite> a much more
+efficient algorithm is employed.</p></li>
+<li><p><strong>scc_members</strong> (<em>list</em>) – a list of sets for nodes in each SCC</p></li>
+<li><p><strong>dm</strong> (<em>list</em><em> of </em><em>numpy arrays</em>) – a list of n-by-n 2-d square matrix of the weights for
+directed edges of each input n-node graph</p></li>
+<li><p><strong>bdm</strong> (<em>list</em><em> of </em><em>numpy arrays</em>) – a list of <em>symmetric</em> n-by-n 2-d square matrix of the
+weights for bidirected edges of each input n-node graph</p></li>
+<li><p><strong>edge_weights</strong> (<em>tuple with 2 elements</em>) – a tuple of 2 values, the first is importance of matching
+directed weights when solving optimization problem and the second is for bidirected.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>clingo code as a string</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="drate">
 <h2>drate<a class="headerlink" href="#drate" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.clingo_rasl.drate">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.clingo_rasl.</span></span><span class="sig-name descname"><span class="pre">drate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/clingo_rasl.html#drate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.clingo_rasl.drate" title="Link to this definition">#</a></dt>
+<dd><p>Replaces <code class="docutils literal notranslate"><span class="pre">rate</span></code> if there are multiple under sampled inputs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> (<em>integer</em>) – maximum under sampling rate</p></li>
+<li><p><strong>gnum</strong> (<em>integer</em>) – number of under sampled inputs</p></li>
+<li><p><strong>weighted</strong> (<em>boolean</em>) – whether the input graphs are weighted or
+precize.  If <cite>True</cite> but no weight matrices are provided -
+all weights are set to <cite>1</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> code for under sampling with multiple under sampled inputs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="glist2str">
 <h2>glist2str<a class="headerlink" href="#glist2str" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.clingo_rasl.glist2str">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.clingo_rasl.</span></span><span class="sig-name descname"><span class="pre">glist2str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bdm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/clingo_rasl.html#glist2str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.clingo_rasl.glist2str" title="Link to this definition">#</a></dt>
+<dd><p>Converts list of graphs into <code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g_list</strong> (list of dictionaries (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – a list of graphs that are undersampled versions of
+the same system</p></li>
+<li><p><strong>weighted</strong> (<em>boolean</em>) – whether the input graphs are weighted or
+precize.  If <cite>True</cite> but no weight matrices are provided -
+all weights are set to <cite>1</cite></p></li>
+<li><p><strong>dm</strong> (<em>list</em><em> of </em><em>numpy arrays</em>) – a list of n-by-n 2-d square matrix of the weights for
+directed edges of each input n-node graph</p></li>
+<li><p><strong>bdm</strong> (<em>list</em><em> of </em><em>numpy arrays</em>) – a list of <em>symmetric</em> n-by-n 2-d square matrix of the
+weights for bidirected edges of each input n-node graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> predicates as a string</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="rasl">
 <h2>rasl<a class="headerlink" href="#rasl" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.clingo_rasl.rasl">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.clingo_rasl.</span></span><span class="sig-name descname"><span class="pre">rasl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">urate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pnum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tweety'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/clingo_rasl.html#rasl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.clingo_rasl.rasl" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>capsize</strong> (<em>integer</em>) – maximum number of candidates to return</p></li>
+<li><p><strong>timeout</strong> (<em>integer</em>) – timeout in seconds after which to interrupt
+computation (0 - no limit)</p></li>
+<li><p><strong>urate</strong> (<em>integer</em>) – maximum undersampling rate to consider</p></li>
+<li><p><strong>pnum</strong> (<em>integer</em>) – number of parallel threads to run <code class="docutils literal notranslate"><span class="pre">clingo</span></code> on</p></li>
+<li><p><strong>configuration</strong> (<em>string</em>) – <p>Select configuration based on problem type</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">frumpy</span></code> : Use conservative defaults</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jumpy</span></code> : Use aggressive defaults</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tweety</span></code> : Use defaults geared towards asp problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handy</span></code> : Use defaults geared towards large problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crafty</span></code> : Use defaults geared towards crafted problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trendy</span></code> : Use defaults geared towards industrial problems</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>results of parsed equivalent class</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="rasl-command">
 <h2>rasl_command<a class="headerlink" href="#rasl-command" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.clingo_rasl.rasl_command">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.clingo_rasl.</span></span><span class="sig-name descname"><span class="pre">rasl_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">urate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/clingo_rasl.html#rasl_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.clingo_rasl.rasl_command" title="Link to this definition">#</a></dt>
+<dd><p>Given a graph generates <code class="docutils literal notranslate"><span class="pre">clingo</span></code> code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
+<li><p><strong>urate</strong> (<em>integer</em>) – maximum undersampling rate to consider</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">clingo</span></code> code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="rate">
 <h2>rate<a class="headerlink" href="#rate" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.clingo_rasl.rate">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.clingo_rasl.</span></span><span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/clingo_rasl.html#rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.clingo_rasl.rate" title="Link to this definition">#</a></dt>
+<dd><p>Adds under sampling rate to <code class="docutils literal notranslate"><span class="pre">clingo</span></code> code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> (<em>integer</em>) – maximum under sampling rate</p></li>
+<li><p><strong>uname</strong> (<em>string</em>) – name of the parameter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>predicate for under sampling rate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="weighted-drasl-program">
 <h2>weighted_drasl_program<a class="headerlink" href="#weighted-drasl-program" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.solvers.clingo_rasl.weighted_drasl_program">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.solvers.clingo_rasl.</span></span><span class="sig-name descname"><span class="pre">weighted_drasl_program</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bidirected</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gunfolds/solvers/clingo_rasl.html#weighted_drasl_program"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.solvers.clingo_rasl.weighted_drasl_program" title="Link to this definition">#</a></dt>
+<dd><p>Adjusts the optimization code based on the directed and bidirected priority</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directed</strong> (<em>integer</em>) – priority of directed edges in optimization</p></li>
+<li><p><strong>bidirected</strong> (<em>integer</em>) – priority of bidirected edges in optimization
+graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>optimization part of the <code class="docutils literal notranslate"><span class="pre">clingo</span></code> code</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 </section>
 
@@ -347,14 +591,38 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">clingo_rasl</a><ul>
-<li><a class="reference internal" href="#drasl">drasl</a></li>
-<li><a class="reference internal" href="#drasl-command">drasl_command</a></li>
-<li><a class="reference internal" href="#drate">drate</a></li>
-<li><a class="reference internal" href="#glist2str">glist2str</a></li>
-<li><a class="reference internal" href="#rasl">rasl</a></li>
-<li><a class="reference internal" href="#rasl-command">rasl_command</a></li>
-<li><a class="reference internal" href="#rate">rate</a></li>
-<li><a class="reference internal" href="#weighted-drasl-program">weighted_drasl_program</a></li>
+<li><a class="reference internal" href="#drasl">drasl</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.clingo_rasl.drasl"><code class="docutils literal notranslate"><span class="pre">drasl()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#drasl-command">drasl_command</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.clingo_rasl.drasl_command"><code class="docutils literal notranslate"><span class="pre">drasl_command()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#drate">drate</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.clingo_rasl.drate"><code class="docutils literal notranslate"><span class="pre">drate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#glist2str">glist2str</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.clingo_rasl.glist2str"><code class="docutils literal notranslate"><span class="pre">glist2str()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rasl">rasl</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.clingo_rasl.rasl"><code class="docutils literal notranslate"><span class="pre">rasl()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rasl-command">rasl_command</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.clingo_rasl.rasl_command"><code class="docutils literal notranslate"><span class="pre">rasl_command()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rate">rate</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.clingo_rasl.rate"><code class="docutils literal notranslate"><span class="pre">rate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#weighted-drasl-program">weighted_drasl_program</a><ul>
+<li><a class="reference internal" href="#gunfolds.solvers.clingo_rasl.weighted_drasl_program"><code class="docutils literal notranslate"><span class="pre">weighted_drasl_program()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
