@@ -1,21 +1,20 @@
 """ This module contains clingo interaction functions """
 from __future__ import print_function
-from gunfolds.conversions import msl_jclingo2g
+from gunfolds.conversions import drasl_jclingo2g
 import clingo as clngo
-import json
 from gunfolds.utils.calc_procs import get_process_count
 
-CAPSIZE = 1000
 CLINGO_LIMIT = 64
 PNUM = min(CLINGO_LIMIT, get_process_count(1))
-
+CAPSIZE = 1
 
 def run_clingo(command,
                exact=True,
                timeout=0,
                capsize=CAPSIZE,
                configuration="tweety",
-               pnum=None):
+               pnum=PNUM,
+               optim='optN'):
     """
     Open sub-process and run clingo
 
@@ -41,26 +40,35 @@ def run_clingo(command,
         trendy: Use defaults geared towards industrial problems
     :type configuration: string
 
-    :param cpath: clingo path
-    :type cpath: string
 
     :param pnum: number of parallel threads to run clingo on
     :type pnum: integer
 
+    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound
+     [<arg>[, <bound>]]
+        <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
+        opt   : Find optimal model
+        enum  : Find models with costs <= <bound>
+        optN  : Find optimum, then enumerate optimal models
+        ignore: Ignore optimize statements
+        <bound> : Set initial bound for objective function(s)
+    :type optim: string
+
     :returns: results of equivalent class
     :rtype: dictionary
     """
-    if pnum is None:
-        pnum = PNUM
-    ctrl = clngo.Control(["--warn=no-atom-undefined","--configuration=", configuration, "-t", str(int(pnum)) + ",split", "-n", str(capsize)])
+    assert len(optim.split(',')) < 3, "optim option only takes 1 or 2 comma-separated parameters"
+
+    clingo_control = ["--warn=no-atom-undefined", "--configuration=", configuration, "-t", str(int(pnum)) + ",split", "-n", str(capsize)]
+    ctrl = clngo.Control(clingo_control)
     if not exact:
-        ctrl.configuration.solve.opt_mode = "opt"
+        ctrl.configuration.solve.opt_mode = optim
     ctrl.add("base", [], command.decode())
     ctrl.ground([("base", [])])
     models = []
     with ctrl.solve(yield_=True, async_=True) as handle:
         for model in handle:
-            models.append([str(atom) for atom in model.symbols(shown=True)])
+            models.append(([str(atom) for atom in model.symbols(shown=True)], model.cost))
     cost = ctrl.statistics["summary"]["costs"]
     num_opt = ctrl.statistics["summary"]["models"]["optimal"]
     if not exact:
@@ -72,11 +80,12 @@ def run_clingo(command,
     
 
 def clingo(command, exact=True,
-           convert=msl_jclingo2g,
+           convert=drasl_jclingo2g,
            timeout=0,
            capsize=CAPSIZE,
-           configuration="tweety",
-           pnum=None):
+           configuration="crafty",
+           optim='optN',
+           pnum=PNUM):
     """
     Runs ``run_clingo`` and returns parsed equivalent class
 
@@ -105,8 +114,15 @@ def clingo(command, exact=True,
         trendy: Use defaults geared towards industrial problems
     :type configuration: string
 
-    :param cpath: clingo path
-    :type cpath: string
+    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound
+     [<arg>[, <bound>]]
+        <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
+        opt   : Find optimal model
+        enum  : Find models with costs <= <bound>
+        optN  : Find optimum, then enumerate optimal models
+        ignore: Ignore optimize statements
+        <bound> : Set initial bound for objective function(s)
+    :type optim: string
 
     :param pnum: number of parallel threads to run clingo on
     :type pnum: integer
@@ -119,12 +135,13 @@ def clingo(command, exact=True,
                         timeout=timeout,
                         capsize=capsize,
                         configuration=configuration,
-                        pnum=pnum)
-    if result[0]=={} or result[0]==[]:
+                        pnum=pnum,
+                        optim=optim)
+    if result[0] == {} or result[0] == []:
         return {}
     else:
         if not exact:
-            r = (convert(result[0][-1]), result[1])
+            r = {(convert(value[0]), value[1][0]) for value in result[0]}
         else:
-            r = {convert(value) for value in result[0]}
+            r = {convert(value[0]) for value in result[0]}
     return r
