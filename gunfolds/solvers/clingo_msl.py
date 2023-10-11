@@ -93,12 +93,13 @@ def msl(g, capsize, exact=True, configuration="tweety", urate=2, timeout=0, pnum
     :type timeout: integer
 
     :param configuration: Select configuration based on problem type
-        frumpy: Use conservative defaults
-        jumpy : Use aggressive defaults
-        tweety: Use defaults geared towards asp problems
-        handy : Use defaults geared towards large problems
-        crafty: Use defaults geared towards crafted problems
-        trendy: Use defaults geared towards industrial problems
+
+        - ``frumpy`` : Use conservative defaults
+        - ``jumpy`` : Use aggressive defaults
+        - ``tweety`` : Use defaults geared towards asp problems
+        - ``handy`` : Use defaults geared towards large problems
+        - ``crafty`` : Use defaults geared towards crafted problems
+        - ``trendy`` : Use defaults geared towards industrial problems
     :type configuration: string
     
     :param pnum: number of parallel threads to run ``clingo`` on
