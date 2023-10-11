@@ -256,15 +256,13 @@
           <h1>Source code for gunfolds.utils.clingo</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot; This module contains clingo interaction functions &quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="kn">from</span> <span class="nn">gunfolds.conversions</span> <span class="kn">import</span> <span class="n">msl_jclingo2g</span>
+<span class="kn">from</span> <span class="nn">gunfolds.conversions</span> <span class="kn">import</span> <span class="n">drasl_jclingo2g</span>
 <span class="kn">import</span> <span class="nn">clingo</span> <span class="k">as</span> <span class="nn">clngo</span>
-<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">gunfolds.utils.calc_procs</span> <span class="kn">import</span> <span class="n">get_process_count</span>
 
-<span class="n">CAPSIZE</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">CLINGO_LIMIT</span> <span class="o">=</span> <span class="mi">64</span>
 <span class="n">PNUM</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">CLINGO_LIMIT</span><span class="p">,</span> <span class="n">get_process_count</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-
+<span class="n">CAPSIZE</span> <span class="o">=</span> <span class="mi">1</span>
 
 <div class="viewcode-block" id="run_clingo">
 <a class="viewcode-back" href="../../../utils/clingo.html#gunfolds.utils.clingo.run_clingo">[docs]</a>
@@ -273,7 +271,8 @@
                <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                <span class="n">capsize</span><span class="o">=</span><span class="n">CAPSIZE</span><span class="p">,</span>
                <span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;tweety&quot;</span><span class="p">,</span>
-               <span class="n">pnum</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+               <span class="n">pnum</span><span class="o">=</span><span class="n">PNUM</span><span class="p">,</span>
+               <span class="n">optim</span><span class="o">=</span><span class="s1">&#39;optN&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Open sub-process and run clingo</span>
 
@@ -299,26 +298,35 @@
 <span class="sd">        trendy: Use defaults geared towards industrial problems</span>
 <span class="sd">    :type configuration: string</span>
 
-<span class="sd">    :param cpath: clingo path</span>
-<span class="sd">    :type cpath: string</span>
 
 <span class="sd">    :param pnum: number of parallel threads to run clingo on</span>
 <span class="sd">    :type pnum: integer</span>
 
+<span class="sd">    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound</span>
+<span class="sd">     [&lt;arg&gt;[, &lt;bound&gt;]]</span>
+<span class="sd">        &lt;arg&gt;: &lt;mode {opt|enum|optN|ignore}&gt;[,&lt;bound&gt;...]</span>
+<span class="sd">        opt   : Find optimal model</span>
+<span class="sd">        enum  : Find models with costs &lt;= &lt;bound&gt;</span>
+<span class="sd">        optN  : Find optimum, then enumerate optimal models</span>
+<span class="sd">        ignore: Ignore optimize statements</span>
+<span class="sd">        &lt;bound&gt; : Set initial bound for objective function(s)</span>
+<span class="sd">    :type optim: string</span>
+
 <span class="sd">    :returns: results of equivalent class</span>
 <span class="sd">    :rtype: dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">pnum</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">pnum</span> <span class="o">=</span> <span class="n">PNUM</span>
-    <span class="n">ctrl</span> <span class="o">=</span> <span class="n">clngo</span><span class="o">.</span><span class="n">Control</span><span class="p">([</span><span class="s2">&quot;--warn=no-atom-undefined&quot;</span><span class="p">,</span><span class="s2">&quot;--configuration=&quot;</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">pnum</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;,split&quot;</span><span class="p">,</span> <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">capsize</span><span class="p">)])</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">optim</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;optim option only takes 1 or 2 comma-separated parameters&quot;</span>
+
+    <span class="n">clingo_control</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;--warn=no-atom-undefined&quot;</span><span class="p">,</span> <span class="s2">&quot;--configuration=&quot;</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">pnum</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;,split&quot;</span><span class="p">,</span> <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">capsize</span><span class="p">)]</span>
+    <span class="n">ctrl</span> <span class="o">=</span> <span class="n">clngo</span><span class="o">.</span><span class="n">Control</span><span class="p">(</span><span class="n">clingo_control</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">exact</span><span class="p">:</span>
-        <span class="n">ctrl</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">solve</span><span class="o">.</span><span class="n">opt_mode</span> <span class="o">=</span> <span class="s2">&quot;opt&quot;</span>
+        <span class="n">ctrl</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">solve</span><span class="o">.</span><span class="n">opt_mode</span> <span class="o">=</span> <span class="n">optim</span>
     <span class="n">ctrl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;base&quot;</span><span class="p">,</span> <span class="p">[],</span> <span class="n">command</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
     <span class="n">ctrl</span><span class="o">.</span><span class="n">ground</span><span class="p">([(</span><span class="s2">&quot;base&quot;</span><span class="p">,</span> <span class="p">[])])</span>
     <span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">with</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">yield_</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">async_</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">handle</span><span class="p">:</span>
-            <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="n">shown</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
+            <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(([</span><span class="nb">str</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="n">shown</span><span class="o">=</span><span class="kc">True</span><span class="p">)],</span> <span class="n">model</span><span class="o">.</span><span class="n">cost</span><span class="p">))</span>
     <span class="n">cost</span> <span class="o">=</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">statistics</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">][</span><span class="s2">&quot;costs&quot;</span><span class="p">]</span>
     <span class="n">num_opt</span> <span class="o">=</span> <span class="n">ctrl</span><span class="o">.</span><span class="n">statistics</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">][</span><span class="s2">&quot;models&quot;</span><span class="p">][</span><span class="s2">&quot;optimal&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">exact</span><span class="p">:</span>
@@ -333,11 +341,12 @@
 <div class="viewcode-block" id="clingo">
 <a class="viewcode-back" href="../../../utils/clingo.html#gunfolds.utils.clingo.clingo">[docs]</a>
 <span class="k">def</span> <span class="nf">clingo</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-           <span class="n">convert</span><span class="o">=</span><span class="n">msl_jclingo2g</span><span class="p">,</span>
+           <span class="n">convert</span><span class="o">=</span><span class="n">drasl_jclingo2g</span><span class="p">,</span>
            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
            <span class="n">capsize</span><span class="o">=</span><span class="n">CAPSIZE</span><span class="p">,</span>
-           <span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;tweety&quot;</span><span class="p">,</span>
-           <span class="n">pnum</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+           <span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;crafty&quot;</span><span class="p">,</span>
+           <span class="n">optim</span><span class="o">=</span><span class="s1">&#39;optN&#39;</span><span class="p">,</span>
+           <span class="n">pnum</span><span class="o">=</span><span class="n">PNUM</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Runs ``run_clingo`` and returns parsed equivalent class</span>
 
@@ -366,8 +375,15 @@
 <span class="sd">        trendy: Use defaults geared towards industrial problems</span>
 <span class="sd">    :type configuration: string</span>
 
-<span class="sd">    :param cpath: clingo path</span>
-<span class="sd">    :type cpath: string</span>
+<span class="sd">    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound</span>
+<span class="sd">     [&lt;arg&gt;[, &lt;bound&gt;]]</span>
+<span class="sd">        &lt;arg&gt;: &lt;mode {opt|enum|optN|ignore}&gt;[,&lt;bound&gt;...]</span>
+<span class="sd">        opt   : Find optimal model</span>
+<span class="sd">        enum  : Find models with costs &lt;= &lt;bound&gt;</span>
+<span class="sd">        optN  : Find optimum, then enumerate optimal models</span>
+<span class="sd">        ignore: Ignore optimize statements</span>
+<span class="sd">        &lt;bound&gt; : Set initial bound for objective function(s)</span>
+<span class="sd">    :type optim: string</span>
 
 <span class="sd">    :param pnum: number of parallel threads to run clingo on</span>
 <span class="sd">    :type pnum: integer</span>
@@ -380,14 +396,15 @@
                         <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
                         <span class="n">capsize</span><span class="o">=</span><span class="n">capsize</span><span class="p">,</span>
                         <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span>
-                        <span class="n">pnum</span><span class="o">=</span><span class="n">pnum</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="p">{}</span> <span class="ow">or</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="p">[]:</span>
+                        <span class="n">pnum</span><span class="o">=</span><span class="n">pnum</span><span class="p">,</span>
+                        <span class="n">optim</span><span class="o">=</span><span class="n">optim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">{}</span> <span class="ow">or</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">[]:</span>
         <span class="k">return</span> <span class="p">{}</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">exact</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="p">{(</span><span class="n">convert</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="p">{</span><span class="n">convert</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="p">{</span><span class="n">convert</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
     <span class="k">return</span> <span class="n">r</span></div>
 
 </pre></div>

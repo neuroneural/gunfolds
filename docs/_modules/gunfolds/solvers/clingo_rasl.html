@@ -258,9 +258,14 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">Template</span>
 <span class="kn">from</span> <span class="nn">gunfolds.utils.clingo</span> <span class="kn">import</span> <span class="n">clingo</span>
+<span class="kn">from</span> <span class="nn">gunfolds.utils.calc_procs</span> <span class="kn">import</span> <span class="n">get_process_count</span>
 <span class="kn">from</span> <span class="nn">gunfolds.conversions</span> <span class="kn">import</span> <span class="n">g2clingo</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">rasl_jclingo2g</span><span class="p">,</span>\
      <span class="n">drasl_jclingo2g</span><span class="p">,</span> <span class="n">clingo_preamble</span><span class="p">,</span>\
      <span class="n">numbered_g2clingo</span><span class="p">,</span> <span class="n">numbered_g2wclingo</span><span class="p">,</span> <span class="n">encode_list_sccs</span>
+
+<span class="n">CLINGO_LIMIT</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">PNUM</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">CLINGO_LIMIT</span><span class="p">,</span> <span class="n">get_process_count</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">CAPSIZE</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="n">all_u_rasl_program</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">{edge(X,Y)} :- node(X), node(Y).</span>
@@ -588,8 +593,8 @@
 
 <div class="viewcode-block" id="drasl">
 <a class="viewcode-back" href="../../../solvers/declarative/clingo_rasl.html#gunfolds.solvers.clingo_rasl.drasl">[docs]</a>
-<span class="k">def</span> <span class="nf">drasl</span><span class="p">(</span><span class="n">glist</span><span class="p">,</span> <span class="n">capsize</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">urate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">scc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">scc_members</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="n">dm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-          <span class="n">bdm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pnum</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">edge_weights</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;tweety&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">drasl</span><span class="p">(</span><span class="n">glist</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="n">CAPSIZE</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">urate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">scc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">scc_members</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+          <span class="n">bdm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pnum</span><span class="o">=</span><span class="n">PNUM</span><span class="p">,</span> <span class="n">edge_weights</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">configuration</span><span class="o">=</span><span class="s2">&quot;crafty&quot;</span><span class="p">,</span> <span class="n">optim</span><span class="o">=</span><span class="s1">&#39;optN&#39;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute all candidate causal time-scale graphs that could have</span>
 <span class="sd">    generated all undersampled graphs at all possible undersampling</span>
@@ -647,6 +652,16 @@
 <span class="sd">        trendy: Use defaults geared towards industrial problems</span>
 <span class="sd">    :type configuration: string</span>
 
+<span class="sd">    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound</span>
+<span class="sd">     [&lt;arg&gt;[, &lt;bound&gt;]]</span>
+<span class="sd">        &lt;arg&gt;: &lt;mode {opt|enum|optN|ignore}&gt;[,&lt;bound&gt;...]</span>
+<span class="sd">        opt   : Find optimal model</span>
+<span class="sd">        enum  : Find models with costs &lt;= &lt;bound&gt;</span>
+<span class="sd">        optN  : Find optimum, then enumerate optimal models</span>
+<span class="sd">        ignore: Ignore optimize statements</span>
+<span class="sd">        &lt;bound&gt; : Set initial bound for objective function(s)</span>
+<span class="sd">    :type optim: string</span>
+
 <span class="sd">    :returns: results of parsed equivalent class</span>
 <span class="sd">    :rtype: dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -659,7 +674,7 @@
     <span class="k">return</span> <span class="n">clingo</span><span class="p">(</span><span class="n">drasl_command</span><span class="p">(</span><span class="n">glist</span><span class="p">,</span> <span class="n">max_urate</span><span class="o">=</span><span class="n">urate</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="n">weighted</span><span class="p">,</span>
                                 <span class="n">scc</span><span class="o">=</span><span class="n">scc</span><span class="p">,</span> <span class="n">scc_members</span><span class="o">=</span><span class="n">scc_members</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="n">dm</span><span class="p">,</span> <span class="n">bdm</span><span class="o">=</span><span class="n">bdm</span><span class="p">,</span> <span class="n">edge_weights</span><span class="o">=</span><span class="n">edge_weights</span><span class="p">),</span>
                   <span class="n">capsize</span><span class="o">=</span><span class="n">capsize</span><span class="p">,</span> <span class="n">convert</span><span class="o">=</span><span class="n">drasl_jclingo2g</span><span class="p">,</span> <span class="n">configuration</span><span class="o">=</span><span class="n">configuration</span><span class="p">,</span>
-                  <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="ow">not</span> <span class="n">weighted</span><span class="p">,</span> <span class="n">pnum</span><span class="o">=</span><span class="n">pnum</span><span class="p">)</span></div>
+                  <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="ow">not</span> <span class="n">weighted</span><span class="p">,</span> <span class="n">pnum</span><span class="o">=</span><span class="n">pnum</span><span class="p">,</span> <span class="n">optim</span><span class="o">=</span><span class="n">optim</span><span class="p">)</span></div>
 
 
 
