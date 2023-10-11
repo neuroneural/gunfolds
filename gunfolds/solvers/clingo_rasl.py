@@ -368,23 +368,28 @@ def drasl(glist, capsize=CAPSIZE, timeout=0, urate=0, weighted=False, scc=False,
     :type edge_weights: tuple with 2 elements
 
     :param configuration: Select configuration based on problem type
-        frumpy: Use conservative defaults
-        jumpy : Use aggressive defaults
-        tweety: Use defaults geared towards asp problems
-        handy : Use defaults geared towards large problems
-        crafty: Use defaults geared towards crafted problems
-        trendy: Use defaults geared towards industrial problems
+
+        - ``frumpy`` : Use conservative defaults
+        - ``jumpy`` : Use aggressive defaults
+        - ``tweety`` : Use defaults geared towards asp problems
+        - ``handy`` : Use defaults geared towards large problems
+        - ``crafty`` : Use defaults geared towards crafted problems
+        - ``trendy`` : Use defaults geared towards industrial problems
     :type configuration: string
 
-    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound
-     [<arg>[, <bound>]]
-        <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
-        opt   : Find optimal model
-        enum  : Find models with costs <= <bound>
-        optN  : Find optimum, then enumerate optimal models
-        ignore: Ignore optimize statements
-        <bound> : Set initial bound for objective function(s)
+    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound [<arg>[, <bound>]]
+        
+        - <arg> : <mode {opt|enum|optN|ignore}>
+            - ``opt`` : Find optimal model
+            - ``enum`` : Find models with costs <= <bound>
+            - ``optN`` : Find optimum, then enumerate optimal models
+            - ``ignore`` : Ignore optimize statements
+        - <bound> : Set initial bound for objective function(s)
     :type optim: string
+    
+    :returns: unique number for each graph considering only directed edges
+    :rtype: long integer
+    """
 
     :returns: results of parsed equivalent class
     :rtype: dictionary
@@ -420,12 +425,13 @@ def rasl(g, capsize, timeout=0, urate=0, pnum=None, configuration="tweety"):
     :type pnum: integer
 
     :param configuration: Select configuration based on problem type
-        frumpy: Use conservative defaults
-        jumpy : Use aggressive defaults
-        tweety: Use defaults geared towards asp problems
-        handy : Use defaults geared towards large problems
-        crafty: Use defaults geared towards crafted problems
-        trendy: Use defaults geared towards industrial problems
+
+        - ``frumpy`` : Use conservative defaults
+        - ``jumpy`` : Use aggressive defaults
+        - ``tweety`` : Use defaults geared towards asp problems
+        - ``handy`` : Use defaults geared towards large problems
+        - ``crafty`` : Use defaults geared towards crafted problems
+        - ``trendy`` : Use defaults geared towards industrial problems
     :type configuration: string
 
     :returns: results of parsed equivalent class
