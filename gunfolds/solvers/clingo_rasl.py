@@ -2,9 +2,14 @@
 from __future__ import print_function
 from string import Template
 from gunfolds.utils.clingo import clingo
+from gunfolds.utils.calc_procs import get_process_count
 from gunfolds.conversions import g2clingo, rate, rasl_jclingo2g,\
      drasl_jclingo2g, clingo_preamble,\
      numbered_g2clingo, numbered_g2wclingo, encode_list_sccs
+
+CLINGO_LIMIT = 64
+PNUM = min(CLINGO_LIMIT, get_process_count(1))
+CAPSIZE = 1
 
 all_u_rasl_program = """
 {edge(X,Y)} :- node(X), node(Y).
@@ -312,8 +317,8 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     return command
 
 
-def drasl(glist, capsize=None, timeout=0, urate=0, weighted=False, scc=False, scc_members=None, dm=None,
-          bdm=None, pnum=None, edge_weights=(1, 1), configuration="crafty", optim=None):
+def drasl(glist, capsize=CAPSIZE, timeout=0, urate=0, weighted=False, scc=False, scc_members=None, dm=None,
+          bdm=None, pnum=PNUM, edge_weights=(1, 1), configuration="crafty", optim='optN'):
     """
     Compute all candidate causal time-scale graphs that could have
     generated all undersampled graphs at all possible undersampling
@@ -371,20 +376,19 @@ def drasl(glist, capsize=None, timeout=0, urate=0, weighted=False, scc=False, sc
         trendy: Use defaults geared towards industrial problems
     :type configuration: string
 
-    :param optim: a list containing configuration for optimization algorithm and optionally a bound  [<arg>, <bound>]
+    :param optim: a comma separated string containing configuration for optimization algorithm and optionally a bound
+     [<arg>[, <bound>]]
         <arg>: <mode {opt|enum|optN|ignore}>[,<bound>...]
         opt   : Find optimal model
         enum  : Find models with costs <= <bound>
         optN  : Find optimum, then enumerate optimal models
         ignore: Ignore optimize statements
         <bound> : Set initial bound for objective function(s)
-    :type optim: list
+    :type optim: string
 
     :returns: results of parsed equivalent class
     :rtype: dictionary
     """
-    if optim is None:
-        optim = ['optN']
     if dm is not None:
         dm = [nd.astype('int') for nd in dm]
     if bdm is not None:
