@@ -43,6 +43,7 @@ jobs:
           git config --local user.name "gunfoldspypi"
           git config --local user.email "neuroneural.trends@gmail.com"
           git config --list --show-origin
+          ls -alhF ~/.ssh/
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
           twine upload dist/* -u ${{secrets.PYPI_USER}} -p ${{secrets.PYPI_PASSWORD}}
