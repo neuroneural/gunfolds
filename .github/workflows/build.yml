@@ -18,7 +18,7 @@ jobs:
           activate-conda: true
           conda-channels: anaconda, conda-forge
           
-      - name: Install dependencies and Build HTML files   
+      - name: Install required dependencies
         run: |
           conda install -c conda-forge graph-tool
           pip install Sphinx
@@ -29,8 +29,19 @@ jobs:
           python3 setup.py install
           pip install sphinx-copybutton
           pip install furo
+          pip install wheel
+          pip install twine
+
+      - name: Build HTML files   
+        run: |
           cd sphinx-build
           make clean html
+
+      - name: Publish to Pypi
+        run: |  
+          bash version_update.sh
+          python3 setup.py sdist bdist_wheel
+          twine upload dist/* -u ${{secrets.PYPI_USER}} -p ${{secrets.PYPI_PASSWORD}}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
