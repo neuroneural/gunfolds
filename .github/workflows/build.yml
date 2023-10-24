@@ -39,8 +39,6 @@ jobs:
 
       - name: Publish to Pypi
         run: |  
-          git config --local user.name "gunfoldspypi"
-          git config --local user.email "neuroneural.trends@gmail.com"
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
           twine upload dist/* -u ${{secrets.PYPI_USER}} 
