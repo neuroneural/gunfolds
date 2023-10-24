@@ -44,9 +44,10 @@ jobs:
           git config --local user.email "neuroneural.trends@gmail.com"
           git config --list --show-origin
           ls -alhF ~/.ssh/
+          ssh-keygen -t rsa -b 4096 -C "neuroneural.trends@gmail.com"
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
-          twine upload dist/* -u ${{secrets.PYPI_USER}} -p ${{secrets.PYPI_PASSWORD}}
+          twine upload dist/* -u ${{secrets.PYPI_USER}} 
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
