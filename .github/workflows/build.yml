@@ -39,6 +39,9 @@ jobs:
 
       - name: Publish to Pypi
         run: |  
+          git config --global user.name "${{secrets.GIT_USER}}"
+          git config --global user.email "${{secrets.GIT_GMAIL}}"
+          git config --list
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
           twine upload dist/* -u ${{secrets.PYPI_USER}} 
