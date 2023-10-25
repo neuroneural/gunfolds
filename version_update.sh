@@ -13,6 +13,7 @@ git add version.py
 git commit -m "version update"
 git push origin test1
 git checkout master
+git pull origin master
 git merge test1
 git push origin master
 rm *.py-e
