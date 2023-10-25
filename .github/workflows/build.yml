@@ -39,13 +39,9 @@ jobs:
 
       - name: Publish to Pypi
         run: |  
-          git config --global user.name "gunfoldspypi"
-          git config --global user.email "neuroneural.trends@gmail.com"
-          git config --list
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
           twine upload dist/* -u ${{secrets.PYPI_USER}}
-          cd ../..
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
