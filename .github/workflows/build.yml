@@ -39,13 +39,15 @@ jobs:
 
       - name: Publish to Pypi
         run: |  
+          mkdir testgunfolds
+          cd testgunfolds
           git clone https://github.com/neuroneural/gunfolds.git
           cd gunfolds
           git config --list
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
           twine upload dist/* -u ${{secrets.PYPI_USER}}
-          cd ..
+          cd ../..
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
