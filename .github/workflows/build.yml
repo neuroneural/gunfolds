@@ -41,7 +41,7 @@ jobs:
         run: |  
           mkdir testgunfolds
           cd testgunfolds
-          git clone https://github.com/neuroneural/gunfolds.git
+          git clone git@github.com:neuroneural/gunfolds.git
           cd gunfolds
           git config --global user.name "gunfoldspypi"
           git config --global user.email "neuroneural.trends@gmail.com"
