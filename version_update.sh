@@ -12,5 +12,6 @@ sed -i -e "1s/__version_info__ = .*/__version_info__ = $updated_version/" versio
 git add version.py
 git commit -m "version update"
 git push -f origin test1
+git checkout master
 git merge test1
 rm *.py-e
