@@ -39,6 +39,8 @@ jobs:
 
       - name: Publish to Pypi
         run: |  
+          git config --local user.name "gunfoldspypi"
+          git config --local user.email "neuroneural.trends@gmail.com"
           mkdir testgunfolds
           cd testgunfolds
           git clone https://github.com/neuroneural/gunfolds.git
