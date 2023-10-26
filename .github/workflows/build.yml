@@ -47,6 +47,7 @@ jobs:
       - name: Publish to Pypi
         run: |  
           git stash
+          git fetch --all
           git checkout version
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
