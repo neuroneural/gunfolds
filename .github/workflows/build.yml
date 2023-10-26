@@ -37,14 +37,17 @@ jobs:
           cd sphinx-build
           make clean html
 
-      - name: Publish to Pypi
-        run: |  
-          bash version_update.sh
-          python3 setup.py sdist bdist_wheel
-          twine upload dist/* -u ${{secrets.PYPI_USER}}
-
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: sphinx-build/_build/html
           target-folder: docs
+
+
+      - name: Publish to Pypi
+        run: |  
+          git stash
+          git checkout version
+          bash version_update.sh
+          python3 setup.py sdist bdist_wheel
+          twine upload dist/* -u ${{secrets.PYPI_USER}} -p ${{secrets.PYPI_PASSWORD}}
