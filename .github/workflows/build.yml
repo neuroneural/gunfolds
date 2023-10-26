@@ -50,5 +50,6 @@ jobs:
           git fetch --all
           git checkout version
           bash version_update.sh
+          cat version.py
           python3 setup.py sdist bdist_wheel
-          twine upload dist/* -u ${{secrets.PYPI_USER}} -p ${{secrets.PYPI_PASSWORD}}
+          twine upload dist/* -u ${{secrets.PYPI_USER}} 
