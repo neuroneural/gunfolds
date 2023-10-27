@@ -27,6 +27,7 @@ jobs:
           pip install .
           cd ..
           python3 setup.py install
+          ls
           pip install sphinx-copybutton
           pip install furo
           pip install wheel
