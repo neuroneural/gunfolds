@@ -47,6 +47,7 @@ jobs:
 
       - name: Publish to Pypi
         run: |  
+          ls
           git stash
           git fetch --all
           git checkout version
