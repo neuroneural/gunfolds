@@ -27,7 +27,6 @@ jobs:
           pip install .
           cd ..
           python3 setup.py install
-          ls
           pip install sphinx-copybutton
           pip install furo
           pip install wheel
@@ -37,6 +36,7 @@ jobs:
         run: |
           cd sphinx-build
           make clean html
+          rm -rf build dist gunfolds.egg-info
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
@@ -51,6 +51,5 @@ jobs:
           git fetch --all
           git checkout version
           bash version_update.sh
-          cat version.py
           python3 setup.py sdist bdist_wheel
           twine upload dist/* -u ${{secrets.PYPI_USER}} -p ${{secrets.PYPI_PASSWORD}}
