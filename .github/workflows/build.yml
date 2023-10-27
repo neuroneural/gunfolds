@@ -47,7 +47,6 @@ jobs:
       - name: Publish to Pypi
         run: |  
           rm -rf build dist gunfolds.egg-info
-          ls
           git stash
           git fetch --all
           git checkout version
