@@ -36,7 +36,6 @@ jobs:
         run: |
           cd sphinx-build
           make clean html
-          rm -rf build dist gunfolds.egg-info
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
@@ -47,6 +46,7 @@ jobs:
 
       - name: Publish to Pypi
         run: |  
+          rm -rf build dist gunfolds.egg-info
           ls
           git stash
           git fetch --all
