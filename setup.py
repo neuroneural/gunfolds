@@ -4,7 +4,7 @@ with open('README.md') as description:
     description = description.read()
 
 exec(open('version.py').read()) # Acquire version constants.
-print("__version__")
+print(__version__)
 # Define some package entry points. These will be command-line scripts that get
 # installed into the user's PATH
 epoints = """
