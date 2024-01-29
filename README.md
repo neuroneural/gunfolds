@@ -23,7 +23,13 @@ clingo installation
 
 **1. Install** ``clingo``
 
-To install ``clingo`` package with **conda install** run one of the following command
+To install ``clingo`` package with **pip install** run the following command
+
+```bash
+   pip install clingo
+```
+
+To install ``clingo`` package with **conda install** run the following command
 
 ```bash
    conda install -c conda-forge clingo
@@ -39,7 +45,7 @@ graph-tool installation
 -------------------------  
 **2. Install** ``graph-tool``
 
-To install ``graph-tool`` package with **conda install** run one of the following command
+To install ``graph-tool`` package with **conda install** run the following command
 
 ```bash
    conda install -c conda-forge graph-tool
