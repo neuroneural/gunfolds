@@ -13,7 +13,7 @@ epoints = """
 
 install_requires = ['networkx', 'igraph', 'scipy', 'numpy',
                     'statsmodels', 'sympy', 'seaborn', 'pandas',
-                    'matplotlib', 'progressbar', 'ipdb', 'pydot']
+                    'matplotlib', 'progressbar', 'ipdb', 'pydot', 'clingo']
 
 tests_require = install_requires
 
