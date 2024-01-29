@@ -1,7 +1,7 @@
 version=`cat version.txt`
 
 sed -i -e "1s/s = .*/s = $version/" version_update.py
-rm *.py-e
+rm *.py-e || true
 
 updated_version=$(python version_update.py)
 echo $updated_version > version.txt
@@ -12,4 +12,4 @@ git push origin version
 git checkout master
 
 sed -i -e "1s/__version_info__ = .*/__version_info__ = $updated_version/" version.py
-rm *.py-e
+rm *.py-e || true
