@@ -8,7 +8,7 @@ permissions:
   id-token: write
 jobs:
   build-and-deploy:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -52,7 +52,6 @@ jobs:
           git checkout version
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
-
 
       - name: Publish to Pypi
         uses: pypa/gh-action-pypi-publish@release/v1
