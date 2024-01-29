@@ -5,6 +5,7 @@ on:
       - master
 permissions:
   contents: write
+  id-token: write
 jobs:
   build-and-deploy:
     runs-on: macOS-latest
@@ -43,8 +44,7 @@ jobs:
           folder: sphinx-build/_build/html
           target-folder: docs
 
-
-      - name: Publish to Pypi
+      - name: Build Pypi Files
         run: |  
           rm -rf build dist gunfolds.egg-info
           git stash
@@ -52,4 +52,9 @@ jobs:
           git checkout version
           bash version_update.sh
           python3 setup.py sdist bdist_wheel
-          twine upload dist/* -u ${{secrets.PYPI_USER}} -p ${{secrets.PYPI_PASSWORD}}
+
+
+      - name: Publish to Pypi
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_PASSWORD }}
