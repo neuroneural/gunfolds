@@ -17,33 +17,10 @@ Install the gunfolds package
 ```
 
 Additionally, install these packages to use gunfolds
-
-clingo installation
--------------------
-
-**1. Install** ``clingo``
-
-To install ``clingo`` package with **pip install** run the following command
-
-```bash
-   pip install clingo
-```
-
-To install ``clingo`` package with **conda install** run the following command
-
-```bash
-   conda install -c conda-forge clingo
-```
-   
-To install ``clingo`` package with **brew install** run the following command
-
-```bash
-   brew install clingo
-```
    
 graph-tool installation
 -------------------------  
-**2. Install** ``graph-tool``
+**1. Install** ``graph-tool``
 
 To install ``graph-tool`` package with **conda install** run the following command
 
@@ -59,7 +36,7 @@ To install ``graph-tool`` package with **brew install** run the following comman
 
 PyGObject installation
 -------------------------
-**3. Install** ``PyGObject``
+**2. Install** ``PyGObject``
 
 **This is only required if you need to use** ``gtool`` **module of the** ``gunfolds`` **package**
 
