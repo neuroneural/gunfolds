@@ -23,10 +23,7 @@ jobs:
         run: |
           conda install -c conda-forge graph-tool
           pip install Sphinx
-          git clone https://github.com/potassco/clorm
-          cd clorm
-          pip install .
-          cd ..
+          pip install clingo
           python3 setup.py install
           pip install sphinx-copybutton
           pip install furo
