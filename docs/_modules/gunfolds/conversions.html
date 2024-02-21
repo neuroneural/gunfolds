@@ -1212,6 +1212,29 @@
     <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;:- directed(X,Y,U), scc(X,K), scc(Y,L), K != L, sccsize(L,Z), Z &gt; 1, not dag(K,L,N), u(U,N).&#39;</span>
     <span class="k">return</span> <span class="n">s</span></div>
 
+
+<span class="k">def</span> <span class="nf">Glag2CG</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts lag graph format to gunfolds graph format,</span>
+<span class="sd">   and A and B matrices representing directed and bidirected edges weights.</span>
+
+<span class="sd">   Args:</span>
+<span class="sd">       results (dict): A dictionary containing:</span>
+<span class="sd">           - &#39;graph&#39;: A 3D NumPy array of shape [N, N, 2] representing the graph structure.</span>
+<span class="sd">           - &#39;val_matrix&#39;: A NumPy array of shape [N, N, 2] storing edge weights.</span>
+
+<span class="sd">   Returns:</span>
+<span class="sd">       tuple: (graph_dict, A_matrix, B_matrix)</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+
+    <span class="n">graph_array</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span>
+    <span class="n">bidirected_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">graph_array</span> <span class="o">==</span> <span class="s1">&#39;o-o&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">directed_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">graph_array</span> <span class="o">==</span> <span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">graph_dict</span> <span class="o">=</span> <span class="n">adjs2graph</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">directed_edges</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">bidirected_edges</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])))</span>
+    <span class="n">A_matrix</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;val_matrix&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">B_matrix</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;val_matrix&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">graph_dict</span><span class="p">,</span> <span class="n">A_matrix</span><span class="p">,</span> <span class="n">B_matrix</span>
 </pre></div>
         </article>
       </div>
