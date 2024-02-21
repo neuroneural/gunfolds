@@ -143,7 +143,7 @@ def clingo(command, exact=True,
         return {}
     else:
         if not exact:
-            r = {(convert(value[0]), value[1][0]) for value in result[0]}
+            r = {(convert(value[0]), sum(value[1])) for value in result[0]}
         else:
             r = {convert(value[0]) for value in result[0]}
     return r
