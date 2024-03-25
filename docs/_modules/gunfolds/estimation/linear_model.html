@@ -1,0 +1,1493 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+        <title>gunfolds.estimation.linear_model</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --font-stack: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  --color-api-overall: green;
+  --color-api-pre-name: #005eff;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand"></div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../../../_static/light.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../../../_static/dark.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text"></span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/contributors.html">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started/publications.html">Publications</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../modules.html">gunfolds</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../conversions.html">conversions</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../conversions/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../conversions/external.html">external</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../conversions/internal.html">internal</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../estimation/grangercausality.html">grangercausality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../estimation/linear_model.html">linear_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../estimation/pc.html">pc</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../solvers.html">solvers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../solvers/declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../solvers/declarative/clingo_msl.html">clingo_msl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../solvers/declarative/clingo_rasl.html">clingo_rasl</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../solvers/imperative.html">imperative</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../solvers/imperative/traversal.html">traversal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../solvers/imperative/unknownrate.html">unknownrate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../utils.html">utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/bfutils.html">bfutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/calc_procs.html">calc_procs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/clingo.html">clingo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/comparison.html">comparison</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/ecj.html">ecj</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/graphkit.html">graphkit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/myTimeout.html">myTimeout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/neighborhoods.html">neighborhoods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/simpleloops.html">simpleloops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../utils/zickle.html">zickle</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../viz/dbn2latex.html">dbn2latex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../viz/gtool.html">gtool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for gunfolds.estimation.linear_model</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">gunfolds.utils</span> <span class="kn">import</span> <span class="n">ecj</span>
+<span class="kn">from</span> <span class="nn">gunfolds.utils</span> <span class="kn">import</span> <span class="n">bfutils</span> <span class="k">as</span> <span class="n">bfu</span>
+<span class="kn">from</span> <span class="nn">gunfolds.conversions</span> <span class="kn">import</span> <span class="n">graph2adj</span><span class="p">,</span> <span class="n">adjs2graph</span>
+<span class="kn">from</span> <span class="nn">gunfolds.utils</span> <span class="kn">import</span> <span class="n">graphkit</span> <span class="k">as</span> <span class="n">gk</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">ProgressBar</span><span class="p">,</span> <span class="n">Percentage</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span><span class="p">,</span> <span class="n">optimize</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.api</span> <span class="kn">import</span> <span class="n">VAR</span>
+<span class="kn">from</span> <span class="nn">sympy.matrices</span> <span class="kn">import</span> <span class="n">SparseMatrix</span>
+
+
+<div class="viewcode-block" id="symchol">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.symchol">[docs]</a>
+<span class="k">def</span> <span class="nf">symchol</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>  <span class="c1"># symbolic Cholesky</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param M:</span>
+<span class="sd">    :type M:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">SparseMatrix</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">row_structure_symbolic_cholesky</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="o">*</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="G2SVAR">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.G2SVAR">[docs]</a>
+<span class="k">def</span> <span class="nf">G2SVAR</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param G: ``gunfolds`` format graph</span>
+<span class="sd">    :type G: dictionary (``gunfolds`` graph)</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">npG2SVAR</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">P</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">lu</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">listplace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">listplace</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;e&#39;</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">P</span></div>
+
+
+
+<div class="viewcode-block" id="G2AH">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.G2AH">[docs]</a>
+<span class="k">def</span> <span class="nf">G2AH</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param G: ``gunfolds`` format graph</span>
+<span class="sd">    :type G: dictionary (``gunfolds`` graph)</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">npG2SVAR</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">P</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">lu</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">listplace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">listplace</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;e&#39;</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">P</span></div>
+
+
+
+<div class="viewcode-block" id="bnf2CG">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.bnf2CG">[docs]</a>
+<span class="k">def</span> <span class="nf">bnf2CG</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param fname:</span>
+<span class="sd">    :type fname:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;pars&#39;</span><span class="p">]}</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">ecj</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+        <span class="n">ld</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">]}</span>
+        <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">ld</span>
+    <span class="k">return</span> <span class="n">G</span></div>
+
+
+
+<div class="viewcode-block" id="npG2SVAR">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.npG2SVAR">[docs]</a>
+<span class="k">def</span> <span class="nf">npG2SVAR</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param G: ``gunfolds`` format graph</span>
+<span class="sd">    :type G: dictionary (``gunfolds`` graph)</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+                <span class="n">B</span><span class="p">[</span><span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">v</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">symchol</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="x2M">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.x2M">[docs]</a>
+<span class="k">def</span> <span class="nf">x2M</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">aidx</span><span class="p">,</span> <span class="n">bidx</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param x:</span>
+<span class="sd">    :type x:</span>
+<span class="sd">    </span>
+<span class="sd">    :param A:</span>
+<span class="sd">    :type A:</span>
+<span class="sd">    </span>
+<span class="sd">    :param B:</span>
+<span class="sd">    :type B:</span>
+<span class="sd">    </span>
+<span class="sd">    :param aidx:</span>
+<span class="sd">    :type aidx:</span>
+<span class="sd">    </span>
+<span class="sd">    :param bidx:</span>
+<span class="sd">    :type bidx:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">aidx</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">aidx</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="n">B</span><span class="p">[</span><span class="n">bidx</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">aidx</span><span class="p">[</span><span class="mi">0</span><span class="p">]):]</span>
+    <span class="c1"># B[(bidx[1],bidx[0])] = x[len(aidx[0]):]</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="nllf">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.nllf">[docs]</a>
+<span class="k">def</span> <span class="nf">nllf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">aidx</span><span class="p">,</span> <span class="n">bidx</span><span class="p">):</span>  <span class="c1"># negative log likelihood</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param x:</span>
+<span class="sd">    :type x:</span>
+<span class="sd">    </span>
+<span class="sd">    :param A:</span>
+<span class="sd">    :type A:</span>
+<span class="sd">    </span>
+<span class="sd">    :param B:</span>
+<span class="sd">    :type B:</span>
+<span class="sd">    </span>
+<span class="sd">    :param Y:</span>
+<span class="sd">    :type Y:</span>
+<span class="sd">    </span>
+<span class="sd">    :param aidx:</span>
+<span class="sd">    :type aidx:</span>
+<span class="sd">    </span>
+<span class="sd">    :param bidx:</span>
+<span class="sd">    :type bidx:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">x2M</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">aidx</span><span class="p">,</span> <span class="n">bidx</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Y</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ldB</span> <span class="o">=</span> <span class="n">T</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">ldB</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">B</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)))</span></div>
+
+
+
+<div class="viewcode-block" id="nllf2">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.nllf2">[docs]</a>
+<span class="k">def</span> <span class="nf">nllf2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">YX</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">aidx</span><span class="p">,</span> <span class="n">bidx</span><span class="p">):</span>  <span class="c1"># negative log likelihood</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param x:</span>
+<span class="sd">    :type x:</span>
+<span class="sd">    </span>
+<span class="sd">    :param A:</span>
+<span class="sd">    :type A:</span>
+<span class="sd">    </span>
+<span class="sd">    :param B:</span>
+<span class="sd">    :type B:</span>
+<span class="sd">    </span>
+<span class="sd">    :param YY:</span>
+<span class="sd">    :type YY:</span>
+<span class="sd">    </span>
+<span class="sd">    :param XX:</span>
+<span class="sd">    :type XX:</span>
+<span class="sd">    </span>
+<span class="sd">    :param YX:</span>
+<span class="sd">    :type YX:</span>
+<span class="sd">    </span>
+<span class="sd">    :param T:</span>
+<span class="sd">    :type T:</span>
+<span class="sd">    </span>
+<span class="sd">    :param aidx:</span>
+<span class="sd">    :type aidx:</span>
+<span class="sd">    </span>
+<span class="sd">    :param bidx:</span>
+<span class="sd">    :type bidx:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">x2M</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">aidx</span><span class="p">,</span> <span class="n">bidx</span><span class="p">)</span>
+    <span class="n">AYX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">YX</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">YY</span> <span class="o">-</span> <span class="n">AYX</span> <span class="o">-</span> <span class="n">AYX</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">XX</span><span class="p">),</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">ldB</span> <span class="o">=</span> <span class="n">T</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">flat</span><span class="p">)</span> <span class="o">+</span> <span class="n">ldB</span></div>
+
+    <span class="c1"># return ldB + 0.5*np.trace( np.dot(np.dot(B.T, B), S))</span>
+
+
+<div class="viewcode-block" id="VARbic">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.VARbic">[docs]</a>
+<span class="k">def</span> <span class="nf">VARbic</span><span class="p">(</span><span class="n">nllf</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param nllf:</span>
+<span class="sd">    :type nllf:</span>
+<span class="sd">    </span>
+<span class="sd">    :param K:</span>
+<span class="sd">    :type K:</span>
+<span class="sd">    </span>
+<span class="sd">    :param T:</span>
+<span class="sd">    :type T:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">nllf</span> <span class="o">+</span> <span class="n">K</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">T</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="listplace">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.listplace">[docs]</a>
+<span class="k">def</span> <span class="nf">listplace</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param l:</span>
+<span class="sd">    :type l:</span>
+<span class="sd">    </span>
+<span class="sd">    :param a:</span>
+<span class="sd">    :type a:</span>
+<span class="sd">    </span>
+<span class="sd">    :param b:</span>
+<span class="sd">    :type b:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">listplace</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">else</span> <span class="n">b</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">a</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]</span></div>
+
+
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># data generation</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="randweights">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.randweights">[docs]</a>
+<span class="k">def</span> <span class="nf">randweights</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param n:</span>
+<span class="sd">    :type n:</span>
+<span class="sd">    </span>
+<span class="sd">    :param c:</span>
+<span class="sd">    :type c: float</span>
+<span class="sd">    </span>
+<span class="sd">    :param factor:</span>
+<span class="sd">    :type factor: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">rw</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">factor</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">idx</span><span class="p">:</span>
+        <span class="n">rw</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">rw</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">rw</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">factor</span>
+    <span class="k">return</span> <span class="n">rw</span></div>
+
+
+
+<div class="viewcode-block" id="transitionMatrix">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.transitionMatrix">[docs]</a>
+<span class="k">def</span> <span class="nf">transitionMatrix</span><span class="p">(</span><span class="n">cg</span><span class="p">,</span> <span class="n">minstrength</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param cg:</span>
+<span class="sd">    :type cg:</span>
+<span class="sd">    </span>
+<span class="sd">    :param minstrength:</span>
+<span class="sd">    :type minstrength: float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">graph2adj</span><span class="p">(</span><span class="n">cg</span><span class="p">)</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">randweights</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">minstrength</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">(</span><span class="n">widgets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Searching for weights: &#39;</span><span class="p">,</span> <span class="n">Percentage</span><span class="p">(),</span> <span class="s1">&#39; &#39;</span><span class="p">],</span> <span class="n">maxval</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">while</span> <span class="nb">max</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">randweights</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">pbar</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">A</span></div>
+
+
+
+<div class="viewcode-block" id="sampleWeights">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.sampleWeights">[docs]</a>
+<span class="k">def</span> <span class="nf">sampleWeights</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">minstrength</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param n:</span>
+<span class="sd">    :type n:</span>
+<span class="sd">    </span>
+<span class="sd">    :param minstrength:</span>
+<span class="sd">    :type minstrength: float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">minstrength</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="o">*</span><span class="n">r</span>
+    <span class="k">return</span> <span class="n">r</span></div>
+
+
+
+<div class="viewcode-block" id="transitionMatrix2">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.transitionMatrix2">[docs]</a>
+<span class="k">def</span> <span class="nf">transitionMatrix2</span><span class="p">(</span><span class="n">cg</span><span class="p">,</span> <span class="n">minstrength</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param cg:</span>
+<span class="sd">    :type cg:</span>
+<span class="sd">    </span>
+<span class="sd">    :param minstrength:</span>
+<span class="sd">    :type minstrength: float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">graph2adj</span><span class="p">(</span><span class="n">cg</span><span class="p">)</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">sampleWeights</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">minstrength</span><span class="o">=</span><span class="n">minstrength</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">(</span><span class="n">widgets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Searching for weights: &#39;</span><span class="p">,</span> <span class="n">Percentage</span><span class="p">(),</span> <span class="s1">&#39; &#39;</span><span class="p">],</span> <span class="n">maxval</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">while</span> <span class="nb">max</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">sampleWeights</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">minstrength</span><span class="o">=</span><span class="n">minstrength</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">pbar</span><span class="o">.</span><span class="n">maxval</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">pbar</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">A</span></div>
+
+
+
+<div class="viewcode-block" id="transitionMatrix3">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.transitionMatrix3">[docs]</a>
+<span class="k">def</span> <span class="nf">transitionMatrix3</span><span class="p">(</span><span class="n">cg</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">minstrength</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param cg:</span>
+<span class="sd">    :type cg:</span>
+<span class="sd">    </span>
+<span class="sd">    :param x0:</span>
+<span class="sd">    :type x0:</span>
+<span class="sd">    </span>
+<span class="sd">    :param minstrength:</span>
+<span class="sd">    :type minstrength: float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">graph2adj</span><span class="p">(</span><span class="n">cg</span><span class="p">)</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">initRandomMatrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">l</span><span class="p">)))</span><span class="o">-</span><span class="mf">0.99</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">minstrength</span><span class="p">)</span><span class="o">-</span><span class="n">minstrength</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">n</span>
+
+    <span class="n">o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">))</span>
+    <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="o">*</span><span class="n">minstrength</span><span class="p">:</span>
+        <span class="n">rpt</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">while</span> <span class="n">rpt</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">o</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin_bfgs</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span>
+                                           <span class="n">gtol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                                           <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="n">l</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">l</span><span class="p">)))</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">rpt</span> <span class="o">=</span> <span class="kc">False</span>
+
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">rpt</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">except</span> <span class="ne">Warning</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="n">rpt</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">A</span></div>
+
+
+
+<div class="viewcode-block" id="initRandomMatrix">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.initRandomMatrix">[docs]</a>
+<span class="k">def</span> <span class="nf">initRandomMatrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;beta&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    possible distributions:</span>
+<span class="sd">    flat</span>
+<span class="sd">    flatsigned</span>
+<span class="sd">    beta</span>
+<span class="sd">    normal</span>
+<span class="sd">    uniform</span>
+
+<span class="sd">    :param A:</span>
+<span class="sd">    :type A:</span>
+<span class="sd">    </span>
+<span class="sd">    :param edges:</span>
+<span class="sd">    :type edges:</span>
+<span class="sd">    </span>
+<span class="sd">    :param distribution: (GUESS)distribution from which to sample the weights. Available </span>
+<span class="sd">     options are flat, flatsigned, beta, normal, uniform</span>
+<span class="sd">    :type distribution: string</span>
+
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;flat&#39;</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;flatsigned&#39;</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;beta&#39;</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">*</span><span class="mi">3</span><span class="o">-</span><span class="mf">1.5</span>
+        <span class="k">elif</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Wrong option!&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">eigenvalue</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">l</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">init</span><span class="p">()</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">eigenvalue</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="mf">0.99</span><span class="o">-</span><span class="mf">0.8</span><span class="p">)</span><span class="o">+</span><span class="mf">0.8</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="o">/</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span></div>
+
+
+
+<div class="viewcode-block" id="transitionMatrix4">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.transitionMatrix4">[docs]</a>
+<span class="k">def</span> <span class="nf">transitionMatrix4</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">minstrength</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">maxtries</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param g: ``gunfolds`` graph</span>
+<span class="sd">    :type g: dictionary (``gunfolds`` graph)</span>
+<span class="sd">    </span>
+<span class="sd">    :param minstrength:</span>
+<span class="sd">    :type minstrength: float</span>
+<span class="sd">    </span>
+<span class="sd">    :param distribution: (GUESS)distribution from which to sample the weights. Available </span>
+<span class="sd">     options are flat, flatsigned, beta, normal, uniform</span>
+<span class="sd">    :type distribution: string</span>
+<span class="sd">    </span>
+<span class="sd">    :param maxtries:</span>
+<span class="sd">    :type maxtries: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">graph2adj</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mf">2.0</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">(</span><span class="n">widgets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Searching for weights: &#39;</span><span class="p">,</span>
+                                <span class="n">Percentage</span><span class="p">(),</span> <span class="s1">&#39; &#39;</span><span class="p">],</span>
+                       <span class="n">maxval</span><span class="o">=</span><span class="n">maxtries</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="n">minstrength</span> <span class="o">-=</span> <span class="mf">0.001</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">initRandomMatrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="n">distribution</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">minstrength</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">edges</span><span class="p">]</span> <span class="o">=</span> <span class="n">delta</span><span class="o">*</span><span class="n">x</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">l</span><span class="p">)))</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">maxtries</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">pbar</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">A</span></div>
+
+
+
+<div class="viewcode-block" id="drawsamplesLG">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.drawsamplesLG">[docs]</a>
+<span class="k">def</span> <span class="nf">drawsamplesLG</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">nstd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param A:</span>
+<span class="sd">    :type A:</span>
+<span class="sd">    </span>
+<span class="sd">    :param nstd:</span>
+<span class="sd">    :type nstd: float</span>
+<span class="sd">    </span>
+<span class="sd">    :param samples:</span>
+<span class="sd">    :type samples: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n</span><span class="p">,</span> <span class="n">samples</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">nstd</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">samples</span><span class="p">):</span>
+        <span class="n">data</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nstd</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="drawsamplesMA">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.drawsamplesMA">[docs]</a>
+<span class="k">def</span> <span class="nf">drawsamplesMA</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">nstd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param A:</span>
+<span class="sd">    :type A:</span>
+<span class="sd">    </span>
+<span class="sd">    :param nstd:</span>
+<span class="sd">    :type nstd: float</span>
+<span class="sd">    </span>
+<span class="sd">    :param samples:</span>
+<span class="sd">    :type samples: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param order:</span>
+<span class="sd">    :type order: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n</span><span class="p">,</span> <span class="n">samples</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">nstd</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">samples</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">order</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">j</span><span class="p">])</span> \
+                  <span class="o">+</span> <span class="n">nstd</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">data</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> \
+              <span class="o">+</span> <span class="n">nstd</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+
+
+
+<div class="viewcode-block" id="getAgraph">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.getAgraph">[docs]</a>
+<span class="k">def</span> <span class="nf">getAgraph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mp</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">st</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param n:</span>
+<span class="sd">    :type n:</span>
+<span class="sd">    </span>
+<span class="sd">    :param mp:</span>
+<span class="sd">    :type mp: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param st:</span>
+<span class="sd">    :type st: float</span>
+<span class="sd">    </span>
+<span class="sd">    :param verbose:</span>
+<span class="sd">    :type verbose: boolean</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">keeptrying</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">while</span> <span class="n">keeptrying</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">gk</span><span class="o">.</span><span class="n">rnd_CG</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">maxindegree</span><span class="o">=</span><span class="n">mp</span><span class="p">,</span> <span class="n">force_connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">transitionMatrix2</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">minstrength</span><span class="o">=</span><span class="n">st</span><span class="p">)</span>
+            <span class="n">keeptrying</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;!!! Unable to find strong links for a stable matrix !!!&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** trying a different graph&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;graph&#39;</span><span class="p">:</span>      <span class="n">G</span><span class="p">,</span>
+            <span class="s1">&#39;transition&#39;</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
+            <span class="s1">&#39;converges&#39;</span><span class="p">:</span>  <span class="nb">len</span><span class="p">(</span><span class="n">bfu</span><span class="o">.</span><span class="n">call_undersamples</span><span class="p">(</span><span class="n">G</span><span class="p">))}</span></div>
+
+
+
+<div class="viewcode-block" id="getAring">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.getAring">[docs]</a>
+<span class="k">def</span> <span class="nf">getAring</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">st</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;flatsigned&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param n:</span>
+<span class="sd">    :type n:</span>
+<span class="sd">    </span>
+<span class="sd">    :param density: (guess)ratio of total nodes to n^2 possible nodes</span>
+<span class="sd">    :type density: float</span>
+<span class="sd">    </span>
+<span class="sd">    :param st:</span>
+<span class="sd">    :type st: float</span>
+<span class="sd">    </span>
+<span class="sd">    :param verbose:</span>
+<span class="sd">    :type verbose: boolean</span>
+<span class="sd">    </span>
+<span class="sd">    :param dist:</span>
+<span class="sd">    :type dist: string</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">keeptrying</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">plusedges</span> <span class="o">=</span> <span class="n">bfu</span><span class="o">.</span><span class="n">dens2edgenum</span><span class="p">(</span><span class="n">density</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">keeptrying</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">gk</span><span class="o">.</span><span class="n">ringmore</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">plusedges</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">transitionMatrix4</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">minstrength</span><span class="o">=</span><span class="n">st</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="n">dist</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+                <span class="n">keeptrying</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="n">keeptrying</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;!!! Unable to find strong links for a stable matrix !!!&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** trying a different graph&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;graph&#39;</span><span class="p">:</span>      <span class="n">G</span><span class="p">,</span>
+            <span class="s1">&#39;transition&#39;</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
+            <span class="s1">&#39;converges&#39;</span><span class="p">:</span>  <span class="nb">len</span><span class="p">(</span><span class="n">bfu</span><span class="o">.</span><span class="n">call_undersamples</span><span class="p">(</span><span class="n">G</span><span class="p">))}</span></div>
+
+
+
+<span class="c1"># -------------------------------------------------------------------</span>
+<span class="c1"># estimation</span>
+<span class="c1"># -------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="scoreAGraph">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.scoreAGraph">[docs]</a>
+<span class="k">def</span> <span class="nf">scoreAGraph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param G: ``gunfolds`` format graph</span>
+<span class="sd">    :type G: dictionary (``gunfolds`` graph)</span>
+<span class="sd">    </span>
+<span class="sd">    :param data:</span>
+<span class="sd">    :type data:</span>
+<span class="sd">    </span>
+<span class="sd">    :param x0:</span>
+<span class="sd">    :type x0:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">npG2SVAR</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+    <span class="n">a_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">b_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">B</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x0</span><span class="p">:</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin_bfgs</span><span class="p">(</span><span class="n">nllf</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">a_idx</span><span class="p">,</span> <span class="n">b_idx</span><span class="p">),</span>
+                               <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin_bfgs</span><span class="p">(</span><span class="n">nllf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">K</span><span class="p">),</span>
+                               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">B</span><span class="p">),</span>
+                                     <span class="n">data</span><span class="p">,</span> <span class="n">a_idx</span><span class="p">,</span> <span class="n">b_idx</span><span class="p">),</span>
+                               <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">VARbic</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">K</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="estimateG">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.estimateG">[docs]</a>
+<span class="k">def</span> <span class="nf">estimateG</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">YX</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param G: ``gunfolds`` format graph</span>
+<span class="sd">    :type G: dictionary (``gunfolds`` graph)</span>
+<span class="sd">    </span>
+<span class="sd">    :param YY:</span>
+<span class="sd">    :type YY:</span>
+<span class="sd">    </span>
+<span class="sd">    :param XX:</span>
+<span class="sd">    :type XX:</span>
+<span class="sd">    </span>
+<span class="sd">    :param YX:</span>
+<span class="sd">    :type YX:</span>
+<span class="sd">    </span>
+<span class="sd">    :param T:</span>
+<span class="sd">    :type T:</span>
+<span class="sd">    </span>
+<span class="sd">    :param x0:</span>
+<span class="sd">    :type x0:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">npG2SVAR</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">+</span><span class="nb">abs</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+    <span class="n">a_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">b_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">B</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">o</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin_bfgs</span><span class="p">(</span><span class="n">nllf2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span>
+                           <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">B</span><span class="p">),</span>
+                                 <span class="n">YY</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">YX</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">a_idx</span><span class="p">,</span> <span class="n">b_idx</span><span class="p">),</span>
+                           <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">x2M</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="n">a_idx</span><span class="p">,</span> <span class="n">b_idx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="data2AB">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.data2AB">[docs]</a>
+<span class="k">def</span> <span class="nf">data2AB</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param data:</span>
+<span class="sd">    :type data:</span>
+<span class="sd">    </span>
+<span class="sd">    :param x0:</span>
+<span class="sd">    :type x0:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">YY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">XX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">YX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">VAR</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+
+    <span class="c1"># A = np.ones((n,n))</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">B</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">B</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># abs(A)+abs(B)))</span>
+
+    <span class="n">a_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">A</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">b_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">B</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">A</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">K</span><span class="p">)]</span>
+    <span class="n">o</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">fmin_bfgs</span><span class="p">(</span><span class="n">nllf2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span>
+                           <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">B</span><span class="p">),</span>
+                                 <span class="n">YY</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">YX</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">a_idx</span><span class="p">,</span> <span class="n">b_idx</span><span class="p">),</span>
+                           <span class="n">gtol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                           <span class="n">disp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">x2M</span><span class="p">(</span><span class="n">o</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="n">a_idx</span><span class="p">,</span> <span class="n">b_idx</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">+</span><span class="n">B</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="amap">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.amap">[docs]</a>
+<span class="k">def</span> <span class="nf">amap</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param f:</span>
+<span class="sd">    :type f:</span>
+<span class="sd">    </span>
+<span class="sd">    :param a:</span>
+<span class="sd">    :type a:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="AB2intAB">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.AB2intAB">[docs]</a>
+<span class="k">def</span> <span class="nf">AB2intAB</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="mf">0.09</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param A:</span>
+<span class="sd">    :type A:</span>
+<span class="sd">    </span>
+<span class="sd">    :param B:</span>
+<span class="sd">    :type B:</span>
+<span class="sd">    </span>
+<span class="sd">    :param th: (GUESS)threshold for discarding edges in A and B</span>
+<span class="sd">    :type th: float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">amap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">th</span><span class="p">,</span> <span class="n">A</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">amap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">B</span><span class="p">[</span><span class="n">amap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">th</span><span class="p">,</span> <span class="n">B</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">B</span><span class="p">[</span><span class="n">amap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="data2graph">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.data2graph">[docs]</a>
+<span class="k">def</span> <span class="nf">data2graph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param data:</span>
+<span class="sd">    :type data:</span>
+<span class="sd">    </span>
+<span class="sd">    :param x0:</span>
+<span class="sd">    :type x0:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">data2AB</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+    <span class="n">Ab</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">Bb</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">AB2intAB</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="n">th</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">adjs2graph</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">),</span> <span class="n">Ab</span><span class="p">,</span> <span class="n">Bb</span></div>
+
+
+
+<div class="viewcode-block" id="data2VARgraph">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.data2VARgraph">[docs]</a>
+<span class="k">def</span> <span class="nf">data2VARgraph</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param data:</span>
+<span class="sd">    :type data:</span>
+<span class="sd">    </span>
+<span class="sd">    :param pval:</span>
+<span class="sd">    :type pval: float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">VAR</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">coefs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">pval</span><span class="p">:</span>
+                <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">g</span></div>
+
+
+
+<span class="c1"># this is for the SAT solver project</span>
+<div class="viewcode-block" id="stableVAR">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.stableVAR">[docs]</a>
+<span class="k">def</span> <span class="nf">stableVAR</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;beta&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function keeps trying to create a random graph and a random</span>
+<span class="sd">    corresponding transition matrix until it succeeds.</span>
+
+<span class="sd">    :param n: number of nodes in the graph</span>
+<span class="sd">    :type n: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param density: ratio of total nodes to n^2 possible nodes</span>
+<span class="sd">    :type density: (guess)float</span>
+<span class="sd">        </span>
+<span class="sd">    :param dist: distribution from which to sample the weights. Available </span>
+<span class="sd">     options are flat, flatsigned, beta, normal, uniform</span>
+<span class="sd">    :type dist: (guess)string</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+    <span class="n">sst</span> <span class="o">=</span> <span class="mf">0.9</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">getAring</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">sst</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sst</span> <span class="o">&lt;</span> <span class="mf">0.03</span><span class="p">:</span>
+            <span class="n">sst</span> <span class="o">-=</span> <span class="mf">0.001</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sst</span> <span class="o">-=</span> <span class="mf">0.01</span>
+        <span class="k">if</span> <span class="n">sst</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sst</span> <span class="o">=</span> <span class="mf">0.02</span>
+    <span class="k">return</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;transition&#39;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="genData">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.genData">[docs]</a>
+<span class="k">def</span> <span class="nf">genData</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">burnin</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">ssize</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;beta&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a number of nodes this function randomly generates a ring</span>
+<span class="sd">    SCC and the corresponding stable transition matrix. It tries until</span>
+<span class="sd">    succeeds and for some graph densities and parameters of the</span>
+<span class="sd">    distribution of transition matrix values it may take</span>
+<span class="sd">    forever. Please play with the dist parameter to stableVAR. Then</span>
+<span class="sd">    using this transition matrix it generates `ssize` samples of data</span>
+<span class="sd">    and undersamples them by `rate` discarding the `burnin` number of</span>
+<span class="sd">    samples at the beginning.</span>
+
+<span class="sd">    :param n: number of nodes in the desired graph</span>
+<span class="sd">    :type n: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param rate: undersampling rate (1 - no undersampling)</span>
+<span class="sd">    :type rate: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param density: density of the graph to be generted</span>
+<span class="sd">    :type density: (guess) float</span>
+<span class="sd">    </span>
+<span class="sd">    :param burnin: number of samples to discard since the beginning of VAR sampling</span>
+<span class="sd">    :type burnin: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param ssize: how many samples to keep at the causal sampling rate</span>
+<span class="sd">    :type ssize: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param noise: noise standard deviation for the VAR model</span>
+<span class="sd">    :type noise: (guess)float</span>
+<span class="sd">    </span>
+<span class="sd">    :param dist: (GUESS)distribution from which to sample the weights. Available </span>
+<span class="sd">     options are flat, flatsigned, beta, normal, uniform</span>
+<span class="sd">    :type dist: (guess)string</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">Agt</span> <span class="o">=</span> <span class="n">stableVAR</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="n">density</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">drawsamplesMA</span><span class="p">(</span><span class="n">Agt</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="n">burnin</span> <span class="o">+</span> <span class="n">ssize</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nstd</span><span class="o">=</span><span class="n">noise</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="n">burnin</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">g</span><span class="p">,</span> <span class="n">Agt</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">::</span><span class="n">rate</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="estimateSVAR">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.estimateSVAR">[docs]</a>
+<span class="k">def</span> <span class="nf">estimateSVAR</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="mf">0.09</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param data:</span>
+<span class="sd">    :type data:</span>
+<span class="sd">    </span>
+<span class="sd">    :param th: (GUESS)threshold for discarding edges in A and B</span>
+<span class="sd">    :type th: (guess)float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">data2AB</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">AB2intAB</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="n">th</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span></div>
+
+
+
+<span class="c1"># option #1</span>
+<div class="viewcode-block" id="randomSVAR">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.randomSVAR">[docs]</a>
+<span class="k">def</span> <span class="nf">randomSVAR</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">burnin</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+               <span class="n">ssize</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s1">&#39;beta&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a number of nodes this function randomly generates a ring</span>
+<span class="sd">    SCC and the corresponding stable transition matrix. It tries until</span>
+<span class="sd">    succeeds and for some graph densities and parameters of the</span>
+<span class="sd">    distribution of transition matrix values it may take</span>
+<span class="sd">    forever. Please play with the dist parameter to stableVAR. Then</span>
+<span class="sd">    using this transition matrix it generates `ssize` samples of data</span>
+<span class="sd">    and undersamples them by `rate` discarding the `burnin` number of</span>
+<span class="sd">    samples at the beginning. For these data the funcion solves the</span>
+<span class="sd">    SVAR estimation maximizing log likelihood and returns the A and B</span>
+<span class="sd">    matrices.</span>
+
+<span class="sd">    :param n: number of nodes in the desired graph</span>
+<span class="sd">    :type n: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param rate: undersampling rate (1 - no undersampling)</span>
+<span class="sd">    :type rate: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param density: density of the graph to be generted</span>
+<span class="sd">    :type density: (guess)float</span>
+<span class="sd">        </span>
+<span class="sd">    :param th: threshold for discarding edges in A and B</span>
+<span class="sd">    :type th: (guess)float</span>
+<span class="sd">    </span>
+<span class="sd">    :param burnin: number of samples to discard since the beginning of VAR sampling</span>
+<span class="sd">    :type burnin: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param ssize: how many samples to keep at the causal sampling rate</span>
+<span class="sd">    :type ssize: (guess)integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param noise: noise standard deviation for the VAR model</span>
+<span class="sd">    :type noise: (guess)float</span>
+<span class="sd">    </span>
+<span class="sd">    :param dist: (GUESS)distribution from which to sample the weights. Available </span>
+<span class="sd">     options are flat, flatsigned, beta, normal, uniform</span>
+<span class="sd">    :type dist: (guess)string</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">Agt</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genData</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="n">density</span><span class="p">,</span>
+                           <span class="n">burnin</span><span class="o">=</span><span class="n">burnin</span><span class="p">,</span> <span class="n">ssize</span><span class="o">=</span><span class="n">ssize</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="n">noise</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">dist</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">estimateSVAR</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="n">th</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;graph&#39;</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span>
+            <span class="s1">&#39;rate&#39;</span><span class="p">:</span> <span class="n">rate</span><span class="p">,</span>
+            <span class="s1">&#39;graph@rate&#39;</span><span class="p">:</span> <span class="n">bfu</span><span class="o">.</span><span class="n">undersample</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">rate</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s1">&#39;transition&#39;</span><span class="p">:</span> <span class="n">Agt</span><span class="p">,</span>
+            <span class="s1">&#39;estimate&#39;</span><span class="p">:</span> <span class="n">adjs2graph</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">),</span>
+            <span class="s1">&#39;directed&#39;</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
+            <span class="s1">&#39;bidirected&#39;</span><span class="p">:</span> <span class="n">B</span>
+            <span class="p">}</span></div>
+
+
+
+<span class="c1"># option #2</span>
+<div class="viewcode-block" id="noiseData">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.noiseData">[docs]</a>
+<span class="k">def</span> <span class="nf">noiseData</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param data:</span>
+<span class="sd">    :type data:</span>
+<span class="sd">    </span>
+<span class="sd">    :param noise: (GUESS)noise standard deviation for the VAR model</span>
+<span class="sd">    :type noise: (guess)float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">return</span> <span class="n">data</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span><span class="o">*</span><span class="n">noise</span></div>
+
+
+
+<div class="viewcode-block" id="decide_absences">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.decide_absences">[docs]</a>
+<span class="k">def</span> <span class="nf">decide_absences</span><span class="p">(</span><span class="n">As</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a list of binary matrices returns a binary mask for absence</span>
+<span class="sd">    and presence of edges</span>
+
+<span class="sd">    :param As: a list of binary matrices</span>
+<span class="sd">    :type As: </span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">As</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">As</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">As</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">M</span></div>
+
+
+
+<div class="viewcode-block" id="presence_probs">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.presence_probs">[docs]</a>
+<span class="k">def</span> <span class="nf">presence_probs</span><span class="p">(</span><span class="n">As</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a list of binary matrices returns a frequency of edge</span>
+<span class="sd">    presence</span>
+
+<span class="sd">    :param As: a list of binary matrices</span>
+<span class="sd">    :type As:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">As</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">As</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">As</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)]</span><span class="o">+</span><span class="n">As</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">M</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mf">2.0</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="weight_and_mask">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.weight_and_mask">[docs]</a>
+<span class="k">def</span> <span class="nf">weight_and_mask</span><span class="p">(</span><span class="n">As</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a list o fbinary matrices returns a weight matrix for</span>
+<span class="sd">    presences and absences and a mask to identify which are which</span>
+
+<span class="sd">    :param As: a list of binary matrices</span>
+<span class="sd">    :type As:</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">decide_absences</span><span class="p">(</span><span class="n">As</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">presence_probs</span><span class="p">(</span><span class="n">As</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="n">W</span>  <span class="c1"># ansence probs</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">M</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">M</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">A</span><span class="p">)))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">),</span> <span class="n">M</span></div>
+
+
+
+<div class="viewcode-block" id="randomSVARs">
+<a class="viewcode-back" href="../../../estimation/linear_model.html#gunfolds.estimation.linear_model.randomSVARs">[docs]</a>
+<span class="k">def</span> <span class="nf">randomSVARs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span>
+                <span class="n">burnin</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">ssize</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">strap_noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    does what requested - help is on the way</span>
+
+<span class="sd">    :param n: number of nodes in the desired graph</span>
+<span class="sd">    :type n: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param repeats: how many times to add noise and re-estiamte</span>
+<span class="sd">    :type repeats: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param rate: undersampling rate (1 - no undersampling)</span>
+<span class="sd">    :type rate: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param density: density of the graph to be generted</span>
+<span class="sd">    :type density: (guess)float</span>
+<span class="sd">    </span>
+<span class="sd">    :param th: threshold for discarding edges in A and B</span>
+<span class="sd">    :type th: (guess)float</span>
+<span class="sd">    </span>
+<span class="sd">    :param burnin: number of samples to discard since the beginning of</span>
+<span class="sd">          VAR sampling</span>
+<span class="sd">    :type burnin: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param ssize: how many samples to keep at the causal sampling rate</span>
+<span class="sd">    :type ssize: integer</span>
+<span class="sd">    </span>
+<span class="sd">    :param noise: noise standard deviation for the VAR model</span>
+<span class="sd">    :type noise: float</span>
+<span class="sd">    </span>
+<span class="sd">    :param strap_noise: amount of noise for bootstrapping</span>
+<span class="sd">    :type strap_noise: float</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: </span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">Agt</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">genData</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="n">density</span><span class="p">,</span>
+                           <span class="n">burnin</span><span class="o">=</span><span class="n">burnin</span><span class="p">,</span> <span class="n">ssize</span><span class="o">=</span><span class="n">ssize</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="n">noise</span><span class="p">)</span>
+
+    <span class="n">As</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Bs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">estimateSVAR</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">th</span><span class="o">=</span><span class="n">th</span><span class="p">)</span>
+    <span class="n">As</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">Bs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeats</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">estimateSVAR</span><span class="p">(</span><span class="n">noiseData</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="n">strap_noise</span><span class="p">),</span> <span class="n">th</span><span class="o">=</span><span class="n">th</span><span class="p">)</span>
+        <span class="n">As</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">Bs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">weight_and_mask</span><span class="p">(</span><span class="n">As</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">weight_and_mask</span><span class="p">(</span><span class="n">Bs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;graph&#39;</span><span class="p">:</span> <span class="n">g</span><span class="p">,</span>
+            <span class="s1">&#39;rate&#39;</span><span class="p">:</span> <span class="n">rate</span><span class="p">,</span>
+            <span class="s1">&#39;graph@rate&#39;</span><span class="p">:</span> <span class="n">bfu</span><span class="o">.</span><span class="n">undersample</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">rate</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+            <span class="s1">&#39;transition&#39;</span><span class="p">:</span> <span class="n">Agt</span><span class="p">,</span>
+            <span class="s1">&#39;directed&#39;</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
+            <span class="s1">&#39;bidirected&#39;</span><span class="p">:</span> <span class="n">B</span>
+            <span class="p">}</span></div>
+
+
+<span class="c1"># option #3</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; neuroneural.net
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
