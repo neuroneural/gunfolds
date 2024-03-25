@@ -6,6 +6,22 @@ import numpy as np
 import igraph
 import sys
 
+################### Start of Internal Conversions ###################
+
+def nodenum(edgepairs):
+    """
+    Returns the number of nodes in the graph
+
+    :param edgepairs: list of edge pairs
+    :type edgepairs: list
+    
+    :returns: number of nodes in the graph
+    :rtype: integer
+    """
+    nodes = 0
+    for e in edgepairs:
+        nodes = np.max([nodes, int(e[0]), int(e[1])])
+    return nodes
 
 def g2num(g):
     """ 
@@ -71,57 +87,6 @@ def bg2num(g):
             if g[v][w] in (2, 3):
                 num = num | (1 << (n2 - v * n - w))
     return num
-
-
-def graph2nx(G):
-    """
-    Convert a ``gunfolds`` graph to NetworkX format ignoring bidirected edges
-    
-    :param G: ``gunfolds`` format graph
-    :type G: dictionary (``gunfolds`` graphs)
-    
-    :returns: NetworkX format graph
-    :rtype: NetworkX graph
-    """
-    g = nx.DiGraph()
-    for v in G:
-        edges = [(v, x) for x in G[v] if G[v][x] in (1, 3)]
-        if edges:
-            g.add_edges_from(edges)
-        else:
-            g.add_node(v)
-    return g
-
-
-def graph2dot(g, filename):
-    """
-    Save the graph structure of `g` to a graphviz format dot file with the name `filename`
-
-    :param g: ``gunfolds`` graph
-    :type g: dictionary (``gunfolds`` graphs)
-
-    :param filename: name of the file
-    :type filename: string
-    """
-    G = graph2nx(g)
-    nx.drawing.nx_pydot.write_dot(G, filename)
-
-
-def nx2graph(G):
-    """
-    Convert NetworkX format graph to ``gunfolds`` graph ignoring bidirected edges
-    
-    :param G: ``gunfolds`` format graph
-    :type G: dictionary (``gunfolds`` graphs)
-    
-    :returns: ``gunfolds`` graph
-    :rtype: dictionary (``gunfolds`` graphs)
-    """
-    g = {n: {} for n in G}
-    for n in G:
-        g[n] = {x: 1 for x in G[n]}
-    return g
-
 
 def num2CG(num, n):
     """
@@ -217,6 +182,21 @@ def ian2g(g):
             gg[str(w)][str(v)] = c[g[w][v]]
     return gg
 
+def edgepairs2g(edgepairs):
+    """
+    Converts edge pairs to a ``gunfolds`` graph
+
+    :param edgepairs: list of edge pairs
+    :type edgepairs: list
+    
+    :returns: ``gunfolds`` graph
+    :rtype: dictionary (``gunfolds`` graph)
+    """
+    n = nodenum(edgepairs)
+    g = {x+1: {} for x in range(n)}
+    for e in edgepairs:
+        g[int(e[0])][int(e[1])] = 1
+    return g
 
 # Adjacency matrix functions
 
@@ -334,6 +314,54 @@ def vec2g(v, n):
     A, B = vec2adj(v, n)
     return adjs2graph(A, B)
 
+def Glag2CG(results):
+    """Converts lag graph format to gunfolds graph format,
+   and A and B matrices representing directed and bidirected edges weights.
+
+   Args:
+       results (dict): A dictionary containing:
+           - 'graph': A 3D NumPy array of shape [N, N, 2] representing the graph structure.
+           - 'val_matrix': A NumPy array of shape [N, N, 2] storing edge weights.
+
+   Returns:
+       tuple: (graph_dict, A_matrix, B_matrix)
+   """
+
+    graph_array = results['graph']
+    bidirected_edges = np.where(graph_array == 'o-o', 1, 0).astype(int)
+    directed_edges = np.where(graph_array == '-->', 1, 0).astype(int)
+
+    graph_dict = adjs2graph(np.transpose(directed_edges[:, :, 1]), np.transpose((bidirected_edges[:, :, 0])))
+    A_matrix = results['val_matrix'][:, :, 1]
+    B_matrix = results['val_matrix'][:, :, 0]
+
+    return graph_dict, A_matrix, B_matrix
+
+def nxbp2graph(G):
+    """
+    Ask 
+
+    :param G: ``gunfolds`` format graph
+    :type G: dictionary (``gunfolds`` graphs)
+    
+    :returns: Ask
+    :rtype: 
+    """
+    nodesnum = len(G)//2
+    g = {n+1: {} for n in range(nodesnum)}
+    for n in g:
+        g[n] = {(x % nodesnum+1): 1 for x in G[n-1]}
+    return g
+
+
+################### Add new functions to internal conversions above #############
+################### End of Internal Conversions ########################
+
+# Dont remove this fake function for automating sphinx build.
+def sphinx_automation_fake():
+    return
+
+################### Start of Clingo Conversions ###################
 
 def rate(u):
     """
@@ -633,39 +661,6 @@ def c2edgepairs(clist):
     return [x.strip(' ')[6:-1].split(',') for x in clist]
 
 
-def nodenum(edgepairs):
-    """
-    Returns the number of nodes in the graph
-
-    :param edgepairs: list of edge pairs
-    :type edgepairs: list
-    
-    :returns: number of nodes in the graph
-    :rtype: integer
-    """
-    nodes = 0
-    for e in edgepairs:
-        nodes = np.max([nodes, int(e[0]), int(e[1])])
-    return nodes
-
-
-def edgepairs2g(edgepairs):
-    """
-    Converts edge pairs to a ``gunfolds`` graph
-
-    :param edgepairs: list of edge pairs
-    :type edgepairs: list
-    
-    :returns: ``gunfolds`` graph
-    :rtype: dictionary (``gunfolds`` graph)
-    """
-    n = nodenum(edgepairs)
-    g = {x+1: {} for x in range(n)}
-    for e in edgepairs:
-        g[int(e[0])][int(e[1])] = 1
-    return g
-
-
 def msl_jclingo2g(output_g):
     """
     Converts the output of ``clingo`` to ``gunfolds`` graph for ``rasl_msl``
@@ -735,42 +730,6 @@ def old_g2clingo(g, file=sys.stdout):
             if g[v][w] == 3:
                 print('edgeu('+str(v)+','+str(w)+').', file=file)
                 print('confu('+str(v)+','+str(w)+').', file=file)
-
-
-def g2ig(g):
-    """
-    Converts our graph representation to an igraph for plotting
-    
-    :param g: ``gunfolds`` graph
-    :type g: dictionary (``gunfolds`` graphs)
-    
-    :returns: igraph representation of ``gunfolds`` graph
-    :rtype: igraph
-    """
-    t = np.where(graph2adj(g) == 1)
-    l = zip(t[0], t[1])
-    ig = igraph.Graph(l, directed=True)
-    ig.vs["name"] = np.sort([u for u in g])
-    ig.vs["label"] = ig.vs["name"]
-    return ig
-
-
-def nxbp2graph(G):
-    """
-    Ask 
-
-    :param G: ``gunfolds`` format graph
-    :type G: dictionary (``gunfolds`` graphs)
-    
-    :returns: Ask
-    :rtype: 
-    """
-    nodesnum = len(G)//2
-    g = {n+1: {} for n in range(nodesnum)}
-    for n in g:
-        g[n] = {(x % nodesnum+1): 1 for x in G[n-1]}
-    return g
-
 
 def encode_sccs(g, idx, components=True, SCCS=None):
     """
@@ -846,25 +805,81 @@ def encode_list_sccs(glist, scc_members=None):
     s += ':- directed(X,Y,U), scc(X,K), scc(Y,L), K != L, sccsize(L,Z), Z > 1, not dag(K,L,N), u(U,N).'
     return s
 
-def Glag2CG(results):
-    """Converts lag graph format to gunfolds graph format,
-   and A and B matrices representing directed and bidirected edges weights.
 
-   Args:
-       results (dict): A dictionary containing:
-           - 'graph': A 3D NumPy array of shape [N, N, 2] representing the graph structure.
-           - 'val_matrix': A NumPy array of shape [N, N, 2] storing edge weights.
+################### Add only new functions to clingo conversions above #############
+################### End of Clingo Conversions ########################
 
-   Returns:
-       tuple: (graph_dict, A_matrix, B_matrix)
-   """
+# Dont remove this fake function for automating sphinx build.
+def sphinx_automation_fake():
+    return
 
-    graph_array = results['graph']
-    bidirected_edges = np.where(graph_array == 'o-o', 1, 0).astype(int)
-    directed_edges = np.where(graph_array == '-->', 1, 0).astype(int)
+################### Start of External Conversions ###################
 
-    graph_dict = adjs2graph(np.transpose(directed_edges[:, :, 1]), np.transpose((bidirected_edges[:, :, 0])))
-    A_matrix = results['val_matrix'][:, :, 1]
-    B_matrix = results['val_matrix'][:, :, 0]
+def graph2nx(G):
+    """
+    Convert a ``gunfolds`` graph to NetworkX format ignoring bidirected edges
+    
+    :param G: ``gunfolds`` format graph
+    :type G: dictionary (``gunfolds`` graphs)
+    
+    :returns: NetworkX format graph
+    :rtype: NetworkX graph
+    """
+    g = nx.DiGraph()
+    for v in G:
+        edges = [(v, x) for x in G[v] if G[v][x] in (1, 3)]
+        if edges:
+            g.add_edges_from(edges)
+        else:
+            g.add_node(v)
+    return g
 
-    return graph_dict, A_matrix, B_matrix
+
+def graph2dot(g, filename):
+    """
+    Save the graph structure of `g` to a graphviz format dot file with the name `filename`
+
+    :param g: ``gunfolds`` graph
+    :type g: dictionary (``gunfolds`` graphs)
+
+    :param filename: name of the file
+    :type filename: string
+    """
+    G = graph2nx(g)
+    nx.drawing.nx_pydot.write_dot(G, filename)
+
+
+def nx2graph(G):
+    """
+    Convert NetworkX format graph to ``gunfolds`` graph ignoring bidirected edges
+    
+    :param G: ``gunfolds`` format graph
+    :type G: dictionary (``gunfolds`` graphs)
+    
+    :returns: ``gunfolds`` graph
+    :rtype: dictionary (``gunfolds`` graphs)
+    """
+    g = {n: {} for n in G}
+    for n in G:
+        g[n] = {x: 1 for x in G[n]}
+    return g
+
+def g2ig(g):
+    """
+    Converts our graph representation to an igraph for plotting
+    
+    :param g: ``gunfolds`` graph
+    :type g: dictionary (``gunfolds`` graphs)
+    
+    :returns: igraph representation of ``gunfolds`` graph
+    :rtype: igraph
+    """
+    t = np.where(graph2adj(g) == 1)
+    l = zip(t[0], t[1])
+    ig = igraph.Graph(l, directed=True)
+    ig.vs["name"] = np.sort([u for u in g])
+    ig.vs["label"] = ig.vs["name"]
+    return ig
+
+################### Add only new functions to external conversions above #############
+################### End of External Conversions ########################

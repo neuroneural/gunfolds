@@ -13,11 +13,6 @@ addaAedge
 .. autofunction:: gunfolds.solvers.traversal.addaAedge
 
 
-addaVpath
----------
-.. autofunction:: gunfolds.solvers.traversal.addaVpath
-
-
 addacedge
 ---------
 .. autofunction:: gunfolds.solvers.traversal.addacedge
@@ -38,9 +33,19 @@ addavedge
 .. autofunction:: gunfolds.solvers.traversal.addavedge
 
 
+addaVpath
+---------
+.. autofunction:: gunfolds.solvers.traversal.addaVpath
+
+
 check3
 ------
 .. autofunction:: gunfolds.solvers.traversal.check3
+
+
+checkable
+---------
+.. autofunction:: gunfolds.solvers.traversal.checkable
 
 
 checkAedge
@@ -51,11 +56,6 @@ checkAedge
 checkApath
 ----------
 .. autofunction:: gunfolds.solvers.traversal.checkApath
-
-
-checkable
----------
-.. autofunction:: gunfolds.solvers.traversal.checkable
 
 
 checkbedges
@@ -98,14 +98,14 @@ chunks
 .. autofunction:: gunfolds.solvers.traversal.chunks
 
 
-cleanVedges
------------
-.. autofunction:: gunfolds.solvers.traversal.cleanVedges
-
-
 cleanedges
 ----------
 .. autofunction:: gunfolds.solvers.traversal.cleanedges
+
+
+cleanVedges
+-----------
+.. autofunction:: gunfolds.solvers.traversal.cleanVedges
 
 
 cloneempty
@@ -133,11 +133,6 @@ delaAedge
 .. autofunction:: gunfolds.solvers.traversal.delaAedge
 
 
-delaVpath
----------
-.. autofunction:: gunfolds.solvers.traversal.delaVpath
-
-
 delacedge
 ---------
 .. autofunction:: gunfolds.solvers.traversal.delacedge
@@ -156,6 +151,11 @@ delapath
 delavedge
 ---------
 .. autofunction:: gunfolds.solvers.traversal.delavedge
+
+
+delaVpath
+---------
+.. autofunction:: gunfolds.solvers.traversal.delaVpath
 
 
 edge\_function\_idx
@@ -293,11 +293,6 @@ maskaCedge
 .. autofunction:: gunfolds.solvers.traversal.maskaCedge
 
 
-maskaVpath
-----------
-.. autofunction:: gunfolds.solvers.traversal.maskaVpath
-
-
 maskanedge
 ----------
 .. autofunction:: gunfolds.solvers.traversal.maskanedge
@@ -313,6 +308,11 @@ maskavedge
 .. autofunction:: gunfolds.solvers.traversal.maskavedge
 
 
+maskaVpath
+----------
+.. autofunction:: gunfolds.solvers.traversal.maskaVpath
+
+
 memo\_no\_return
 ----------------
 .. autofunction:: gunfolds.solvers.traversal.memo_no_return
@@ -326,11 +326,6 @@ ok2add2edges
 ok2addaAedge
 ------------
 .. autofunction:: gunfolds.solvers.traversal.ok2addaAedge
-
-
-ok2addaVpath
-------------
-.. autofunction:: gunfolds.solvers.traversal.ok2addaVpath
 
 
 ok2addacedge
@@ -361,6 +356,11 @@ ok2addapath
 ok2addavedge
 ------------
 .. autofunction:: gunfolds.solvers.traversal.ok2addavedge
+
+
+ok2addaVpath
+------------
+.. autofunction:: gunfolds.solvers.traversal.ok2addaVpath
 
 
 prune\_sort\_CDS

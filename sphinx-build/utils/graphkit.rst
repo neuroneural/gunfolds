@@ -3,16 +3,6 @@ graphkit
 .. currentmodule:: gunfolds.utils.graphkit
 
 
-OCE
----
-.. autofunction:: gunfolds.utils.graphkit.OCE
-
-
-\_OCE
------
-.. autofunction:: gunfolds.utils.graphkit._OCE
-
-
 \_normed\_OCE
 -------------
 .. autofunction:: gunfolds.utils.graphkit._normed_OCE
@@ -23,19 +13,24 @@ OCE
 .. autofunction:: gunfolds.utils.graphkit._normed_undirected_OCE
 
 
+\_OCE
+-----
+.. autofunction:: gunfolds.utils.graphkit._OCE
+
+
 \_undirected\_OCE
 -----------------
 .. autofunction:: gunfolds.utils.graphkit._undirected_OCE
 
 
-addAring
---------
-.. autofunction:: gunfolds.utils.graphkit.addAring
-
-
 addanedge
 ---------
 .. autofunction:: gunfolds.utils.graphkit.addanedge
+
+
+addAring
+--------
+.. autofunction:: gunfolds.utils.graphkit.addAring
 
 
 addedges
@@ -181,6 +176,11 @@ no\_children
 no\_parents
 -----------
 .. autofunction:: gunfolds.utils.graphkit.no_parents
+
+
+OCE
+---
+.. autofunction:: gunfolds.utils.graphkit.OCE
 
 
 oerror
