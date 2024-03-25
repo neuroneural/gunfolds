@@ -17,7 +17,7 @@ jobs:
         uses: s-weigand/setup-conda@v1
         with:
           activate-conda: true
-          conda-channels: anaconda, conda-forge
+          conda-channels: anaconda
           
       - name: Install required dependencies
         run: |
@@ -29,7 +29,6 @@ jobs:
           pip install furo
           pip install wheel
           pip install twine
-          mpmath -v
 
       - name: Build HTML files   
         run: |
@@ -37,6 +36,7 @@ jobs:
           python3 run.py
           ls
           make clean html
+          mpmath -v
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
