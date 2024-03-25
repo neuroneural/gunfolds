@@ -34,7 +34,7 @@ jobs:
         run: |
           cd sphinx-build
           python3 run.py
-          ls
+          pip install mpmath==1.3.0
           make clean html
           conda list
           pip list
