@@ -36,6 +36,8 @@ jobs:
           python3 run.py
           ls
           make clean html
+          conda list
+          pip list
           mpmath -v
 
       - name: Deploy 🚀
