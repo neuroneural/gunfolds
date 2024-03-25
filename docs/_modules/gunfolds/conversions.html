@@ -262,6 +262,25 @@
 <span class="kn">import</span> <span class="nn">igraph</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
+<span class="c1">################### Start of Internal Conversions ###################</span>
+
+<div class="viewcode-block" id="nodenum">
+<a class="viewcode-back" href="../../conversions/internal.html#gunfolds.conversions.nodenum">[docs]</a>
+<span class="k">def</span> <span class="nf">nodenum</span><span class="p">(</span><span class="n">edgepairs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the number of nodes in the graph</span>
+
+<span class="sd">    :param edgepairs: list of edge pairs</span>
+<span class="sd">    :type edgepairs: list</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: number of nodes in the graph</span>
+<span class="sd">    :rtype: integer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edgepairs</span><span class="p">:</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">nodes</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+    <span class="k">return</span> <span class="n">nodes</span></div>
+
 
 <div class="viewcode-block" id="g2num">
 <a class="viewcode-back" href="../../conversions/internal.html#gunfolds.conversions.g2num">[docs]</a>
@@ -335,66 +354,6 @@
             <span class="k">if</span> <span class="n">g</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
                 <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">n2</span> <span class="o">-</span> <span class="n">v</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="n">w</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">num</span></div>
-
-
-
-<div class="viewcode-block" id="graph2nx">
-<a class="viewcode-back" href="../../conversions/external.html#gunfolds.conversions.graph2nx">[docs]</a>
-<span class="k">def</span> <span class="nf">graph2nx</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert a ``gunfolds`` graph to NetworkX format ignoring bidirected edges</span>
-<span class="sd">    </span>
-<span class="sd">    :param G: ``gunfolds`` format graph</span>
-<span class="sd">    :type G: dictionary (``gunfolds`` graphs)</span>
-<span class="sd">    </span>
-<span class="sd">    :returns: NetworkX format graph</span>
-<span class="sd">    :rtype: NetworkX graph</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
-        <span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
-        <span class="k">if</span> <span class="n">edges</span><span class="p">:</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">g</span></div>
-
-
-
-<div class="viewcode-block" id="graph2dot">
-<a class="viewcode-back" href="../../conversions/external.html#gunfolds.conversions.graph2dot">[docs]</a>
-<span class="k">def</span> <span class="nf">graph2dot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Save the graph structure of `g` to a graphviz format dot file with the name `filename`</span>
-
-<span class="sd">    :param g: ``gunfolds`` graph</span>
-<span class="sd">    :type g: dictionary (``gunfolds`` graphs)</span>
-
-<span class="sd">    :param filename: name of the file</span>
-<span class="sd">    :type filename: string</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">graph2nx</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">nx</span><span class="o">.</span><span class="n">drawing</span><span class="o">.</span><span class="n">nx_pydot</span><span class="o">.</span><span class="n">write_dot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="nx2graph">
-<a class="viewcode-back" href="../../conversions/external.html#gunfolds.conversions.nx2graph">[docs]</a>
-<span class="k">def</span> <span class="nf">nx2graph</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert NetworkX format graph to ``gunfolds`` graph ignoring bidirected edges</span>
-<span class="sd">    </span>
-<span class="sd">    :param G: ``gunfolds`` format graph</span>
-<span class="sd">    :type G: dictionary (``gunfolds`` graphs)</span>
-<span class="sd">    </span>
-<span class="sd">    :returns: ``gunfolds`` graph</span>
-<span class="sd">    :rtype: dictionary (``gunfolds`` graphs)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="p">}</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
-        <span class="n">g</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">n</span><span class="p">]}</span>
-    <span class="k">return</span> <span class="n">g</span></div>
-
 
 
 <div class="viewcode-block" id="num2CG">
@@ -502,6 +461,24 @@
             <span class="n">gg</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">)][</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="n">w</span><span class="p">][</span><span class="n">v</span><span class="p">]]</span>
     <span class="k">return</span> <span class="n">gg</span></div>
 
+
+<div class="viewcode-block" id="edgepairs2g">
+<a class="viewcode-back" href="../../conversions/internal.html#gunfolds.conversions.edgepairs2g">[docs]</a>
+<span class="k">def</span> <span class="nf">edgepairs2g</span><span class="p">(</span><span class="n">edgepairs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts edge pairs to a ``gunfolds`` graph</span>
+
+<span class="sd">    :param edgepairs: list of edge pairs</span>
+<span class="sd">    :type edgepairs: list</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: ``gunfolds`` graph</span>
+<span class="sd">    :rtype: dictionary (``gunfolds`` graph)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">nodenum</span><span class="p">(</span><span class="n">edgepairs</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edgepairs</span><span class="p">:</span>
+        <span class="n">g</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])][</span><span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">g</span></div>
 
 
 <span class="c1"># Adjacency matrix functions</span>
@@ -638,6 +615,60 @@
     <span class="k">return</span> <span class="n">adjs2graph</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="Glag2CG">
+<a class="viewcode-back" href="../../conversions/internal.html#gunfolds.conversions.Glag2CG">[docs]</a>
+<span class="k">def</span> <span class="nf">Glag2CG</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts lag graph format to gunfolds graph format,</span>
+<span class="sd">   and A and B matrices representing directed and bidirected edges weights.</span>
+
+<span class="sd">   Args:</span>
+<span class="sd">       results (dict): A dictionary containing:</span>
+<span class="sd">           - &#39;graph&#39;: A 3D NumPy array of shape [N, N, 2] representing the graph structure.</span>
+<span class="sd">           - &#39;val_matrix&#39;: A NumPy array of shape [N, N, 2] storing edge weights.</span>
+
+<span class="sd">   Returns:</span>
+<span class="sd">       tuple: (graph_dict, A_matrix, B_matrix)</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+
+    <span class="n">graph_array</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span>
+    <span class="n">bidirected_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">graph_array</span> <span class="o">==</span> <span class="s1">&#39;o-o&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">directed_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">graph_array</span> <span class="o">==</span> <span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="n">graph_dict</span> <span class="o">=</span> <span class="n">adjs2graph</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">directed_edges</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">bidirected_edges</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])))</span>
+    <span class="n">A_matrix</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;val_matrix&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">B_matrix</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;val_matrix&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">graph_dict</span><span class="p">,</span> <span class="n">A_matrix</span><span class="p">,</span> <span class="n">B_matrix</span></div>
+
+
+<div class="viewcode-block" id="nxbp2graph">
+<a class="viewcode-back" href="../../conversions/internal.html#gunfolds.conversions.nxbp2graph">[docs]</a>
+<span class="k">def</span> <span class="nf">nxbp2graph</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask </span>
+
+<span class="sd">    :param G: ``gunfolds`` format graph</span>
+<span class="sd">    :type G: dictionary (``gunfolds`` graphs)</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: Ask</span>
+<span class="sd">    :rtype: </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nodesnum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodesnum</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
+        <span class="n">g</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{(</span><span class="n">x</span> <span class="o">%</span> <span class="n">nodesnum</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span>
+    <span class="k">return</span> <span class="n">g</span></div>
+
+
+
+<span class="c1">################### Add new functions to internal conversions above #############</span>
+<span class="c1">################### End of Internal Conversions ########################</span>
+
+<span class="c1"># Dont remove this fake function for automating sphinx build.</span>
+<span class="k">def</span> <span class="nf">sphinx_automation_fake</span><span class="p">():</span>
+    <span class="k">return</span>
+
+<span class="c1">################### Start of Clingo Conversions ###################</span>
 
 <div class="viewcode-block" id="rate">
 <a class="viewcode-back" href="../../conversions/clingo.html#gunfolds.conversions.rate">[docs]</a>
@@ -973,45 +1004,6 @@
 
 
 
-<div class="viewcode-block" id="nodenum">
-<a class="viewcode-back" href="../../conversions/internal.html#gunfolds.conversions.nodenum">[docs]</a>
-<span class="k">def</span> <span class="nf">nodenum</span><span class="p">(</span><span class="n">edgepairs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Returns the number of nodes in the graph</span>
-
-<span class="sd">    :param edgepairs: list of edge pairs</span>
-<span class="sd">    :type edgepairs: list</span>
-<span class="sd">    </span>
-<span class="sd">    :returns: number of nodes in the graph</span>
-<span class="sd">    :rtype: integer</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">nodes</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edgepairs</span><span class="p">:</span>
-        <span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">nodes</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
-    <span class="k">return</span> <span class="n">nodes</span></div>
-
-
-
-<div class="viewcode-block" id="edgepairs2g">
-<a class="viewcode-back" href="../../conversions/internal.html#gunfolds.conversions.edgepairs2g">[docs]</a>
-<span class="k">def</span> <span class="nf">edgepairs2g</span><span class="p">(</span><span class="n">edgepairs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Converts edge pairs to a ``gunfolds`` graph</span>
-
-<span class="sd">    :param edgepairs: list of edge pairs</span>
-<span class="sd">    :type edgepairs: list</span>
-<span class="sd">    </span>
-<span class="sd">    :returns: ``gunfolds`` graph</span>
-<span class="sd">    :rtype: dictionary (``gunfolds`` graph)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">nodenum</span><span class="p">(</span><span class="n">edgepairs</span><span class="p">)</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)}</span>
-    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edgepairs</span><span class="p">:</span>
-        <span class="n">g</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])][</span><span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">g</span></div>
-
-
-
 <div class="viewcode-block" id="msl_jclingo2g">
 <a class="viewcode-back" href="../../conversions/clingo.html#gunfolds.conversions.msl_jclingo2g">[docs]</a>
 <span class="k">def</span> <span class="nf">msl_jclingo2g</span><span class="p">(</span><span class="n">output_g</span><span class="p">):</span>
@@ -1094,45 +1086,6 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;confu(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;).&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="g2ig">
-<a class="viewcode-back" href="../../conversions/external.html#gunfolds.conversions.g2ig">[docs]</a>
-<span class="k">def</span> <span class="nf">g2ig</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Converts our graph representation to an igraph for plotting</span>
-<span class="sd">    </span>
-<span class="sd">    :param g: ``gunfolds`` graph</span>
-<span class="sd">    :type g: dictionary (``gunfolds`` graphs)</span>
-<span class="sd">    </span>
-<span class="sd">    :returns: igraph representation of ``gunfolds`` graph</span>
-<span class="sd">    :rtype: igraph</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">graph2adj</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">l</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">ig</span> <span class="o">=</span> <span class="n">igraph</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ig</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">([</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">g</span><span class="p">])</span>
-    <span class="n">ig</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ig</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">ig</span></div>
-
-
-
-<span class="k">def</span> <span class="nf">nxbp2graph</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Ask </span>
-
-<span class="sd">    :param G: ``gunfolds`` format graph</span>
-<span class="sd">    :type G: dictionary (``gunfolds`` graphs)</span>
-<span class="sd">    </span>
-<span class="sd">    :returns: Ask</span>
-<span class="sd">    :rtype: </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">nodesnum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nodesnum</span><span class="p">)}</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
-        <span class="n">g</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{(</span><span class="n">x</span> <span class="o">%</span> <span class="n">nodesnum</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]}</span>
-    <span class="k">return</span> <span class="n">g</span>
-
-
 <div class="viewcode-block" id="encode_sccs">
 <a class="viewcode-back" href="../../conversions/clingo.html#gunfolds.conversions.encode_sccs">[docs]</a>
 <span class="k">def</span> <span class="nf">encode_sccs</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">components</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">SCCS</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1213,28 +1166,96 @@
     <span class="k">return</span> <span class="n">s</span></div>
 
 
-<span class="k">def</span> <span class="nf">Glag2CG</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts lag graph format to gunfolds graph format,</span>
-<span class="sd">   and A and B matrices representing directed and bidirected edges weights.</span>
 
-<span class="sd">   Args:</span>
-<span class="sd">       results (dict): A dictionary containing:</span>
-<span class="sd">           - &#39;graph&#39;: A 3D NumPy array of shape [N, N, 2] representing the graph structure.</span>
-<span class="sd">           - &#39;val_matrix&#39;: A NumPy array of shape [N, N, 2] storing edge weights.</span>
+<span class="c1">################### Add only new functions to clingo conversions above #############</span>
+<span class="c1">################### End of Clingo Conversions ########################</span>
 
-<span class="sd">   Returns:</span>
-<span class="sd">       tuple: (graph_dict, A_matrix, B_matrix)</span>
-<span class="sd">   &quot;&quot;&quot;</span>
+<span class="c1"># Dont remove this fake function for automating sphinx build.</span>
+<span class="k">def</span> <span class="nf">sphinx_automation_fake</span><span class="p">():</span>
+    <span class="k">return</span>
 
-    <span class="n">graph_array</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span>
-    <span class="n">bidirected_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">graph_array</span> <span class="o">==</span> <span class="s1">&#39;o-o&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="n">directed_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">graph_array</span> <span class="o">==</span> <span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="c1">################### Start of External Conversions ###################</span>
 
-    <span class="n">graph_dict</span> <span class="o">=</span> <span class="n">adjs2graph</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">directed_edges</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">bidirected_edges</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])))</span>
-    <span class="n">A_matrix</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;val_matrix&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">B_matrix</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;val_matrix&#39;</span><span class="p">][:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<div class="viewcode-block" id="graph2nx">
+<a class="viewcode-back" href="../../conversions/external.html#gunfolds.conversions.graph2nx">[docs]</a>
+<span class="k">def</span> <span class="nf">graph2nx</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a ``gunfolds`` graph to NetworkX format ignoring bidirected edges</span>
+<span class="sd">    </span>
+<span class="sd">    :param G: ``gunfolds`` format graph</span>
+<span class="sd">    :type G: dictionary (``gunfolds`` graphs)</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: NetworkX format graph</span>
+<span class="sd">    :rtype: NetworkX graph</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">if</span> <span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">g</span></div>
 
-    <span class="k">return</span> <span class="n">graph_dict</span><span class="p">,</span> <span class="n">A_matrix</span><span class="p">,</span> <span class="n">B_matrix</span>
+
+
+<div class="viewcode-block" id="graph2dot">
+<a class="viewcode-back" href="../../conversions/external.html#gunfolds.conversions.graph2dot">[docs]</a>
+<span class="k">def</span> <span class="nf">graph2dot</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save the graph structure of `g` to a graphviz format dot file with the name `filename`</span>
+
+<span class="sd">    :param g: ``gunfolds`` graph</span>
+<span class="sd">    :type g: dictionary (``gunfolds`` graphs)</span>
+
+<span class="sd">    :param filename: name of the file</span>
+<span class="sd">    :type filename: string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">graph2nx</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">drawing</span><span class="o">.</span><span class="n">nx_pydot</span><span class="o">.</span><span class="n">write_dot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="nx2graph">
+<a class="viewcode-back" href="../../conversions/external.html#gunfolds.conversions.nx2graph">[docs]</a>
+<span class="k">def</span> <span class="nf">nx2graph</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert NetworkX format graph to ``gunfolds`` graph ignoring bidirected edges</span>
+<span class="sd">    </span>
+<span class="sd">    :param G: ``gunfolds`` format graph</span>
+<span class="sd">    :type G: dictionary (``gunfolds`` graphs)</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: ``gunfolds`` graph</span>
+<span class="sd">    :rtype: dictionary (``gunfolds`` graphs)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="p">:</span>
+        <span class="n">g</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">G</span><span class="p">[</span><span class="n">n</span><span class="p">]}</span>
+    <span class="k">return</span> <span class="n">g</span></div>
+
+
+<div class="viewcode-block" id="g2ig">
+<a class="viewcode-back" href="../../conversions/external.html#gunfolds.conversions.g2ig">[docs]</a>
+<span class="k">def</span> <span class="nf">g2ig</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts our graph representation to an igraph for plotting</span>
+<span class="sd">    </span>
+<span class="sd">    :param g: ``gunfolds`` graph</span>
+<span class="sd">    :type g: dictionary (``gunfolds`` graphs)</span>
+<span class="sd">    </span>
+<span class="sd">    :returns: igraph representation of ``gunfolds`` graph</span>
+<span class="sd">    :rtype: igraph</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">graph2adj</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ig</span> <span class="o">=</span> <span class="n">igraph</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ig</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">([</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">g</span><span class="p">])</span>
+    <span class="n">ig</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ig</span><span class="o">.</span><span class="n">vs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ig</span></div>
+
+
+<span class="c1">################### Add only new functions to external conversions above #############</span>
+<span class="c1">################### End of External Conversions ########################</span>
 </pre></div>
         </article>
       </div>

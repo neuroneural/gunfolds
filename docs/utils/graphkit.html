@@ -265,54 +265,6 @@
         <article role="main">
           <section id="graphkit">
 <h1>graphkit<a class="headerlink" href="#graphkit" title="Link to this heading">#</a></h1>
-<section id="oce">
-<h2>OCE<a class="headerlink" href="#oce" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.utils.graphkit.OCE">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.utils.graphkit.</span></span><span class="sig-name descname"><span class="pre">OCE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">undirected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/utils/graphkit.html#OCE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.utils.graphkit.OCE" title="Link to this definition">#</a></dt>
-<dd><p>Return omission and comission errors for graphs.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>g1</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – the graph to check</p></li>
-<li><p><strong>g2</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – the ground truth graph</p></li>
-<li><p><strong>normalized</strong> (<em>boolean</em>) – If True, returns normalized error and vice versa</p></li>
-<li><p><strong>undirected</strong> (<em>boolean</em>) – If True, returns undirected error and vice versa</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>omission and comission errors for graphs</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
-<section id="id1">
-<h2>_OCE<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.utils.graphkit._OCE">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.utils.graphkit.</span></span><span class="sig-name descname"><span class="pre">_OCE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/utils/graphkit.html#_OCE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.utils.graphkit._OCE" title="Link to this definition">#</a></dt>
-<dd><p>Omission/commision error of <code class="docutils literal notranslate"><span class="pre">g1</span></code> referenced to <code class="docutils literal notranslate"><span class="pre">g2</span></code></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>g1</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – the graph to check</p></li>
-<li><p><strong>g2</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – the ground truth graph</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Omission/commision error for directed and bidirected edges</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
 <section id="normed-oce">
 <h2>_normed_OCE<a class="headerlink" href="#normed-oce" title="Link to this heading">#</a></h2>
 <dl class="py function">
@@ -369,6 +321,29 @@ in the ground truth.</p>
 </dd></dl>
 
 </section>
+<section id="oce">
+<h2>_OCE<a class="headerlink" href="#oce" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.utils.graphkit._OCE">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.utils.graphkit.</span></span><span class="sig-name descname"><span class="pre">_OCE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/utils/graphkit.html#_OCE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.utils.graphkit._OCE" title="Link to this definition">#</a></dt>
+<dd><p>Omission/commision error of <code class="docutils literal notranslate"><span class="pre">g1</span></code> referenced to <code class="docutils literal notranslate"><span class="pre">g2</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g1</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – the graph to check</p></li>
+<li><p><strong>g2</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – the ground truth graph</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Omission/commision error for directed and bidirected edges</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="undirected-oce">
 <h2>_undirected_OCE<a class="headerlink" href="#undirected-oce" title="Link to this heading">#</a></h2>
 <dl class="py function">
@@ -393,20 +368,6 @@ if both are undirected graphs.</p>
 </dd></dl>
 
 </section>
-<section id="addaring">
-<h2>addAring<a class="headerlink" href="#addaring" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.utils.graphkit.addAring">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.utils.graphkit.</span></span><span class="sig-name descname"><span class="pre">addAring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/utils/graphkit.html#addAring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.utils.graphkit.addAring" title="Link to this definition">#</a></dt>
-<dd><p>Add a ring to <code class="docutils literal notranslate"><span class="pre">g</span></code> in place</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
 <section id="addanedge">
 <h2>addanedge<a class="headerlink" href="#addanedge" title="Link to this heading">#</a></h2>
 <dl class="py function">
@@ -419,6 +380,20 @@ if both are undirected graphs.</p>
 <li><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
 <li><p><strong>e</strong> (<em>pair</em><em> of </em><em>integers</em>) – edge to be added</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="addaring">
+<h2>addAring<a class="headerlink" href="#addaring" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.utils.graphkit.addAring">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.utils.graphkit.</span></span><span class="sig-name descname"><span class="pre">addAring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/utils/graphkit.html#addAring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.utils.graphkit.addAring" title="Link to this definition">#</a></dt>
+<dd><p>Add a ring to <code class="docutils literal notranslate"><span class="pre">g</span></code> in place</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1007,6 +982,31 @@ the same system</p>
 </dd></dl>
 
 </section>
+<section id="id1">
+<h2>OCE<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.utils.graphkit.OCE">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.utils.graphkit.</span></span><span class="sig-name descname"><span class="pre">OCE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">undirected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/utils/graphkit.html#OCE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.utils.graphkit.OCE" title="Link to this definition">#</a></dt>
+<dd><p>Return omission and comission errors for graphs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g1</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – the graph to check</p></li>
+<li><p><strong>g2</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)) – the ground truth graph</p></li>
+<li><p><strong>normalized</strong> (<em>boolean</em>) – If True, returns normalized error and vice versa</p></li>
+<li><p><strong>undirected</strong> (<em>boolean</em>) – If True, returns undirected error and vice versa</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>omission and comission errors for graphs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="oerror">
 <h2>oerror<a class="headerlink" href="#oerror" title="Link to this heading">#</a></h2>
 <dl class="py function">
@@ -1567,14 +1567,6 @@ sorted in ascending order</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">graphkit</a><ul>
-<li><a class="reference internal" href="#oce">OCE</a><ul>
-<li><a class="reference internal" href="#gunfolds.utils.graphkit.OCE"><code class="docutils literal notranslate"><span class="pre">OCE()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id1">_OCE</a><ul>
-<li><a class="reference internal" href="#gunfolds.utils.graphkit._OCE"><code class="docutils literal notranslate"><span class="pre">_OCE()</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#normed-oce">_normed_OCE</a><ul>
 <li><a class="reference internal" href="#gunfolds.utils.graphkit._normed_OCE"><code class="docutils literal notranslate"><span class="pre">_normed_OCE()</span></code></a></li>
 </ul>
@@ -1583,16 +1575,20 @@ sorted in ascending order</p>
 <li><a class="reference internal" href="#gunfolds.utils.graphkit._normed_undirected_OCE"><code class="docutils literal notranslate"><span class="pre">_normed_undirected_OCE()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#oce">_OCE</a><ul>
+<li><a class="reference internal" href="#gunfolds.utils.graphkit._OCE"><code class="docutils literal notranslate"><span class="pre">_OCE()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#undirected-oce">_undirected_OCE</a><ul>
 <li><a class="reference internal" href="#gunfolds.utils.graphkit._undirected_OCE"><code class="docutils literal notranslate"><span class="pre">_undirected_OCE()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#addaring">addAring</a><ul>
-<li><a class="reference internal" href="#gunfolds.utils.graphkit.addAring"><code class="docutils literal notranslate"><span class="pre">addAring()</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#addanedge">addanedge</a><ul>
 <li><a class="reference internal" href="#gunfolds.utils.graphkit.addanedge"><code class="docutils literal notranslate"><span class="pre">addanedge()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#addaring">addAring</a><ul>
+<li><a class="reference internal" href="#gunfolds.utils.graphkit.addAring"><code class="docutils literal notranslate"><span class="pre">addAring()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#addedges">addedges</a><ul>
@@ -1709,6 +1705,10 @@ sorted in ascending order</p>
 </li>
 <li><a class="reference internal" href="#no-parents">no_parents</a><ul>
 <li><a class="reference internal" href="#gunfolds.utils.graphkit.no_parents"><code class="docutils literal notranslate"><span class="pre">no_parents()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">OCE</a><ul>
+<li><a class="reference internal" href="#gunfolds.utils.graphkit.OCE"><code class="docutils literal notranslate"><span class="pre">OCE()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#oerror">oerror</a><ul>

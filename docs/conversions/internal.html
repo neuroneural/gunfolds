@@ -426,6 +426,29 @@
 </dd></dl>
 
 </section>
+<section id="glag2cg">
+<h2>Glag2CG<a class="headerlink" href="#glag2cg" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.Glag2CG">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">Glag2CG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#Glag2CG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.Glag2CG" title="Link to this definition">#</a></dt>
+<dd><p>Converts lag graph format to gunfolds graph format,
+and A and B matrices representing directed and bidirected edges weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>results</strong> (<em>dict</em>) – A dictionary containing:
+- ‘graph’: A 3D NumPy array of shape [N, N, 2] representing the graph structure.
+- ‘val_matrix’: A NumPy array of shape [N, N, 2] storing edge weights.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(graph_dict, A_matrix, B_matrix)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="graph2adj">
 <h2>graph2adj<a class="headerlink" href="#graph2adj" title="Link to this heading">#</a></h2>
 <dl class="py function">
@@ -525,6 +548,26 @@ presence/absence into a compressed graph representaion</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="nxbp2graph">
+<h2>nxbp2graph<a class="headerlink" href="#nxbp2graph" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="gunfolds.conversions.nxbp2graph">
+<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">nxbp2graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#nxbp2graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.nxbp2graph" title="Link to this definition">#</a></dt>
+<dd><p>Ask</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>G</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> format graph</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Ask</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
 </dd>
 </dl>
 </dd></dl>
@@ -683,6 +726,10 @@ binary format</p>
 <li><a class="reference internal" href="#gunfolds.conversions.g2vec"><code class="docutils literal notranslate"><span class="pre">g2vec()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#glag2cg">Glag2CG</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.Glag2CG"><code class="docutils literal notranslate"><span class="pre">Glag2CG()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#graph2adj">graph2adj</a><ul>
 <li><a class="reference internal" href="#gunfolds.conversions.graph2adj"><code class="docutils literal notranslate"><span class="pre">graph2adj()</span></code></a></li>
 </ul>
@@ -701,6 +748,10 @@ binary format</p>
 </li>
 <li><a class="reference internal" href="#num2cg">num2CG</a><ul>
 <li><a class="reference internal" href="#gunfolds.conversions.num2CG"><code class="docutils literal notranslate"><span class="pre">num2CG()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nxbp2graph">nxbp2graph</a><ul>
+<li><a class="reference internal" href="#gunfolds.conversions.nxbp2graph"><code class="docutils literal notranslate"><span class="pre">nxbp2graph()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ug2num">ug2num</a><ul>

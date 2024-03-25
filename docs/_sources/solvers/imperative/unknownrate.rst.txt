@@ -53,14 +53,14 @@ confpairs
 .. autofunction:: gunfolds.solvers.unknownrate.confpairs
 
 
-delAloop
---------
-.. autofunction:: gunfolds.solvers.unknownrate.delAloop
-
-
 del\_loop
 ---------
 .. autofunction:: gunfolds.solvers.unknownrate.del_loop
+
+
+delAloop
+--------
+.. autofunction:: gunfolds.solvers.unknownrate.delAloop
 
 
 e2num

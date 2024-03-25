@@ -3,16 +3,6 @@ comparison
 .. currentmodule:: gunfolds.utils.comparison
 
 
-SM\_converging
---------------
-.. autofunction:: gunfolds.utils.comparison.SM_converging
-
-
-SM\_fixed
----------
-.. autofunction:: gunfolds.utils.comparison.SM_fixed
-
-
 compatible\_at\_u
 -----------------
 .. autofunction:: gunfolds.utils.comparison.compatible_at_u
@@ -46,5 +36,15 @@ randSCC
 search\_match
 -------------
 .. autofunction:: gunfolds.utils.comparison.search_match
+
+
+SM\_converging
+--------------
+.. autofunction:: gunfolds.utils.comparison.SM_converging
+
+
+SM\_fixed
+---------
+.. autofunction:: gunfolds.utils.comparison.SM_fixed
 
 

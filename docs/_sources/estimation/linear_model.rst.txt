@@ -8,21 +8,6 @@ AB2intAB
 .. autofunction:: gunfolds.estimation.linear_model.AB2intAB
 
 
-G2AH
-----
-.. autofunction:: gunfolds.estimation.linear_model.G2AH
-
-
-G2SVAR
-------
-.. autofunction:: gunfolds.estimation.linear_model.G2SVAR
-
-
-VARbic
-------
-.. autofunction:: gunfolds.estimation.linear_model.VARbic
-
-
 amap
 ----
 .. autofunction:: gunfolds.estimation.linear_model.amap
@@ -38,14 +23,14 @@ data2AB
 .. autofunction:: gunfolds.estimation.linear_model.data2AB
 
 
-data2VARgraph
--------------
-.. autofunction:: gunfolds.estimation.linear_model.data2VARgraph
-
-
 data2graph
 ----------
 .. autofunction:: gunfolds.estimation.linear_model.data2graph
+
+
+data2VARgraph
+-------------
+.. autofunction:: gunfolds.estimation.linear_model.data2VARgraph
 
 
 decide\_absences
@@ -71,6 +56,16 @@ estimateG
 estimateSVAR
 ------------
 .. autofunction:: gunfolds.estimation.linear_model.estimateSVAR
+
+
+G2AH
+----
+.. autofunction:: gunfolds.estimation.linear_model.G2AH
+
+
+G2SVAR
+------
+.. autofunction:: gunfolds.estimation.linear_model.G2SVAR
 
 
 genData
@@ -176,6 +171,11 @@ transitionMatrix3
 transitionMatrix4
 -----------------
 .. autofunction:: gunfolds.estimation.linear_model.transitionMatrix4
+
+
+VARbic
+------
+.. autofunction:: gunfolds.estimation.linear_model.VARbic
 
 
 weight\_and\_mask
