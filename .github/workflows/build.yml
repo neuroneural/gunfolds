@@ -36,9 +36,6 @@ jobs:
           python3 run.py
           pip install mpmath==1.3.0
           make clean html
-          conda list
-          pip list
-          mpmath -v
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
