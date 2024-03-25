@@ -29,11 +29,13 @@ jobs:
           pip install furo
           pip install wheel
           pip install twine
+          mpmath -v
 
       - name: Build HTML files   
         run: |
           cd sphinx-build
           python3 run.py
+          ls
           make clean html
 
       - name: Deploy 🚀
