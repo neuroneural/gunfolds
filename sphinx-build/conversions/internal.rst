@@ -38,6 +38,11 @@ g2vec
 .. autofunction:: gunfolds.conversions.g2vec
 
 
+Glag2CG
+-------
+.. autofunction:: gunfolds.conversions.Glag2CG
+
+
 graph2adj
 ---------
 .. autofunction:: gunfolds.conversions.graph2adj
@@ -61,6 +66,11 @@ nodenum
 num2CG
 ------
 .. autofunction:: gunfolds.conversions.num2CG
+
+
+nxbp2graph
+----------
+.. autofunction:: gunfolds.conversions.nxbp2graph
 
 
 ug2num
