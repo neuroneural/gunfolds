@@ -112,16 +112,23 @@ drasl_program += """
     """
 
 
-def weighted_drasl_program(directed, bidirected):
+def weighted_drasl_program(directed, bidirected, no_directed, no_bidirected):
     """
     Adjusts the optimization code based on the directed and bidirected priority
 
-    :param directed: priority of directed edges in optimization
+    :param directed: priority of existence of directed edges in optimization
     :type directed: integer
 
-    :param bidirected: priority of bidirected edges in optimization
+    :param bidirected: priority of existence of bidirected edges in optimization
         graph
     :type bidirected: integer
+
+    :param no_directed: priority of absence of directed edges in optimization
+    :type no_directed: integer
+
+    :param no_bidirected: priority of absence of bidirected edges in optimization
+        graph
+    :type no_bidirected: integer
 
     :returns: optimization part of the ``clingo`` code
     :rtype: string
@@ -136,6 +143,8 @@ def weighted_drasl_program(directed, bidirected):
     :~ not bidirected(X, Y, L), hbidirected(X, Y, W, K), node(X;Y), u(L, K), X < Y. [W@$bidirected,X,Y]
     :~ directed(X, Y, L), no_hdirected(X, Y, W, K), node(X;Y), u(L, K). [W@$directed,X,Y]
     :~ bidirected(X, Y, L), no_hbidirected(X, Y, W, K), node(X;Y), u(L, K), X < Y. [W@$bidirected,X,Y]
+    :~ not directed(X, Y, L), hdirected(X, Y, W, K), node(X;Y), u(L, K). [W@$no_directed,X,Y]
+    :~ not bidirected(X, Y, L), hbidirected(X, Y, W, K), node(X;Y), u(L, K), X < Y. [W@$no_bidirected,X,Y]
 
     pastfork(X,Y,L) :- directed(Z, X, K), directed(Z, Y, K), node(X;Y;Z), X < Y, K < L-1, uk(K), u(L, _).
     notequal(L-1,L) :- bidirected(X,Y,L), not pastfork(X,Y,L), node(X;Y), X < Y, u(L, _).
@@ -146,7 +155,7 @@ def weighted_drasl_program(directed, bidirected):
     nonempty(L) :- bidirected(X, Y, L), u(L,_).
     :- not nonempty(L), u(L,_).
     """)
-    return t.substitute(directed=directed, bidirected=bidirected)
+    return t.substitute(directed=directed, bidirected=bidirected, no_directed=no_directed, no_bidirected=no_bidirected)
 
 
 def rate(u, uname='u'):
@@ -253,7 +262,8 @@ def glist2str(g_list, weighted=False, dm=None, bdm=None):
     return s
 
 
-def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=None, dm=None, bdm=None, edge_weights=(1, 1)):
+def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=None, dm=None, bdm=None,
+                  edge_weights=[1, 1, 1, 1, 1], GT_density=None):
     """
     Given a list of graphs generates ``clingo`` codes
 
@@ -272,7 +282,7 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
     :param scc: whether to assume that each SCC in the input graph is
         either a singleton or have ``gcd=1``.  If `True` a much more
         efficient algorithm is employed.
-    :type scc: (GUESS)boolean
+    :type scc: boolean
 
     :param scc_members: a list of sets for nodes in each SCC
     :type scc_members: list
@@ -285,9 +295,17 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
         weights for bidirected edges of each input n-node graph
     :type bdm: list of numpy arrays
 
-    :param edge_weights: a tuple of 2 values, the first is importance of matching
-        directed weights when solving optimization problem and the second is for bidirected.
-    :type edge_weights: tuple with 2 elements
+    :param edge_weights: a list of 5 values, the first is importance of matching the existence of
+        directed edges, second importance of matching the existence of
+        bidirected edges, third importance of matching the absence of
+        directed edges and forth importance of matching the absence of
+        bidirected edges. Fifth and last value is the importance of matching the expected
+        density of resulted graph  when solving optimization problem.
+    :type edge_weights: list with 5 elements
+
+    :param GT_density: desired density of the ground truth at causal
+        time-scale, multiplied by 1000
+    :type GT_density: integer
 
     :returns: clingo code as a string
     :rtype: string
@@ -296,20 +314,28 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
         dm = [nd.astype('int') for nd in dm]
     if bdm is not None:
         bdm = [nd.astype('int') for nd in bdm]
-
     assert len({len(g) for g in g_list}) == 1, "Input graphs have variable number of nodes!"
-
     if not max_urate:
         max_urate = 1+3*len(g_list[0])
     n = len(g_list)
     command = clingo_preamble(g_list[0])
+
+    if weighted and GT_density is not None:
+        command += f"#const d = {GT_density}. "
+        command += 'countedge1(C):- C = #count { edge1(X, Y): edge1(X, Y), node(X), node(Y)}. '
+        command += 'countfull(C):- C = n*n. '
+        command += 'hypoth_density(D) :- D = 1000*X/Y,  countfull(Y), countedge1(X). '
+        command += 'abs_diff(Diff) :- hypoth_density(D), Diff = |D - d|. '
+        command += f':~ abs_diff(Diff). [Diff@{edge_weights[4]}]\n'
+
     if scc:
         command += encode_list_sccs(g_list, scc_members)
     command += f"dagl({len(g_list[0])-1}). "
     command += glist2str(g_list, weighted=weighted, dm=dm, bdm=bdm) + ' '   # generate all graphs
     command += 'uk(1..'+str(max_urate)+').' + ' '
     command += ' '.join([drate(max_urate, i+1, weighted=weighted) for i in range(n)]) + ' '
-    command += weighted_drasl_program(edge_weights[0], edge_weights[1]) if weighted else drasl_program
+    command += weighted_drasl_program(edge_weights[0], edge_weights[1], edge_weights[2],
+                                      edge_weights[3]) if weighted else drasl_program
     command += f":- M = N, {{u(M, 1..{n}); u(N, 1..{n})}} == 2, u(M, _), u(N, _). "
     command += "#show edge1/2. "
     command += "#show u/2."
@@ -318,7 +344,7 @@ def drasl_command(g_list, max_urate=0, weighted=False, scc=False, scc_members=No
 
 
 def drasl(glist, capsize=CAPSIZE, timeout=0, urate=0, weighted=False, scc=False, scc_members=None, dm=None,
-          bdm=None, pnum=PNUM, edge_weights=(1, 1), configuration="crafty", optim='optN'):
+          bdm=None, pnum=PNUM, GT_density= None, edge_weights=[1, 1, 1, 1, 1], configuration="crafty", optim='optN'):
     """
     Compute all candidate causal time-scale graphs that could have
     generated all undersampled graphs at all possible undersampling
@@ -363,9 +389,17 @@ def drasl(glist, capsize=CAPSIZE, timeout=0, urate=0, weighted=False, scc=False,
     :param pnum: number of parallel threads to run ``clingo`` on
     :type pnum: integer
 
-    :param edge_weights: a tuple of 2 values, the first is importance
-        of matching directed weights when solving optimization problem and the second is for bidirected.
-    :type edge_weights: tuple with 2 elements
+    :param edge_weights: a list of 5 values, the first is importance of matching the existence of
+    directed edges, second importance of matching the existence of
+    bidirected edges, third importance of matching the absence of
+    directed edges and forth importance of matching the absence of
+    bidirected edges. Fifth and last value is the importance of matching the expected
+    density of resulted graph  when solving optimization problem.
+    :type edge_weights: list with 5 elements
+
+    :param GT_density: desired density of the ground truth at causal
+        time-scale, multiplied by 1000
+    :type GT_density: integer
 
     :param configuration: Select configuration based on problem type
 
@@ -397,7 +431,8 @@ def drasl(glist, capsize=CAPSIZE, timeout=0, urate=0, weighted=False, scc=False,
     if not isinstance(glist, list):
         glist = [glist]
     return clingo(drasl_command(glist, max_urate=urate, weighted=weighted,
-                                scc=scc, scc_members=scc_members, dm=dm, bdm=bdm, edge_weights=edge_weights),
+                                scc=scc, scc_members=scc_members, dm=dm,
+                                bdm=bdm, edge_weights=edge_weights,GT_density=GT_density),
                   capsize=capsize, convert=drasl_jclingo2g, configuration=configuration,
                   timeout=timeout, exact=not weighted, pnum=pnum, optim=optim)
 
