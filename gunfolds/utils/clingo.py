@@ -68,6 +68,8 @@ def run_clingo(command,
     ctrl.ground([("base", [])])
     models = []
     with ctrl.solve(yield_=True, async_=True) as handle:
+        handle.wait(timeout)
+        handle.cancel()
         for model in handle:
             models.append(([str(atom) for atom in model.symbols(shown=True)], model.cost))
     cost = ctrl.statistics["summary"]["costs"]
