@@ -260,7 +260,7 @@ def linegraph(glist, sccs=True):
     return gr
 
 
-def plotg(g, sccs=True, output=None, fmt='auto', names=None):
+def plotg(g, sccs=True, output=None, fmt='auto'):
     """
     Given a ``gunfolds`` graph, plots it in an interactive window
 
@@ -275,9 +275,6 @@ def plotg(g, sccs=True, output=None, fmt='auto', names=None):
 
     :param fmt: Output file format. Possible values are ``"auto"``, ``"ps"``, ``"pdf"``, ``"svg"``, and ``"png"``. If the value is ``"auto"``, the format is guessed from the output parameter.
     :type fmt: string or file object (optional, default: None)
-
-    :param names: Optional custom labels per node. Either a sequence of length V (aligned to vertex index) or a mapping {existing_label -> display_name}. Falls back to existing 'label' if not provided.
-    :type names: sequence or dict (optional, default: None)
     """
 
     gg = g2gt(g)
@@ -287,43 +284,14 @@ def plotg(g, sccs=True, output=None, fmt='auto', names=None):
         colorcomponents(gg)
         vcolors = gg.vertex_properties["color"]
 
-    # Decide vertex text
-    vtext = gg.vertex_properties.get('label')
-
-    if names is not None:
-        from collections.abc import Mapping, Sequence  # local import to avoid global deps
-        name_prop = gg.new_vertex_property("string")
-        if isinstance(names, Mapping):
-            # Map using existing labels when available; else use vertex index
-            key_prop = gg.vertex_properties.get('label')
-            for v in gg.vertices():
-                key = key_prop[v] if key_prop is not None else int(v)
-                name_prop[v] = str(names.get(key, key))
-        else:
-            # Treat as sequence aligned to vertex indices
-            try:
-                n = len(names)  # may raise if not sequence-like
-            except Exception as e:  # noqa: F841
-                raise TypeError("names must be a mapping or a sequence")  # keep message terse
-            if n != gg.num_vertices():
-                raise ValueError(f"names length {n} != number of vertices {gg.num_vertices()}")
-            for v in gg.vertices():
-                name_prop[v] = str(names[int(v)])
-        vtext = name_prop
-
-    gtd.graph_draw(
-        gg,
-        gg.vertex_properties["pos"],
-        vertex_text=vtext,
-        edge_pen_width=gg.edge_properties['pen_width'],
-        edge_marker_size=gg.edge_properties['marker_size'],
-        edge_control_points=gg.edge_properties['control'],
-        vertex_pen_width=1,
-        edge_color=gg.edge_properties['color'],
-        vertex_fill_color=vcolors,
-        output=output,
-        fmt=fmt
-    )
+    gtd.graph_draw(gg, gg.vertex_properties["pos"],
+                   vertex_text=gg.vertex_properties['label'],
+                   edge_pen_width=gg.edge_properties['pen_width'],
+                   edge_marker_size=gg.edge_properties['marker_size'],
+                   edge_control_points=gg.edge_properties['control'],
+                   vertex_pen_width=1,
+                   edge_color=gg.edge_properties['color'],
+                   vertex_fill_color=vcolors, output=output, fmt=fmt)
 
 
 def plotgunfolds(g, sccs=True, output=None, fmt='auto'):

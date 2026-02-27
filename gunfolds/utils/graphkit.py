@@ -427,7 +427,7 @@ def _undirected_OCE(g1, g2):
 
 def _normed_undirected_OCE(g1, g2):
     """
-    Return omission and commission errors for undirected edges.
+    Return omission and comission errors for undirected edges.
 
     Omission error is normalized by the number of edges present
     in the ground truth. Commision error is normalized by the
@@ -775,7 +775,7 @@ def pow_degree_graph(node_num, degree):
     :type node_num: integer
     
     :param degree: degree
-    :type degree: float
+    :type degree: integer
     
     :returns: a graph constructed using the Havel-Hakimi algorithm.
     :rtype: dictionary(``gunfolds`` graph)
