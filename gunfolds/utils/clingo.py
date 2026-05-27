@@ -76,9 +76,9 @@ def run_clingo(command,
         if num_opt == 0.0:
             return {}, cost
         else:
-            return models, cost
+            return models, cost 
     return models, cost
-
+    
 
 def clingo(command, exact=True,
            convert=drasl_jclingo2g,

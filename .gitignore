@@ -1,12 +1,3 @@
-*.log
-gunfolds/scripts/figs/
-gunfolds/scripts/res/
-gunfolds/scripts/res_CAP_0_/
-gunfolds/scripts/res_config_test/
-gunfolds/scripts/res_drasl_after_optim/
-gunfolds/scripts/res_simulation/
-gunfolds/scripts/results/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -71,37 +62,5 @@ target/
 shipfig_figure.tex
 
 # my local files
-*.zkl
+#*.zkl
 [0-9]*.txt
-
-# IDE settings
-.idea/
-
-# Experimental results and datasets
-gunfolds/scripts/fbirn_results/
-gunfolds/scripts/fbirn_results_scc_true/
-gunfolds/scripts/gcm_roebroeck/
-gunfolds/scripts/macaque/
-gunfolds/scripts/macaque_results/
-gunfolds/scripts/ruben_runs/
-gunfolds/scripts/VAR_ringmore/
-gunfolds/scripts/VAR_ruben/
-gunfolds/scripts/bold/
-gunfolds/scripts/datasets/test/
-pic/
-env.yml
-gunfolds/scripts/Python-3.10.0/
-gunfolds/scripts/err/
-gunfolds/scripts/fbirn_loader.py
-gunfolds/scripts/fbirn_sz_data.npz
-gunfolds/scripts/jobsubmitss
-gunfolds/scripts/mpich-3.3.2/
-gunfolds/scripts/new_jobsubmit
-gunfolds/scripts/old_err/
-gunfolds/scripts/old_out/
-gunfolds/scripts/out/
-gunfolds/scripts/save_sz_data.py
-
-# Generated files
-*.tex.tex
-*.png

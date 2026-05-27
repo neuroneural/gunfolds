@@ -3,33 +3,9 @@ gunfolds
 
 Tools to explore dynamic causal graphs in the case of  undersampled data helping to unfold the apparent structure into the underlying truth.
 
-## 📢 Version 2.0 Released - Major Refactoring
-
-**Gunfolds v2.0** features a complete reorganization for better maintainability and usability!
-
-### 🆕 New Users
-- **[Get Started →](docs/QUICKSTART.md)** - Quick start guide
-- **[Documentation Hub →](docs/README.md)** - All guides and tutorials
-
-### 🔄 Existing Users (Migrating from v1.x)
-- **[Quick Script Lookup →](OLD_TO_NEW_SCRIPT_REFERENCE.md)** - Find where your script moved (2 min)
-- **[Migration Guide →](MIGRATION.md)** - Complete migration instructions (30-60 min)
-- **[Visual Workflow →](MIGRATION_WORKFLOW.md)** - Step-by-step visual guide
-
-### 📚 All Documentation
-- **[Documentation Index →](DOCUMENTATION_INDEX.md)** - Complete guide to all docs
-
-**Key improvements in v2.0:**
-- ✅ 118+ scripts consolidated to ~33 organized modules
-- ✅ Eliminated 85+ duplicate files
-- ✅ Clear folder structure (analysis/benchmarks/experiments/visualization)
-- ✅ Unified interfaces with command-line parameters
-- ✅ Comprehensive documentation
-- ✅ Full backward compatibility (old scripts preserved in `scripts/legacy/`)
-
 Documentation
 ===================
-Please refer to the [Online Documentation](https://neuroneural.github.io/gunfolds/) for API reference and the documentation links above for v2.0 guides.
+Please refer to the [Documentation](https://neuroneural.github.io/gunfolds/) for more information.
 
 Installation
 ============
