@@ -1,17 +1,19 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="estimation" href="../estimation.html" /><link rel="prev" title="external" href="external.html" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="estimation" href="../estimation.html"><link rel="prev" title="external" href="external.html">
+        <link rel="prefetch" href="../_static/light.png" as="image">
+        <link rel="prefetch" href="../_static/dark.png" as="image">
 
-    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.01.29 -->
+    <link rel="shortcut icon" href="../_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>internal</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -74,7 +76,7 @@
   <symbol id="svg-sun" viewBox="0 0 24 24">
     <title>Light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
       <circle cx="12" cy="12" r="5"></circle>
       <line x1="12" y1="1" x2="12" y2="3"></line>
       <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -89,34 +91,73 @@
   <symbol id="svg-moon" viewBox="0 0 24 24">
     <title>Dark mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
 
 
@@ -124,8 +165,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -133,16 +173,15 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
-          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -150,7 +189,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
-  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo only-light" src="../_static/light.png" alt="Light Logo"/>
     <img class="sidebar-logo only-dark" src="../_static/dark.png" alt="Dark Logo"/>
@@ -165,7 +203,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started.html">Getting Started</a><input aria-label="Toggle navigation of Getting Started" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../getting_started/installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../getting_started/tutorials.html">Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../getting_started/contributors.html">Contributors</a></li>
@@ -175,33 +213,33 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">gunfolds</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of gunfolds</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current has-children"><a class="reference internal" href="../conversions.html">conversions</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of conversions</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">gunfolds</a><input aria-label="Toggle navigation of gunfolds" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="../conversions.html">conversions</a><input aria-label="Toggle navigation of conversions" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="clingo.html">clingo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="external.html">external</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">internal</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../estimation.html">estimation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of estimation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../estimation.html">estimation</a><input aria-label="Toggle navigation of estimation" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../estimation/grangercausality.html">grangercausality</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../estimation/linear_model.html">linear_model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../estimation/pc.html">pc</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../solvers.html">solvers</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of solvers</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../solvers/declarative.html">declarative</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of declarative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../solvers.html">solvers</a><input aria-label="Toggle navigation of solvers" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../solvers/declarative.html">declarative</a><input aria-label="Toggle navigation of declarative" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../solvers/declarative/clingo_msl.html">clingo_msl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../solvers/declarative/clingo_rasl.html">clingo_rasl</a></li>
 </ul>
 </li>
-<li class="toctree-l3 has-children"><a class="reference internal" href="../solvers/imperative.html">imperative</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of imperative</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../solvers/imperative.html">imperative</a><input aria-label="Toggle navigation of imperative" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l4"><a class="reference internal" href="../solvers/imperative/traversal.html">traversal</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../solvers/imperative/unknownrate.html">unknownrate</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../utils.html">utils</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of utils</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../utils.html">utils</a><input aria-label="Toggle navigation of utils" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../utils/bfutils.html">bfutils</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../utils/calc_procs.html">calc_procs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../utils/clingo.html">clingo</a></li>
@@ -214,7 +252,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../utils/zickle.html">zickle</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../viz.html">viz</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of viz</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../viz.html">viz</a><input aria-label="Toggle navigation of viz" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../viz/dbn2latex.html">dbn2latex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../viz/gtool.html">gtool</a></li>
 </ul>
@@ -240,405 +278,81 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="edit-this-page">
-  <a class="muted-link" href="https://github.com/neuroneural/gunfolds/tree/master/sphinx-build/conversions/internal.rst" title="Edit this page">
-    <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-    </svg>
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/conversions/internal.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div><div class="edit-this-page">
+  <a class="muted-link" href="https://github.com/neuroneural/gunfolds/tree/master/sphinx-build/conversions/internal.rst" rel="edit" title="Edit this page">
+    <svg><use href="#svg-pencil"></use></svg>
     <span class="visually-hidden">Edit this page</span>
   </a>
 </div><div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
-              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
-        <article role="main">
+        <article role="main" id="furo-main-content">
           <section id="internal">
-<h1>internal<a class="headerlink" href="#internal" title="Link to this heading">#</a></h1>
+<h1>internal<a class="headerlink" href="#internal" title="Link to this heading">¶</a></h1>
 <section id="adjs2graph">
-<h2>adjs2graph<a class="headerlink" href="#adjs2graph" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.adjs2graph">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">adjs2graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bidirected</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#adjs2graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.adjs2graph" title="Link to this definition">#</a></dt>
-<dd><p>Convert an adjacency matrix of directed and bidirected edges to a graph</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>directed</strong> (<em>numpy matrix</em>) – graph adjacency matrix for directed edges</p></li>
-<li><p><strong>bidirected</strong> (<em>numpy matrix</em>) – graph adjacency matrix for bidirected edges</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> format graph</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>adjs2graph<a class="headerlink" href="#adjs2graph" title="Link to this heading">¶</a></h2>
 </section>
 <section id="bg2num">
-<h2>bg2num<a class="headerlink" href="#bg2num" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.bg2num">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">bg2num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#bg2num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.bg2num" title="Link to this definition">#</a></dt>
-<dd><p>Convert bidirected edges into a binary format</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>unique number for each graph considering bidirected in binary format</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>a tuple of binary integer</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>bg2num<a class="headerlink" href="#bg2num" title="Link to this heading">¶</a></h2>
 </section>
 <section id="dict-format-converter">
-<h2>dict_format_converter<a class="headerlink" href="#dict-format-converter" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.dict_format_converter">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">dict_format_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#dict_format_converter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.dict_format_converter" title="Link to this definition">#</a></dt>
-<dd><p>Convert a graph from the set style dictionary format to the integer style</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>H</strong> (<em>dictionary</em>) – set style dictionary format</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)</p>
-</dd>
-</dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span>
-<span class="gp">... </span>  <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span>
-<span class="gp">... </span>  <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span>
-<span class="gp">... </span>  <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span>
-<span class="gp">... </span>  <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}},</span>
-<span class="gp">... </span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)}},</span>
-<span class="gp">... </span> <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}},</span>
-<span class="gp">... </span> <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span>
-<span class="gp">... </span>  <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span>
-<span class="gp">... </span>  <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span>
-<span class="gp">... </span>  <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span>
-<span class="gp">... </span>  <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}},</span>
-<span class="gp">... </span> <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}}}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dict_format_converter</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
-<span class="go">{1: {1: 1, 2: 3, 3: 3, 4: 2, 5: 1}, 2: {1: 2, 2: 1, 5: 3}, 3: {1: 3, 2: 1, 5: 1}, 4: {1: 2, 2: 1, 3: 1, 4: 1, 5: 1}, 5: {1: 1, 2: 3, 5: 1}}</span>
-<span class="gp">&gt;&gt;&gt;</span>
-</pre></div>
-</div>
-</dd></dl>
-
+<h2>dict_format_converter<a class="headerlink" href="#dict-format-converter" title="Link to this heading">¶</a></h2>
 </section>
 <section id="edgepairs2g">
-<h2>edgepairs2g<a class="headerlink" href="#edgepairs2g" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.edgepairs2g">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">edgepairs2g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edgepairs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#edgepairs2g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.edgepairs2g" title="Link to this definition">#</a></dt>
-<dd><p>Converts edge pairs to a <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>edgepairs</strong> (<em>list</em>) – list of edge pairs</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph)</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>edgepairs2g<a class="headerlink" href="#edgepairs2g" title="Link to this heading">¶</a></h2>
 </section>
 <section id="g2ian">
-<h2>g2ian<a class="headerlink" href="#g2ian" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.g2ian">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">g2ian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#g2ian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.g2ian" title="Link to this definition">#</a></dt>
-<dd><p>(Ask)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>g2ian<a class="headerlink" href="#g2ian" title="Link to this heading">¶</a></h2>
 </section>
 <section id="g2num">
-<h2>g2num<a class="headerlink" href="#g2num" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.g2num">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">g2num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#g2num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.g2num" title="Link to this definition">#</a></dt>
-<dd><p>Convert a graph into a long int</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>unique number for each graph considering only directed edges</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>long integer</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>g2num<a class="headerlink" href="#g2num" title="Link to this heading">¶</a></h2>
 </section>
 <section id="g2vec">
-<h2>g2vec<a class="headerlink" href="#g2vec" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.g2vec">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">g2vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#g2vec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.g2vec" title="Link to this definition">#</a></dt>
-<dd><p>Converts <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph to a vector</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a vector representing a <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy vector</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>g2vec<a class="headerlink" href="#g2vec" title="Link to this heading">¶</a></h2>
 </section>
 <section id="glag2cg">
-<h2>Glag2CG<a class="headerlink" href="#glag2cg" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.Glag2CG">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">Glag2CG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#Glag2CG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.Glag2CG" title="Link to this definition">#</a></dt>
-<dd><p>Converts lag graph format to gunfolds graph format,
-and A and B matrices representing directed and bidirected edges weights.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>results</strong> (<em>dict</em>) – A dictionary containing:
-- ‘graph’: A 3D NumPy array of shape [N, N, 2] representing the graph structure.
-- ‘val_matrix’: A NumPy array of shape [N, N, 2] storing edge weights.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>(graph_dict, A_matrix, B_matrix)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>Glag2CG<a class="headerlink" href="#glag2cg" title="Link to this heading">¶</a></h2>
 </section>
 <section id="graph2adj">
-<h2>graph2adj<a class="headerlink" href="#graph2adj" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.graph2adj">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">graph2adj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#graph2adj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.graph2adj" title="Link to this definition">#</a></dt>
-<dd><p>Convert the directed edges to an adjacency matrix</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>G</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> format graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>graph adjacency matrix for directed edges</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy matrix</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>graph2adj<a class="headerlink" href="#graph2adj" title="Link to this heading">¶</a></h2>
 </section>
 <section id="graph2badj">
-<h2>graph2badj<a class="headerlink" href="#graph2badj" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.graph2badj">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">graph2badj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#graph2badj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.graph2badj" title="Link to this definition">#</a></dt>
-<dd><p>Convert the bidirected edges to an adjacency matrix</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>G</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> format graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>graph adjacency matrix for bidirected edges</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy matrix</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>graph2badj<a class="headerlink" href="#graph2badj" title="Link to this heading">¶</a></h2>
 </section>
 <section id="ian2g">
-<h2>ian2g<a class="headerlink" href="#ian2g" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.ian2g">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">ian2g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#ian2g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.ian2g" title="Link to this definition">#</a></dt>
-<dd><p>(Ask)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>(Ask)</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>(Ask)</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>ian2g<a class="headerlink" href="#ian2g" title="Link to this heading">¶</a></h2>
 </section>
 <section id="nodenum">
-<h2>nodenum<a class="headerlink" href="#nodenum" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.nodenum">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">nodenum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edgepairs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#nodenum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.nodenum" title="Link to this definition">#</a></dt>
-<dd><p>Returns the number of nodes in the graph</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>edgepairs</strong> (<em>list</em>) – list of edge pairs</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>number of nodes in the graph</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>integer</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>nodenum<a class="headerlink" href="#nodenum" title="Link to this heading">¶</a></h2>
 </section>
 <section id="num2cg">
-<h2>num2CG<a class="headerlink" href="#num2cg" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.num2CG">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">num2CG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#num2CG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.num2CG" title="Link to this definition">#</a></dt>
-<dd><p>Converts a number  whose binary representaion encodes edge
-presence/absence into a compressed graph representaion</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>num</strong> (<em>integer</em>) – unique graph representation in numbers</p></li>
-<li><p><strong>n</strong> (<em>integer</em>) – number of nodes</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>num2CG<a class="headerlink" href="#num2cg" title="Link to this heading">¶</a></h2>
 </section>
 <section id="nxbp2graph">
-<h2>nxbp2graph<a class="headerlink" href="#nxbp2graph" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.nxbp2graph">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">nxbp2graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#nxbp2graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.nxbp2graph" title="Link to this definition">#</a></dt>
-<dd><p>Ask</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>G</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> format graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Ask</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>nxbp2graph<a class="headerlink" href="#nxbp2graph" title="Link to this heading">¶</a></h2>
 </section>
 <section id="ug2num">
-<h2>ug2num<a class="headerlink" href="#ug2num" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.ug2num">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">ug2num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#ug2num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.ug2num" title="Link to this definition">#</a></dt>
-<dd><p>Convert non-empty edges into a tuple of (directed, bidriected) in
-binary format</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>g</strong> (dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)) – <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>unique number for each graph considering directed and bidirected in binary format</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>a tuple of binary integer</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>ug2num<a class="headerlink" href="#ug2num" title="Link to this heading">¶</a></h2>
 </section>
 <section id="vec2adj">
-<h2>vec2adj<a class="headerlink" href="#vec2adj" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.vec2adj">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">vec2adj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#vec2adj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.vec2adj" title="Link to this definition">#</a></dt>
-<dd><p>Converts a vector representation to adjacency matrix</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>v</strong> (<em>numpy vector</em>) – vector representation of <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
-<li><p><strong>n</strong> (<em>integer</em>) – number of nodes</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a tuple of Adjacency matrices</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>a tuple of numpy matrices</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>vec2adj<a class="headerlink" href="#vec2adj" title="Link to this heading">¶</a></h2>
 </section>
 <section id="vec2g">
-<h2>vec2g<a class="headerlink" href="#vec2g" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="gunfolds.conversions.vec2g">
-<span class="sig-prename descclassname"><span class="pre">gunfolds.conversions.</span></span><span class="sig-name descname"><span class="pre">vec2g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/gunfolds/conversions.html#vec2g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gunfolds.conversions.vec2g" title="Link to this definition">#</a></dt>
-<dd><p>Converts a vector representation to <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>v</strong> (<em>numpy vector</em>) – vector representation of <code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graph</p></li>
-<li><p><strong>n</strong> (<em>integer</em>) – number of nodes</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> format graph</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dictionary (<code class="docutils literal notranslate"><span class="pre">gunfolds</span></code> graphs)</p>
-</dd>
-</dl>
-</dd></dl>
-
+<h2>vec2g<a class="headerlink" href="#vec2g" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -698,74 +412,23 @@ binary format</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">internal</a><ul>
-<li><a class="reference internal" href="#adjs2graph">adjs2graph</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.adjs2graph"><code class="docutils literal notranslate"><span class="pre">adjs2graph()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#bg2num">bg2num</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.bg2num"><code class="docutils literal notranslate"><span class="pre">bg2num()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#dict-format-converter">dict_format_converter</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.dict_format_converter"><code class="docutils literal notranslate"><span class="pre">dict_format_converter()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#edgepairs2g">edgepairs2g</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.edgepairs2g"><code class="docutils literal notranslate"><span class="pre">edgepairs2g()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#g2ian">g2ian</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.g2ian"><code class="docutils literal notranslate"><span class="pre">g2ian()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#g2num">g2num</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.g2num"><code class="docutils literal notranslate"><span class="pre">g2num()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#g2vec">g2vec</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.g2vec"><code class="docutils literal notranslate"><span class="pre">g2vec()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#glag2cg">Glag2CG</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.Glag2CG"><code class="docutils literal notranslate"><span class="pre">Glag2CG()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#graph2adj">graph2adj</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.graph2adj"><code class="docutils literal notranslate"><span class="pre">graph2adj()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#graph2badj">graph2badj</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.graph2badj"><code class="docutils literal notranslate"><span class="pre">graph2badj()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#ian2g">ian2g</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.ian2g"><code class="docutils literal notranslate"><span class="pre">ian2g()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#nodenum">nodenum</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.nodenum"><code class="docutils literal notranslate"><span class="pre">nodenum()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#num2cg">num2CG</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.num2CG"><code class="docutils literal notranslate"><span class="pre">num2CG()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#nxbp2graph">nxbp2graph</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.nxbp2graph"><code class="docutils literal notranslate"><span class="pre">nxbp2graph()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#ug2num">ug2num</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.ug2num"><code class="docutils literal notranslate"><span class="pre">ug2num()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#vec2adj">vec2adj</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.vec2adj"><code class="docutils literal notranslate"><span class="pre">vec2adj()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#vec2g">vec2g</a><ul>
-<li><a class="reference internal" href="#gunfolds.conversions.vec2g"><code class="docutils literal notranslate"><span class="pre">vec2g()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#adjs2graph">adjs2graph</a></li>
+<li><a class="reference internal" href="#bg2num">bg2num</a></li>
+<li><a class="reference internal" href="#dict-format-converter">dict_format_converter</a></li>
+<li><a class="reference internal" href="#edgepairs2g">edgepairs2g</a></li>
+<li><a class="reference internal" href="#g2ian">g2ian</a></li>
+<li><a class="reference internal" href="#g2num">g2num</a></li>
+<li><a class="reference internal" href="#g2vec">g2vec</a></li>
+<li><a class="reference internal" href="#glag2cg">Glag2CG</a></li>
+<li><a class="reference internal" href="#graph2adj">graph2adj</a></li>
+<li><a class="reference internal" href="#graph2badj">graph2badj</a></li>
+<li><a class="reference internal" href="#ian2g">ian2g</a></li>
+<li><a class="reference internal" href="#nodenum">nodenum</a></li>
+<li><a class="reference internal" href="#num2cg">num2CG</a></li>
+<li><a class="reference internal" href="#nxbp2graph">nxbp2graph</a></li>
+<li><a class="reference internal" href="#ug2num">ug2num</a></li>
+<li><a class="reference internal" href="#vec2adj">vec2adj</a></li>
+<li><a class="reference internal" href="#vec2g">vec2g</a></li>
 </ul>
 </li>
 </ul>
@@ -778,9 +441,9 @@ binary format</p>
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     </body>
