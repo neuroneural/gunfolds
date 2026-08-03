@@ -108,7 +108,7 @@ def msl(g, capsize, exact=True, configuration="tweety", urate=2, timeout=0, pnum
     :returns: 
     :rtype: 
     """
-    return clingo(msl_command(g, urate=urate, exact=True),
+    return clingo(msl_command(g, urate=urate, exact=exact),
                   capsize=capsize, convert=msl_jclingo2g, timeout=timeout, configuration=configuration, pnum=pnum)
 
 
