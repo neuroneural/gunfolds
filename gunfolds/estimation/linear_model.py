@@ -5,6 +5,8 @@ from gunfolds.utils import graphkit as gk
 import numpy as np
 from progressbar import ProgressBar, Percentage
 from scipy import linalg, optimize
+import scipy.sparse as sp
+from scipy.sparse.linalg import eigs
 from statsmodels.tsa.api import VAR
 from sympy.matrices import SparseMatrix
 
@@ -418,11 +420,11 @@ def initRandomMatrix(A, edges, distribution='beta'):
         if distribution == 'flat':
             x = np.ones(len(edges[0]))
         elif distribution == 'flatsigned':
-            x = np.sign(np.randn(len(edges[0])))*np.ones(len(edges[0]))
+            x = np.sign(np.random.randn(len(edges[0]))) * np.ones(len(edges[0]))
         elif distribution == 'beta':
             x = np.random.beta(0.5, 0.5, len(edges[0]))*3-1.5
         elif distribution == 'normal':
-            x = np.randn(len(edges[0]))
+            x = np.random.randn(len(edges[0]))
         elif distribution == 'uniform':
             x = np.sign(np.randn(len(edges[0])))*np.rand(len(edges[0]))
         else:
@@ -1082,5 +1084,93 @@ def randomSVARs(n, repeats=100, rate=2, density=0.1, th=0.09,
             'directed': A,
             'bidirected': B
             }
+
+def check_matrix_powers(W, powers, threshold):
+    """
+     Check if the powers of a matrix W preserve a threshold for non-zero entries.
+
+     :param W: The input matrix.
+     :type W: array_like
+
+     :param powers: List of powers to check.
+     :type powers: iterable
+
+     :param threshold: Threshold for non-zero entries.
+     :type threshold: float
+
+     :return: True if all powers of the matrix preserve the threshold for non-zero entries, False otherwise.
+     :rtype: bool
+     """
+    for n in powers:
+        W_n = np.linalg.matrix_power(W, n)
+        non_zero_indices = np.nonzero(W_n)
+        if (np.abs(W_n[non_zero_indices]) < threshold).any():
+            return False
+    return True
+
+
+def create_stable_weighted_matrix(
+    A,
+    threshold=0.1,
+    powers=[1, 2, 3, 4],
+    max_attempts=1000,
+    damping_factor=0.99,
+    random_state=None,
+):
+    """
+    Create a stable weighted matrix with a specified spectral radius.
+
+    :param A: The input matrix.
+    :type A: array_like
+
+    :param threshold: Threshold for non-zero entries preservation. Default is 0.1.
+    :type threshold: float, optional
+
+    :param powers: List of powers to check in the stability condition. Default is [1, 2, 3, 4].
+    :type powers: iterable, optional
+
+    :param max_attempts: Maximum attempts to create a stable matrix. Default is 1000.
+    :type max_attempts: int, optional
+
+    :param damping_factor: Damping factor for scaling the matrix. Default is 0.99.
+    :type damping_factor: float, optional
+
+    :param random_state: Random seed for reproducibility. Default is None.
+    :type random_state: int or None, optional
+
+    :return: A stable weighted matrix.
+    :rtype: array_like
+
+    :raises ValueError: If unable to create a stable matrix after the maximum attempts.
+    """
+    np.random.seed(
+        random_state
+    )  # Set random seed for reproducibility if provided
+    attempts = 0
+
+    while attempts < max_attempts:
+        # Generate a random matrix with the same sparsity pattern as A
+        random_weights = np.random.randn(*A.shape)
+        weighted_matrix = A * random_weights
+
+        # Convert to sparse format for efficient eigenvalue computation
+        weighted_sparse = sp.csr_matrix(weighted_matrix)
+
+        # Compute the largest eigenvalue in magnitude
+        eigenvalues, _ = eigs(weighted_sparse, k=1, which="LM")
+        max_eigenvalue = np.abs(eigenvalues[0])
+
+        # Scale the matrix so that the spectral radius is slightly less than 1
+        if max_eigenvalue > 0:
+            weighted_matrix *= damping_factor / max_eigenvalue
+            # Check if the powers of the matrix preserve the threshold for non-zero entries of A
+            if check_matrix_powers(weighted_matrix, powers, threshold):
+                return weighted_matrix
+
+        attempts += 1
+
+    raise ValueError(
+        f"Unable to create a matrix satisfying the condition after {max_attempts} attempts."
+    )
 
 # option #3
